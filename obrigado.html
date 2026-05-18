@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bem-vinda! — Assinatura de Moldes — Thaíza Gonçalves</title>
+<meta name="description" content="Sua assinatura foi confirmada! Entre no grupo exclusivo das assinantes.">
+
+<!-- Meta Pixel Base Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '246033433475773', {country:'br'});
+var _pvEid='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);});
+fbq('track', 'PageView', {}, {eventID: _pvEid});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=246033433475773&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FDF8F0;
+  --warm:#F5EDE0;
+  --gold:#C8A050;
+  --gold-dark:#A07830;
+  --gold-light:#E8D5A8;
+  --charcoal:#2A2420;
+  --brown:#5C4A3A;
+  --brown-light:#8C7A6A;
+  --rose:#D4716A;
+  --rose-dark:#B85550;
+  --rose-light:#F2D5D2;
+  --green:#4A7C5C;
+  --green-light:#E8F0EA;
+  --whatsapp:#25D366;
+  --whatsapp-dark:#1EBE57;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--font-body);color:var(--cream);
+  background:var(--charcoal);min-height:100vh;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  display:flex;align-items:center;justify-content:center;
+  padding:40px 20px;position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 30%,rgba(200,160,80,0.12) 0%,transparent 70%),
+    radial-gradient(ellipse 60% 80% at 20% 80%,rgba(212,113,106,0.08) 0%,transparent 60%);
+  z-index:0;
+}
+
+.wrap{
+  position:relative;z-index:1;
+  max-width:640px;width:100%;text-align:center;
+}
+
+/* ── Success icon ── */
+.check-circle{
+  width:96px;height:96px;margin:0 auto 32px;
+  border-radius:50%;
+  background:rgba(74,124,92,0.15);
+  border:2px solid var(--green);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  animation:pop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  opacity:0;transform:scale(0.5);
+}
+.check-circle svg{width:44px;height:44px;stroke:var(--green);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.check-circle::before{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(74,124,92,0.3);
+  animation:ripple 2s ease-out infinite;
+}
+@keyframes pop{to{opacity:1;transform:scale(1)}}
+@keyframes ripple{
+  0%{transform:scale(0.9);opacity:0.6}
+  100%{transform:scale(1.3);opacity:0}
+}
+
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:100px;
+  background:rgba(200,160,80,0.15);border:1px solid rgba(200,160,80,0.3);
+  font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--gold-light);margin-bottom:24px;
+  opacity:0;animation:fadeUp 0.6s ease 0.3s forwards;
+}
+.badge span{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%}
+
+h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.2rem,5vw,3.2rem);
+  line-height:1.15;font-weight:400;margin-bottom:20px;
+  opacity:0;animation:fadeUp 0.6s ease 0.4s forwards;
+}
+h1 em{font-style:italic;color:var(--gold-light)}
+
+.subtitle{
+  font-size:1.1rem;line-height:1.7;
+  color:rgba(253,248,240,0.72);
+  max-width:520px;margin:0 auto 48px;
+  opacity:0;animation:fadeUp 0.6s ease 0.5s forwards;
+}
+
+/* ── WhatsApp card ── */
+.wa-card{
+  background:rgba(253,248,240,0.04);
+  border:1px solid rgba(37,211,102,0.25);
+  border-radius:24px;padding:40px 32px;
+  margin-bottom:32px;position:relative;overflow:hidden;
+  opacity:0;animation:fadeUp 0.6s ease 0.6s forwards;
+}
+.wa-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(37,211,102,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.wa-icon{
+  width:64px;height:64px;margin:0 auto 20px;
+  border-radius:50%;
+  background:rgba(37,211,102,0.15);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+}
+.wa-icon svg{width:34px;height:34px;fill:var(--whatsapp)}
+.wa-label{
+  font-size:0.75rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--gold-light);
+  margin-bottom:12px;position:relative;z-index:1;
+}
+.wa-title{
+  font-family:var(--font-display);
+  font-size:1.5rem;margin-bottom:12px;
+  color:var(--cream);position:relative;z-index:1;
+}
+.wa-desc{
+  font-size:0.95rem;line-height:1.65;
+  color:rgba(253,248,240,0.65);
+  max-width:440px;margin:0 auto 28px;
+  position:relative;z-index:1;
+}
+.wa-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:18px 36px;border-radius:100px;
+  background:var(--whatsapp);color:#fff;
+  font-size:1rem;font-weight:600;letter-spacing:0.02em;
+  text-decoration:none;
+  transition:all 0.3s ease;
+  box-shadow:0 4px 24px rgba(37,211,102,0.35);
+  position:relative;z-index:1;
+}
+.wa-btn:hover{background:var(--whatsapp-dark);transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,211,102,0.45)}
+.wa-btn svg{width:18px;height:18px;fill:currentColor}
+
+/* ── Next steps ── */
+.steps{
+  text-align:left;margin:32px 0;
+  opacity:0;animation:fadeUp 0.6s ease 0.7s forwards;
+}
+.steps-title{
+  font-size:0.75rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--gold-light);
+  margin-bottom:20px;text-align:center;
+}
+.step{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:18px 22px;margin-bottom:12px;
+  background:rgba(253,248,240,0.03);
+  border:1px solid rgba(200,160,80,0.12);
+  border-radius:14px;
+}
+.step-num{
+  flex-shrink:0;width:32px;height:32px;border-radius:50%;
+  background:rgba(200,160,80,0.15);
+  border:1px solid rgba(200,160,80,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:0.95rem;
+  font-weight:700;color:var(--gold-light);
+}
+.step-text{flex:1}
+.step-text h4{font-size:0.95rem;font-weight:600;color:var(--cream);margin-bottom:2px}
+.step-text p{font-size:0.85rem;color:rgba(253,248,240,0.55);line-height:1.5}
+
+/* ── Footer ── */
+.footer{
+  margin-top:32px;padding-top:24px;
+  border-top:1px solid rgba(200,160,80,0.1);
+  font-size:0.78rem;color:rgba(253,248,240,0.4);
+  opacity:0;animation:fadeUp 0.6s ease 0.8s forwards;
+}
+.footer a{color:var(--gold-light);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+
+@media(max-width:600px){
+  body{padding:24px 16px}
+  .check-circle{width:80px;height:80px;margin-bottom:24px}
+  .check-circle svg{width:36px;height:36px}
+  .wa-card{padding:32px 24px}
+  .wa-btn{width:100%;justify-content:center;padding:16px 28px}
+  .step{padding:16px 18px;gap:12px}
+  .subtitle{font-size:1rem;margin-bottom:36px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="check-circle">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+  </div>
+
+  <div class="badge"><span></span> Assinatura confirmada</div>
+
+  <h1>Seja muito <em>bem-vinda</em>, costureira!</h1>
+
+  <p class="subtitle">Sua compra foi aprovada com sucesso. Agora você faz parte de um grupo de mulheres que estão transformando linha e agulha em renda de verdade.</p>
+
+  <!-- WhatsApp Card -->
+  <div class="wa-card">
+    <div class="wa-icon">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+    <p class="wa-label">Próximo passo</p>
+    <h2 class="wa-title">Entre no grupo exclusivo das assinantes</h2>
+    <p class="wa-desc">É lá que a Thaíza avisa sobre os moldes novos, tira dúvidas de costura, e você troca experiências com outras alunas que também estão vendendo suas peças.</p>
+    <a href="https://chat.whatsapp.com/LA32kxCmtJl2xlUO3x3yi7?mode=gi_t" target="_blank" rel="noopener" class="wa-btn" onclick="trackGroupJoin()">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Entrar no grupo agora
+    </a>
+  </div>
+
+  <!-- Next steps checklist -->
+  <div class="steps">
+    <p class="steps-title">O que vem agora</p>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <h4>Confira seu e-mail</h4>
+        <p>Você vai receber o acesso à área de membros com todos os moldes da biblioteca.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <h4>Entre no grupo do WhatsApp</h4>
+        <p>Acesse a comunidade acima pra acompanhar os lançamentos e tirar dúvidas.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <h4>Escolha seu primeiro molde e comece a costurar</h4>
+        <p>Baixe o PDF, imprima, assista a vídeo-aula e mãos à obra.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer">
+    Dúvidas? Fale com a gente em <a href="mailto:contato@thaizagoncalves.com.br">contato@thaizagoncalves.com.br</a><br>
+    Thaíza Gonçalves &mdash; Assinatura de Moldes &copy; 2026
+  </p>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     META PIXEL + CAPI — PURCHASE EVENT (THANK YOU PAGE)
+     Dispara Purchase no load + CompleteRegistration no click grupo
+     Valor em BRL lido da query string ?plan=mensal|trimestral|anual
+     ═══════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+
+  var PX='246033433475773';
+  var TK='EAAIPT7FQDboBO9yWW5YVbbAHIdbGEI16L6pxRo6w0lzoSxtZCfZAUR61wmKOEtyFQz1C3vroZCVbTHUyKBei9ZAwMtTp3hWqDglfpTMX7dPnGVSuR9Jocv6VvZB32Ya5KMZAtZBKZCp8IvbKmfnBr9k2ocIBihbaeYfNhr4hxlYpqxdaLDcglYZCzJdgfSZBmBZB6yxRQZDZD';
+  var API='https://graph.facebook.com/v21.0/'+PX+'/events?access_token='+TK;
+
+  function eid(){
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+      var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);
+    });
+  }
+
+  function getExternalId(){
+    var id=localStorage.getItem('_meta_ext_id');
+    if(!id){id='ext_'+eid();localStorage.setItem('_meta_ext_id',id);}
+    return id;
+  }
+  var extId=getExternalId();
+
+  function ck(n){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?m.pop():'';}
+  function getFbp(){return ck('_fbp');}
+  function getFbc(){
+    var f=ck('_fbc');
+    if(!f){var q=new URLSearchParams(location.search).get('fbclid');if(q)f='fb.1.'+Date.now()+'.'+q;}
+    return f;
+  }
+
+  var clientIP='';
+  try{
+    fetch('https://api.ipify.org?format=json').then(function(r){return r.json();}).then(function(d){clientIP=d.ip||'';}).catch(function(){});
+  }catch(e){}
+
+  function buildUserData(){
+    var o={client_user_agent:navigator.userAgent,external_id:extId,country:'br'};
+    if(clientIP)o.client_ip_address=clientIP;
+    var p=getFbp();if(p)o.fbp=p;
+    var f=getFbc();if(f)o.fbc=f;
+    return o;
+  }
+
+  function capi(name,id,data){
+    var payload=JSON.stringify({data:[{
+      event_name:name,event_time:Math.floor(Date.now()/1000),
+      event_id:id,event_source_url:location.href,
+      action_source:'website',user_data:buildUserData(),
+      custom_data:data||{}
+    }]});
+    try{
+      if(navigator.sendBeacon)navigator.sendBeacon(API,payload);
+      else fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:payload,keepalive:true}).catch(function(){});
+    }catch(e){}
+  }
+
+  function dual(name,params){
+    var id=eid();
+    if(typeof fbq==='function')fbq('track',name,params||{},{eventID:id});
+    capi(name,id,params||{});
+  }
+
+  // ── PageView CAPI mirror (same _pvEid from <head>) ──
+  capi('PageView',_pvEid,{});
+
+  // ── Read plan from URL (?plan=mensal|trimestral|anual) ──
+  // Hotmart redirect can include ?plan=X or fallback to 'mensal'
+  var qs=new URLSearchParams(location.search);
+  var plan=(qs.get('plan')||'mensal').toLowerCase();
+  var plans={
+    mensal:{name:'Mensal',value:49.90,id:'assinatura-moldes-mensal'},
+    trimestral:{name:'Trimestral',value:109.90,id:'assinatura-moldes-trimestral'},
+    anual:{name:'Anual',value:289.90,id:'assinatura-moldes-anual'}
+  };
+  var p=plans[plan]||plans.mensal;
+
+  // ── PURCHASE — the critical conversion event ──
+  // Note: Hotmart will also fire its own Purchase via postback.
+  // This fires on thank-you page load as an additional signal with proper dedup.
+  dual('Purchase',{
+    content_name:'Assinatura de Moldes — Plano '+p.name,
+    content_category:'Assinatura de Moldes',
+    content_type:'product',
+    content_ids:[p.id],
+    contents:[{id:p.id,quantity:1,item_price:p.value}],
+    value:p.value,
+    currency:'BRL',
+    num_items:1
+  });
+
+  // ── CompleteRegistration — when user clicks WhatsApp group link ──
+  window.trackGroupJoin=function(){
+    dual('CompleteRegistration',{
+      content_name:'WhatsApp Group Join',
+      content_category:'Community',
+      status:true,
+      value:p.value,
+      currency:'BRL'
+    });
+  };
+
+})();
+</script>
+
+</body>
+</html>
