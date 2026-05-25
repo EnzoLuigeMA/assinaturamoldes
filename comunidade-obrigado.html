@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bem-vinda à Comunidade! — Thaíza Gonçalves</title>
+<meta name="description" content="Você está dentro! Entre no grupo da comunidade de costura da Thaíza Gonçalves.">
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+var _extId=localStorage.getItem('_meta_ext_id');
+if(!_extId){_extId='ext_'+'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);});localStorage.setItem('_meta_ext_id',_extId);}
+var _pvEid='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);});
+fbq('init', '246033433475773', {country:'br',external_id:_extId});
+fbq('track', 'PageView', {}, {eventID: _pvEid});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=246033433475773&ev=PageView&noscript=1"/></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FDF8F0;--warm:#F5EDE0;
+  --gold:#C8A050;--gold-dark:#A07830;--gold-light:#E8D5A8;
+  --charcoal:#2A2420;--brown:#5C4A3A;--brown-light:#8C7A6A;
+  --rose:#D4716A;--rose-dark:#B85550;--rose-light:#F2D5D2;
+  --green:#4A7C5C;--green-light:#E8F0EA;
+  --whatsapp:#25D366;--whatsapp-dark:#1EBE57;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+}
+html{font-size:16px}
+body{
+  font-family:var(--font-body);color:var(--cream);
+  background:var(--charcoal);min-height:100vh;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  display:flex;align-items:center;justify-content:center;
+  padding:40px 20px;position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 30%,rgba(200,160,80,0.14) 0%,transparent 70%),
+    radial-gradient(ellipse 60% 80% at 80% 70%,rgba(212,113,106,0.08) 0%,transparent 60%);
+  z-index:0;
+}
+.wrap{position:relative;z-index:1;max-width:620px;width:100%;text-align:center}
+
+/* ── Confetti particles ── */
+.confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.confetti i{
+  position:absolute;top:-20px;
+  width:10px;height:10px;border-radius:2px;
+  animation:fall linear forwards;
+  opacity:0.8;
+}
+@keyframes fall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:0.9}
+  100%{transform:translateY(100vh) rotate(720deg);opacity:0}
+}
+
+/* ── Check circle ── */
+.check-circle{
+  width:100px;height:100px;margin:0 auto 28px;
+  border-radius:50%;
+  background:rgba(74,124,92,0.15);
+  border:2px solid var(--green);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  animation:pop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  opacity:0;transform:scale(0.5);
+}
+.check-circle svg{width:48px;height:48px;stroke:var(--green);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.check-circle::before{
+  content:'';position:absolute;inset:-10px;border-radius:50%;
+  border:1px solid rgba(74,124,92,0.3);
+  animation:ripple 2s ease-out infinite;
+}
+@keyframes pop{to{opacity:1;transform:scale(1)}}
+@keyframes ripple{0%{transform:scale(0.9);opacity:0.6}100%{transform:scale(1.4);opacity:0}}
+
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:100px;
+  background:rgba(74,124,92,0.15);border:1px solid rgba(74,124,92,0.3);
+  font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--green-light);margin-bottom:24px;
+  opacity:0;animation:fadeUp 0.6s ease 0.3s forwards;
+}
+.badge span{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%}
+
+h1{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,5vw,2.8rem);
+  line-height:1.15;font-weight:400;margin-bottom:16px;
+  opacity:0;animation:fadeUp 0.6s ease 0.4s forwards;
+}
+h1 em{font-style:italic;color:var(--gold-light)}
+
+.subtitle{
+  font-size:1.05rem;line-height:1.7;
+  color:rgba(253,248,240,0.65);
+  max-width:480px;margin:0 auto 44px;
+  opacity:0;animation:fadeUp 0.6s ease 0.5s forwards;
+}
+
+/* ── WhatsApp Card ── */
+.wa-card{
+  background:rgba(253,248,240,0.04);
+  border:1px solid rgba(37,211,102,0.25);
+  border-radius:24px;padding:44px 36px;
+  position:relative;overflow:hidden;
+  opacity:0;animation:fadeUp 0.6s ease 0.6s forwards;
+}
+.wa-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(37,211,102,0.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.wa-icon{
+  width:72px;height:72px;margin:0 auto 20px;
+  border-radius:50%;
+  background:rgba(37,211,102,0.15);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,0.3)}50%{box-shadow:0 0 0 16px rgba(37,211,102,0)}}
+.wa-icon svg{width:38px;height:38px;fill:var(--whatsapp)}
+.wa-subtitle{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--gold-light);
+  margin-bottom:10px;position:relative;z-index:1;
+}
+.wa-title{
+  font-family:var(--font-display);font-size:1.5rem;
+  margin-bottom:12px;color:var(--cream);position:relative;z-index:1;
+}
+.wa-desc{
+  font-size:0.92rem;line-height:1.65;
+  color:rgba(253,248,240,0.6);
+  max-width:420px;margin:0 auto 28px;
+  position:relative;z-index:1;
+}
+.wa-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:20px 44px;border-radius:100px;
+  background:var(--whatsapp);color:#fff;
+  font-size:1.05rem;font-weight:600;letter-spacing:0.02em;
+  text-decoration:none;
+  transition:all 0.3s ease;
+  box-shadow:0 4px 24px rgba(37,211,102,0.35);
+  position:relative;z-index:1;
+}
+.wa-btn:hover{background:var(--whatsapp-dark);transform:translateY(-3px);box-shadow:0 8px 36px rgba(37,211,102,0.45)}
+.wa-btn svg{width:20px;height:20px;fill:currentColor}
+
+/* ── What to expect ── */
+.expect{
+  margin-top:40px;text-align:left;
+  opacity:0;animation:fadeUp 0.6s ease 0.7s forwards;
+}
+.expect-title{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--gold-light);
+  margin-bottom:18px;text-align:center;
+}
+.expect-item{
+  display:flex;gap:14px;align-items:center;
+  padding:14px 18px;margin-bottom:10px;
+  background:rgba(253,248,240,0.03);
+  border:1px solid rgba(200,160,80,0.1);
+  border-radius:12px;
+  font-size:0.9rem;color:rgba(253,248,240,0.75);
+}
+.expect-icon{
+  flex-shrink:0;width:28px;height:28px;border-radius:50%;
+  background:rgba(200,160,80,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;color:var(--gold-light);
+}
+
+/* ── Footer ── */
+.footer{
+  margin-top:36px;padding-top:20px;
+  border-top:1px solid rgba(200,160,80,0.1);
+  font-size:0.78rem;color:rgba(253,248,240,0.35);
+  opacity:0;animation:fadeUp 0.6s ease 0.8s forwards;
+}
+.footer a{color:var(--gold-light);text-decoration:none}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+@media(max-width:600px){
+  body{padding:24px 16px}
+  .wa-card{padding:32px 24px;border-radius:20px}
+  .wa-btn{width:100%;justify-content:center;padding:18px 28px}
+  .check-circle{width:80px;height:80px}
+  .check-circle svg{width:38px;height:38px}
+  .wa-icon{width:60px;height:60px}
+  .wa-icon svg{width:32px;height:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- Confetti -->
+<div class="confetti" id="confetti"></div>
+
+<div class="wrap">
+
+  <div class="check-circle">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+  </div>
+
+  <div class="badge"><span></span> Inscrição confirmada</div>
+
+  <h1>Você está <em>dentro!</em></h1>
+
+  <p class="subtitle">Sua inscrição na comunidade de costura da Thaíza Gonçalves foi confirmada. Agora só falta um passo pra você não perder nada.</p>
+
+  <!-- WhatsApp Card -->
+  <div class="wa-card">
+    <div class="wa-icon">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+    <p class="wa-subtitle">Passo final</p>
+    <h2 class="wa-title">Entre agora no grupo da comunidade</h2>
+    <p class="wa-desc">É no grupo do WhatsApp que a Thaíza compartilha as dicas, os lançamentos de moldes, e onde a comunidade se conecta. Não fique de fora.</p>
+    <a href="https://chat.whatsapp.com/JvhvCZjch9EAtyzwDknrHy?mode=gi_t" target="_blank" rel="noopener" class="wa-btn" id="waBtn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Entrar agora na comunidade
+    </a>
+  </div>
+
+  <!-- What to expect -->
+  <div class="expect">
+    <p class="expect-title">O que esperar da comunidade</p>
+    <div class="expect-item">
+      <div class="expect-icon">&#9997;</div>
+      Dicas de costura e técnicas da Thaíza toda semana
+    </div>
+    <div class="expect-item">
+      <div class="expect-icon">&#127775;</div>
+      Lançamentos de moldes novos em primeira mão
+    </div>
+    <div class="expect-item">
+      <div class="expect-icon">&#128176;</div>
+      Acesso antecipado à loja de moldes avulsos
+    </div>
+    <div class="expect-item">
+      <div class="expect-icon">&#128172;</div>
+      Troca de experiências com outras costureiras
+    </div>
+  </div>
+
+  <p class="footer">
+    Thaíza Gonçalves &mdash; Comunidade de Costura &copy; 2026
+  </p>
+
+</div>
+
+<script>
+// ── Confetti animation ──
+(function(){
+  var container=document.getElementById('confetti');
+  var colors=['#C8A050','#D4716A','#E8D5A8','#4A7C5C','#F2D5D2','#FDF8F0'];
+  for(var i=0;i<40;i++){
+    var el=document.createElement('i');
+    el.style.left=Math.random()*100+'%';
+    el.style.background=colors[Math.floor(Math.random()*colors.length)];
+    el.style.width=(Math.random()*8+6)+'px';
+    el.style.height=(Math.random()*8+6)+'px';
+    el.style.animationDuration=(Math.random()*2+2)+'s';
+    el.style.animationDelay=(Math.random()*2)+'s';
+    el.style.borderRadius=Math.random()>0.5?'50%':'2px';
+    container.appendChild(el);
+  }
+})();
+
+// ═══════════════════════════════════════════════
+// META PIXEL + CAPI — LEAD TRACKING
+// ═══════════════════════════════════════════════
+(function(){
+  'use strict';
+
+  var PX='246033433475773';
+  var TK='EAAIPT7FQDboBO9yWW5YVbbAHIdbGEI16L6pxRo6w0lzoSxtZCfZAUR61wmKOEtyFQz1C3vroZCVbTHUyKBei9ZAwMtTp3hWqDglfpTMX7dPnGVSuR9Jocv6VvZB32Ya5KMZAtZBKZCp8IvbKmfnBr9k2ocIBihbaeYfNhr4hxlYpqxdaLDcglYZCzJdgfSZBmBZB6yxRQZDZD';
+  var API='https://graph.facebook.com/v21.0/'+PX+'/events?access_token='+TK;
+
+  function eid(){
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+      var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);
+    });
+  }
+
+  function getExtId(){
+    var id=localStorage.getItem('_meta_ext_id');
+    if(!id){id='ext_'+eid();localStorage.setItem('_meta_ext_id',id);}
+    return id;
+  }
+  var extId=getExtId();
+
+  function ck(n){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?m.pop():'';}
+
+  var clientIP='';
+  try{fetch('https://api.ipify.org?format=json').then(function(r){return r.json();}).then(function(d){clientIP=d.ip||'';}).catch(function(){});}catch(e){}
+
+  function buildUD(){
+    var o={client_user_agent:navigator.userAgent,external_id:extId,country:'br'};
+    if(clientIP)o.client_ip_address=clientIP;
+    var p=ck('_fbp');if(p)o.fbp=p;
+    var f=ck('_fbc');if(!f){var q=new URLSearchParams(location.search).get('fbclid');if(q)f='fb.1.'+Date.now()+'.'+q;}
+    if(f)o.fbc=f;
+    return o;
+  }
+
+  function capi(name,id,data){
+    var payload=JSON.stringify({data:[{
+      event_name:name,event_time:Math.floor(Date.now()/1000),
+      event_id:id,event_source_url:location.href,
+      action_source:'website',user_data:buildUD(),
+      custom_data:data||{}
+    }]});
+    try{
+      if(navigator.sendBeacon)navigator.sendBeacon(API,payload);
+      else fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:payload,keepalive:true}).catch(function(){});
+    }catch(e){}
+  }
+
+  // ── PageView CAPI mirror (same _pvEid from <head>) ──
+  capi('PageView',_pvEid,{});
+
+  // ── ViewContent on load ──
+  var vcId=eid();
+  if(typeof fbq==='function')fbq('track','ViewContent',{content_name:'Obrigado Comunidade',content_category:'Comunidade'},{eventID:vcId});
+  capi('ViewContent',vcId,{content_name:'Obrigado Comunidade',content_category:'Comunidade'});
+
+  // ── Lead event on WhatsApp button click ──
+  var waBtn=document.getElementById('waBtn');
+  if(waBtn){
+    waBtn.addEventListener('click',function(e){
+      e.preventDefault();
+      var href=this.getAttribute('href');
+      var id=eid();
+      var params={
+        content_name:'Comunidade WhatsApp Join',
+        content_category:'Lead Comunidade',
+        value:0,
+        currency:'BRL'
+      };
+      if(typeof fbq==='function')fbq('track','Lead',params,{eventID:id});
+      capi('Lead',id,params);
+      setTimeout(function(){window.open(href,'_blank');},300);
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
