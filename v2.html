@@ -36,6 +36,8 @@ fbq('track', 'PageView', {}, {eventID: _pvEid});
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="hero-1.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="hero-2.webp" type="image/webp">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -446,17 +448,17 @@ em{font-style:italic}
       </div>
       <div class="hero-proof">
         <div class="avatars">
-          <img src="mariane-blusa.jpg" alt="Aluna" loading="lazy">
-          <img src="amanda-saiacamadas.jpg" alt="Aluna" loading="lazy">
-          <img src="rose-blusaeshow.jpg" alt="Aluna" loading="lazy">
-          <img src="silvana-blusa.jpg" alt="Aluna" loading="lazy">
+          <img src="av-mariane.webp" alt="Aluna" width="40" height="40" loading="lazy" decoding="async">
+          <img src="av-amanda.webp" alt="Aluna" width="40" height="40" loading="lazy" decoding="async">
+          <img src="av-rose.webp" alt="Aluna" width="40" height="40" loading="lazy" decoding="async">
+          <img src="av-silvana.webp" alt="Aluna" width="40" height="40" loading="lazy" decoding="async">
         </div>
         <div class="txt"><span class="stars">★★★★★</span><br><b>+200 costureiras</b> já transformando linha e agulha em renda</div>
       </div>
     </div>
     <div class="hero-media">
-      <div class="frame f1"><img src="amanda-saiacamadas.jpg" alt="Peça costurada por aluna" loading="lazy"></div>
-      <div class="frame f2"><img src="rose-blusaeshow.jpg" alt="Peça costurada por aluna" loading="lazy"></div>
+      <div class="frame f1"><picture><source srcset="hero-1.webp" type="image/webp"><img src="amanda-saiacamadas.jpg" alt="Peça costurada por aluna" fetchpriority="high" decoding="async"></picture></div>
+      <div class="frame f2"><picture><source srcset="hero-2.webp" type="image/webp"><img src="rose-blusaeshow.jpg" alt="Peça costurada por aluna" decoding="async"></picture></div>
       <div class="hero-float">
         <div class="ico">✓</div>
         <div>
