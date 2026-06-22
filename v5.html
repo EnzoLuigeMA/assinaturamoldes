@@ -352,7 +352,7 @@ fbq('track','PageView');
     .carousel-slide { flex:0 0 260px; }
   }
   @media (min-width:860px) {
-    .plans { grid-template-columns:repeat(3,1fr); gap:22px; max-width:1060px; }
+    .plans { grid-template-columns:repeat(auto-fit, minmax(280px, 330px)); justify-content:center; gap:22px; max-width:1060px; }
     .plan-card.featured { transform:scale(1.045); }
   }
 </style>
@@ -557,6 +557,7 @@ fbq('track','PageView');
       <p class="s4-sub">Por menos do que o valor de um tecido básico por mês, você recebe acesso a uma biblioteca completa de moldes, novos lançamentos, vídeo-aulas, suporte e uma comunidade exclusiva de costureiras.</p>
     </div>
     <div class="plans">
+      <!-- ===== PLANO MENSAL — DESATIVADO. Para reativar, descomente o bloco abaixo. (R$ 49,90/mes · checkout off=iv7j24uu) =====
       <div class="plan-card">
         <p class="plan-name">Mensal</p>
         <p class="plan-tagline">Pra começar leve, mês a mês</p>
@@ -572,6 +573,7 @@ fbq('track','PageView');
         </ul>
         <a href="https://pay.hotmart.com/E79768335W?off=iv7j24uu&checkoutMode=10" class="btn-wine-outline" data-plan="Mensal" data-value="49.90" target="_blank" rel="noopener">Quero o plano mensal</a>
       </div>
+      ===== fim PLANO MENSAL desativado ===== -->
       <div class="plan-card">
         <p class="plan-name">Trimestral</p>
         <p class="plan-tagline">Ideal para quem deseja conhecer a assinatura</p>
