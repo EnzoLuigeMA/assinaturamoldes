@@ -23,6 +23,8 @@ fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=246033433475773&ev=PageView&noscript=1"/></noscript>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -366,7 +368,7 @@ fbq('track','PageView');
     <span class="hero-eyebrow">Assinatura de Moldes Profissionais</span>
 
     <div class="hero-video-box">
-      <video autoplay muted loop playsinline poster="hero-1.webp">
+      <video muted loop playsinline preload="none" poster="hero-1.webp">
         <source src="hero-video.mp4" type="video/mp4">
       </video>
     </div>
@@ -393,7 +395,7 @@ fbq('track','PageView');
     <h3 class="topic-title"><span class="topic-num-inline">1 –</span> Tutorial de Costura em cada peça</h3>
 
     <div class="block-video" style="aspect-ratio:16/9; max-width:100%;">
-      <video autoplay muted loop playsinline poster="amanda-saiacamadas.jpg" style="width:100%;height:100%;object-fit:cover;">
+      <video muted loop playsinline preload="none" poster="amanda-saiacamadas.jpg" style="width:100%;height:100%;object-fit:cover;">
         <source src="tutorial-video.mp4" type="video/mp4">
       </video>
     </div>
@@ -430,7 +432,7 @@ fbq('track','PageView');
     <h3 class="topic-title" style="margin-top:48px;"><span class="topic-num-inline">3 –</span> Ficha técnica com indicações de tecidos e aviamentos</h3>
 
     <div class="block-video" style="aspect-ratio:4/5; max-width:300px;">
-      <video autoplay muted loop playsinline poster="Blusas.jpg" style="width:100%;height:100%;object-fit:cover;">
+      <video muted loop playsinline preload="none" poster="Blusas.jpg" style="width:100%;height:100%;object-fit:cover;">
         <source src="ficha-video.mp4" type="video/mp4">
       </video>
     </div>
@@ -448,7 +450,7 @@ fbq('track','PageView');
       <div style="flex:1; min-width:140px; max-width:200px; text-align:center;">
         <p style="font-family:'Playfair Display',serif; font-size:14px; font-weight:600; color:var(--wine); margin-bottom:10px; letter-spacing:0.06em; text-transform:uppercase;">A4</p>
         <div class="block-video" style="aspect-ratio:4/5; max-width:100%; margin:0 auto;">
-          <video autoplay muted loop playsinline poster="Vestidos.png" style="width:100%;height:100%;object-fit:cover;">
+          <video muted loop playsinline preload="none" poster="Vestidos.png" style="width:100%;height:100%;object-fit:cover;">
             <source src="a4-video.mp4" type="video/mp4">
           </video>
         </div>
@@ -458,7 +460,7 @@ fbq('track','PageView');
       <div style="flex:1; min-width:140px; max-width:200px; text-align:center;">
         <p style="font-family:'Playfair Display',serif; font-size:14px; font-weight:600; color:var(--wine); margin-bottom:10px; letter-spacing:0.06em; text-transform:uppercase;">Plotter</p>
         <div class="block-video" style="aspect-ratio:4/5; max-width:100%; margin:0 auto;">
-          <video autoplay muted loop playsinline poster="Saias.jpg" style="width:100%;height:100%;object-fit:cover;">
+          <video muted loop playsinline preload="none" poster="Saias.jpg" style="width:100%;height:100%;object-fit:cover;">
             <source src="plotter-video.mp4" type="video/mp4">
           </video>
         </div>
@@ -486,7 +488,7 @@ fbq('track','PageView');
         <div class="carousel-slide"><img src="comunidade-12.jpeg" alt="Feedback" loading="lazy"></div>
         <div class="carousel-slide"><img src="comunidade-1.jpeg" alt="Feedback" loading="lazy"></div>
         <div class="carousel-slide"><img src="comunidade-3.jpeg" alt="Feedback" loading="lazy"></div>
-        <div class="carousel-slide"><img src="feedback-2.png" alt="Feedback" loading="lazy"></div>
+        <div class="carousel-slide"><img src="feedback-2.jpg" alt="Feedback" loading="lazy"></div>
       </div>
       <div class="carousel-dots" id="dots-feedbacks"></div>
     </div>
@@ -497,7 +499,7 @@ fbq('track','PageView');
 <div class="benefit-block">
   <div class="benefit-inner">
     <div class="mosaic">
-      <div class="mosaic-item"><img src="molde-1.png" alt="Molde profissional" loading="lazy"></div>
+      <div class="mosaic-item"><img src="molde-1.jpg" alt="Molde profissional" loading="lazy"></div>
       <div class="mosaic-item"><img src="molde-2.png" alt="Blusa Peplum" loading="lazy"></div>
       <div class="mosaic-item"><img src="molde-3.png" alt="Saia Pala e Pregas" loading="lazy"></div>
       <div class="mosaic-item"><img src="Blusas.jpg" alt="Blusa" loading="lazy"></div>
@@ -762,6 +764,20 @@ fbq('track','PageView');
       if (typeof fbq === 'function') fbq('track','InitiateCheckout',{value:v,currency:'BRL',content_name:a.getAttribute('data-plan')});
     });
   });
+
+  // Vídeos lazy: só carregam/tocam quando entram na tela (economiza dados no mobile)
+  (function(){
+    var vids = document.querySelectorAll('video');
+    if (!vids.length) return;
+    if (!('IntersectionObserver' in window)) { vids.forEach(function(v){ v.play().catch(function(){}); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.play().catch(function(){}); }
+        else { e.target.pause(); }
+      });
+    }, { threshold: 0.25 });
+    vids.forEach(function(v){ io.observe(v); });
+  })();
 </script>
 </body>
 </html>
