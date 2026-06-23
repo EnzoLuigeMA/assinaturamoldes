@@ -357,9 +357,71 @@ fbq('track','PageView',{},{eventID:_pvEid});
     .plans { grid-template-columns:repeat(auto-fit, minmax(280px, 330px)); justify-content:center; gap:22px; max-width:1060px; }
     .plan-card.featured { transform:scale(1.045); }
   }
+  /* ── ANNOUNCE / STICKY / SEÇÕES AIDA ── */
+  .announce { background:var(--wine); color:#fff; text-align:center; padding:10px 16px; font-size:12.5px; font-weight:500; letter-spacing:0.01em; position:relative; z-index:50; }
+  .announce strong { font-weight:700; }
+  .announce .timer { display:inline-flex; align-items:center; gap:5px; background:rgba(0,0,0,0.18); padding:3px 10px; border-radius:100px; font-variant-numeric:tabular-nums; font-weight:700; margin-left:6px; }
+
+  .pain5 { background:var(--cream); padding:64px 24px; border-bottom:1px solid var(--stone); }
+  .pain5-inner { max-width:760px; margin:0 auto; text-align:center; }
+  .pain5-cards { display:grid; grid-template-columns:1fr; gap:14px; margin:30px 0 26px; text-align:left; }
+  .pain5-card { background:var(--white); border:1px solid var(--stone); border-radius:10px; padding:22px; }
+  .pain5-card .ic { font-size:24px; margin-bottom:8px; }
+  .pain5-card h4 { font-family:'Playfair Display',serif; font-size:16px; font-weight:600; color:var(--ink); margin-bottom:6px; line-height:1.3; }
+  .pain5-card p { font-size:13.5px; color:var(--muted); line-height:1.7; }
+  .pain5-turn { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(16px,3.8vw,21px); color:var(--wine); line-height:1.5; max-width:620px; margin:0 auto; }
+  @media(min-width:760px){ .pain5-cards{ grid-template-columns:repeat(3,1fr); } }
+
+  .author5 { background:var(--blush); padding:60px 24px; }
+  .author5-inner { max-width:680px; margin:0 auto; text-align:center; }
+  .author5 .body-text { text-align:left; }
+
+  .forwho5 { background:var(--white); padding:64px 24px; border-top:1px solid var(--stone); }
+  .forwho5-inner { max-width:620px; margin:0 auto; }
+  .forwho5-head { text-align:center; margin-bottom:28px; }
+  .forwho5-list { display:flex; flex-direction:column; gap:12px; }
+  .forwho5-item { display:flex; gap:12px; align-items:flex-start; background:var(--cream); border:1px solid var(--stone); border-radius:10px; padding:16px 18px; }
+  .forwho5-check { flex-shrink:0; width:24px; height:24px; border-radius:50%; background:var(--wine); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; margin-top:1px; }
+  .forwho5-item p { font-size:14.5px; color:var(--ink); line-height:1.55; }
+  .forwho5-item strong { color:var(--wine); }
+
+  .vstack5 { background:var(--cream); padding:64px 24px 44px; }
+  .vstack5-inner { max-width:640px; margin:0 auto; }
+  .vstack5-head { text-align:center; margin-bottom:28px; }
+  .vstack5-rows { background:var(--white); border:1px solid var(--stone); border-radius:12px; overflow:hidden; }
+  .vstack5-row { display:flex; align-items:center; gap:14px; padding:16px 20px; border-bottom:1px solid var(--stone); }
+  .vstack5-row:last-child { border-bottom:none; }
+  .vstack5-row .ic { font-size:20px; flex-shrink:0; }
+  .vstack5-row .t { flex:1; font-size:14.5px; color:var(--ink); line-height:1.3; }
+  .vstack5-row .t small { display:block; color:var(--muted); font-size:12.5px; margin-top:3px; }
+  .vstack5-row .v { font-weight:700; color:var(--ink); font-size:13.5px; white-space:nowrap; }
+  .vstack5-total { margin-top:22px; background:var(--wine); color:#fff; border-radius:12px; padding:26px 22px; text-align:center; }
+  .vstack5-total .strike { opacity:0.72; text-decoration:line-through; font-size:14px; }
+  .vstack5-total .now { font-family:'Playfair Display',serif; font-size:clamp(21px,5vw,29px); font-weight:600; margin:5px 0 4px; }
+  .vstack5-total .day { font-size:13px; opacity:0.92; line-height:1.5; }
+
+  .sticky5 { position:fixed; left:50%; bottom:18px; transform:translate(-50%,160%); z-index:60; width:min(560px,calc(100% - 28px)); background:var(--ink); color:#fff; border-radius:100px; box-shadow:0 12px 36px rgba(0,0,0,0.32); display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px 10px 22px; transition:transform .4s cubic-bezier(.16,1,.3,1),opacity .3s; opacity:0; }
+  .sticky5.show { transform:translate(-50%,0); opacity:1; }
+  .sticky5 .s-info { line-height:1.25; font-size:13px; }
+  .sticky5 .s-info b { color:#e8a0b4; }
+  .sticky5 .s-info small { display:block; font-size:11px; opacity:0.7; }
+  .sticky5 .s-btn { flex-shrink:0; background:var(--wine); color:#fff; border:none; cursor:pointer; font-family:'Inter',sans-serif; font-weight:600; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; padding:12px 22px; border-radius:100px; }
+  @media(max-width:600px){ .sticky5{ bottom:0; left:0; transform:translateY(120%); width:100%; border-radius:14px 14px 0 0; } .sticky5.show{ transform:translateY(0); } .sticky5 .s-info small{ display:none; } }
 </style>
 </head>
 <body>
+
+<!-- ── BARRA DE ANÚNCIO ── -->
+<div class="announce">
+  ⚡ <strong>OFERTA DE LANÇAMENTO</strong> — Plano Anual com 51% OFF
+  <span class="timer">⏳ <span class="countdown">--:--:--</span></span>
+</div>
+
+<!-- ── CTA FIXO ── -->
+<div class="sticky5" id="sticky5">
+  <div class="s-info"><b>Plano Anual · 51% OFF</b><small>a partir de R$ 24,16/mês — menos de R$ 1 por dia</small></div>
+  <button class="s-btn" onclick="document.getElementById('planos').scrollIntoView({behavior:'smooth'})">Assinar agora</button>
+</div>
 
 <!-- ── HERO ── -->
 <section class="hero">
@@ -382,6 +444,21 @@ fbq('track','PageView',{},{eventID:_pvEid});
     <a href="#planos" class="btn-primary">Comece agora</a>
   </div>
 </section>
+
+<!-- ── DOR / AGITAÇÃO ── -->
+<div class="pain5">
+  <div class="pain5-inner">
+    <span class="label">A real de quem ama costurar</span>
+    <h2 class="heading-display">Você sabe costurar. <em>Então por que a peça ainda sai “feita em casa”?</em></h2>
+    <p class="body-text">Não é falta de talento — é a modelagem. Sem o caimento certo, a peça mais caprichada perde valor e o acabamento entrega.</p>
+    <div class="pain5-cards">
+      <div class="pain5-card"><div class="ic">✂️</div><h4>Horas — e tecido — refazendo o mesmo molde</h4><p>Você traça, corta, testa e ajusta. E quando sai errado, é tecido bom indo pro lixo.</p></div>
+      <div class="pain5-card"><div class="ic">🪞</div><h4>Linda no cabide. No corpo, o caimento entrega.</h4><p>A peça parece pronta no manequim, mas no corpo a modelagem denuncia que faltou ajuste.</p></div>
+      <div class="pain5-card"><div class="ic">😮‍💨</div><h4>Outras com acabamento de ateliê — e você ainda na régua</h4><p>Enquanto você perde noites na modelagem, outras costureiras já entregam peças com caimento profissional.</p></div>
+    </div>
+    <p class="pain5-turn">Não falta talento na sua mão. Falta um molde profissional, já testado e com o caimento resolvido — chegando todo mês, com a vídeo-aula da montagem.</p>
+  </div>
+</div>
 
 <!-- ── SEÇÃO 2 ── -->
 <div class="s2-intro">
@@ -496,6 +573,16 @@ fbq('track','PageView',{},{eventID:_pvEid});
   </div>
 </div>
 
+<!-- ── AUTORIDADE ── -->
+<div class="author5">
+  <div class="author5-inner">
+    <span class="label">Quem está por trás dos moldes</span>
+    <h2 class="heading-display">Cada molde é desenvolvido e testado pela <em>Thaíza Gonçalves.</em></h2>
+    <p class="body-text" style="margin-top:18px;">Não são moldes genéricos baixados de qualquer lugar. Cada peça é modelada com metodologia profissional, já com as correções do corpo feminino e testada do PP ao GG antes de chegar até você. É esse cuidado técnico que faz o caimento sair profissional logo na primeira costura.</p>
+    <p class="body-text">Hoje são <strong>+200 alunas</strong> costurando com mais segurança e acabamento — e todo mês entram moldes novos, escolhidos pra você evoluir de verdade.</p>
+  </div>
+</div>
+
 <!-- BLOCO BIBLIOTECA -->
 <div class="benefit-block">
   <div class="benefit-inner">
@@ -548,6 +635,45 @@ fbq('track','PageView',{},{eventID:_pvEid});
       A maioria dessas alunas não começou sendo especialista na costura. Elas evoluíram utilizando os moldes da assinatura, tutoriais completos de costura e o suporte disponível dentro da assinatura de moldes.
     </p>
     <a href="#planos" class="btn-primary">Quero ter acesso aos moldes</a>
+  </div>
+</div>
+
+<!-- ── PRA QUEM É ── -->
+<div class="forwho5">
+  <div class="forwho5-inner">
+    <div class="forwho5-head">
+      <span class="label">É pra você?</span>
+      <h2 class="heading-display">Essa assinatura é <em>pra você que…</em></h2>
+    </div>
+    <div class="forwho5-list">
+      <div class="forwho5-item"><div class="forwho5-check">✓</div><p>Já costura ou está aprimorando suas habilidades na costura.</p></div>
+      <div class="forwho5-item"><div class="forwho5-check">✓</div><p>Valoriza <strong>modelagens com metodologia profissional</strong>, já com as correções do corpo feminino.</p></div>
+      <div class="forwho5-item"><div class="forwho5-check">✓</div><p>Quer <strong>produzir peças com caimento e acabamento</strong> cada vez mais profissional.</p></div>
+      <div class="forwho5-item"><div class="forwho5-check">✓</div><p>Tem ateliê, marca própria ou costura sob encomenda e procura <strong>moldes testados e aprovados</strong>, do PP ao GG.</p></div>
+      <div class="forwho5-item"><div class="forwho5-check">✓</div><p>Não gosta de modelar e quer <strong>moldes prontos</strong>, sem fazer inúmeras correções na peça.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── VALUE STACK / ÂNCORA DE PREÇO ── -->
+<div class="vstack5">
+  <div class="vstack5-inner">
+    <div class="vstack5-head">
+      <span class="label">Tudo que entra todo mês</span>
+      <h2 class="heading-display">Você não está só comprando moldes. Está <em>montando um ateliê.</em></h2>
+    </div>
+    <div class="vstack5-rows">
+      <div class="vstack5-row"><span class="ic">🧵</span><span class="t">4 moldes profissionais por mês<small>Modelados e testados, do PP ao GG</small></span><span class="v">R$ 120/mês</span></div>
+      <div class="vstack5-row"><span class="ic">🎬</span><span class="t">Vídeo-aula de montagem de cada peça<small>Do corte ao acabamento</small></span><span class="v">R$ 80/mês</span></div>
+      <div class="vstack5-row"><span class="ic">📋</span><span class="t">Ficha técnica completa<small>Tecido, metragem e aviamentos</small></span><span class="v">R$ 40/mês</span></div>
+      <div class="vstack5-row"><span class="ic">📚</span><span class="t">Biblioteca acumulativa<small>+60 moldes que ficam com você</small></span><span class="v">Inestimável</span></div>
+      <div class="vstack5-row"><span class="ic">💬</span><span class="t">Comunidade de costureiras<small>Suporte e troca com +200 alunas</small></span><span class="v">Incluso</span></div>
+    </div>
+    <div class="vstack5-total">
+      <span class="strike">Valor real: mais de R$ 240 por mês</span>
+      <div class="now">Você assina a partir de R$ 24,16/mês</div>
+      <p class="day">Menos de R$ 1 por dia — uma única peça com caimento profissional já vale mais que isso.</p>
+    </div>
   </div>
 </div>
 
@@ -621,8 +747,9 @@ fbq('track','PageView',{},{eventID:_pvEid});
     <p class="reinforcement-body">
       Por apenas R$ 24,16 por mês no plano anual, você recebe acesso a dezenas de moldes
       já disponíveis na plataforma, além de novos lançamentos todos os meses.
+      A diferença entre você e as costureiras que já entregam peças de ateliê não é talento — é uma decisão. Você pode tomar essa decisão hoje, ou continuar mais um ano brigando com a régua.
     </p>
-    <a href="#planos" class="btn-primary">Quero fazer parte da assinatura</a>
+    <a href="#planos" class="btn-primary">Quero começar agora</a>
   </div>
 </div>
 
@@ -757,6 +884,23 @@ fbq('track','PageView',{},{eventID:_pvEid});
       if (!isOpen) item.classList.add('open');
     });
   });
+
+  // Contador evergreen 24h (barra de anúncio)
+  (function(){
+    var els=document.querySelectorAll('.countdown'); if(!els.length)return;
+    var KEY='_offer_deadline_v5', dl=parseInt(localStorage.getItem(KEY)||'0',10), now=Date.now();
+    if(!dl||dl<=now){dl=now+24*3600*1000;localStorage.setItem(KEY,String(dl));}
+    function p(n){return(n<10?'0':'')+n;}
+    function tick(){var d=dl-Date.now();if(d<=0){dl=Date.now()+24*36e5;localStorage.setItem(KEY,String(dl));d=dl-Date.now();}var h=Math.floor(d/36e5),m=Math.floor(d%36e5/6e4),s=Math.floor(d%6e4/1e3);els.forEach(function(e){e.textContent=p(h)+':'+p(m)+':'+p(s);});}
+    tick();setInterval(tick,1000);
+  })();
+
+  // CTA fixo aparece ao rolar
+  (function(){
+    var bar=document.getElementById('sticky5'); if(!bar)return;
+    function onScroll(){ if(window.scrollY>600){bar.classList.add('show');}else{bar.classList.remove('show');} }
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  })();
 
   // ═══ Meta Pixel + CONVERSIONS API (CAPI) — dedup por event_id (igual v2) ═══
   (function(){
