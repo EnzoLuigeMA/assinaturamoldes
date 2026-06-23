@@ -697,7 +697,6 @@ fbq('track','PageView',{},{eventID:_pvEid});
       <p class="s4-sub">Por menos do que o valor de um tecido básico por mês, você recebe acesso a uma biblioteca completa de moldes, novos lançamentos, vídeo-aulas, suporte e uma comunidade exclusiva de costureiras.</p>
     </div>
     <div class="plans">
-      <!-- ===== PLANO MENSAL — DESATIVADO. Para reativar, descomente o bloco abaixo. (R$ 49,90/mes · checkout off=iv7j24uu) =====
       <div class="plan-card">
         <p class="plan-name">Mensal</p>
         <p class="plan-tagline">Pra começar leve, mês a mês</p>
@@ -713,7 +712,6 @@ fbq('track','PageView',{},{eventID:_pvEid});
         </ul>
         <a href="https://pay.hotmart.com/E79768335W?off=iv7j24uu&checkoutMode=10" class="btn-wine-outline" data-plan="Mensal" data-value="49.90" target="_blank" rel="noopener">Quero o plano mensal</a>
       </div>
-      ===== fim PLANO MENSAL desativado ===== -->
       <div class="plan-card">
         <p class="plan-name">Trimestral</p>
         <p class="plan-tagline">Ideal para quem deseja conhecer a assinatura</p>
@@ -934,11 +932,11 @@ fbq('track','PageView',{},{eventID:_pvEid});
     if(typeof _pvEid!=='undefined') capi('PageView',_pvEid,{});
 
     // 2) ViewContent — página carregada, planos listados
-    dual('ViewContent',{content_name:'Assinatura de Moldes — Thaíza Gonçalves',content_category:'Moldes de Costura',content_type:'product_group',content_ids:['assinatura-moldes-trimestral','assinatura-moldes-anual'],contents:[{id:'assinatura-moldes-trimestral',quantity:1,item_price:109.90},{id:'assinatura-moldes-anual',quantity:1,item_price:289.90}],currency:'BRL',value:109.90});
+    dual('ViewContent',{content_name:'Assinatura de Moldes — Thaíza Gonçalves',content_category:'Moldes de Costura',content_type:'product_group',content_ids:['assinatura-moldes-mensal','assinatura-moldes-trimestral','assinatura-moldes-anual'],contents:[{id:'assinatura-moldes-mensal',quantity:1,item_price:49.90},{id:'assinatura-moldes-trimestral',quantity:1,item_price:109.90},{id:'assinatura-moldes-anual',quantity:1,item_price:289.90}],currency:'BRL',value:49.90});
 
     // 3) AddToCart — seção de planos visível (intenção de compra)
     var pricingEl=document.getElementById('planos');
-    if(pricingEl){var atcDone=false;var pObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!atcDone){atcDone=true;dual('AddToCart',{content_name:'Assinatura de Moldes',content_type:'product',content_ids:['assinatura-moldes'],contents:[{id:'assinatura-moldes',quantity:1,item_price:109.90}],currency:'BRL',value:109.90});pObs.unobserve(e.target);}});},{threshold:0.25});pObs.observe(pricingEl);}
+    if(pricingEl){var atcDone=false;var pObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!atcDone){atcDone=true;dual('AddToCart',{content_name:'Assinatura de Moldes',content_type:'product',content_ids:['assinatura-moldes'],contents:[{id:'assinatura-moldes',quantity:1,item_price:49.90}],currency:'BRL',value:49.90});pObs.unobserve(e.target);}});},{threshold:0.25});pObs.observe(pricingEl);}
 
     // 4) InitiateCheckout — clique no botão de plano (Pixel + CAPI, mesmo event_id)
     document.querySelectorAll('[data-plan]').forEach(function(btn){
