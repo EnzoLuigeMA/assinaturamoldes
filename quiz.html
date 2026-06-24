@@ -146,7 +146,7 @@ fbq('track','PageView',{});
   /* pergunta com imagem */
   .qz-imgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
   .qz-imgopt { position: relative; border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); cursor: pointer; padding: 0; font-family: var(--sans); transition: border-color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease); }
-  .qz-imgopt .ph { display: block; width: 100%; height: 118px; object-fit: cover; background: #fff; }
+  .qz-imgopt .ph { display: block; width: 100%; height: 132px; object-fit: cover; object-position: 78% 50%; background: #fff; }
   .qz-imgopt .emoji { display: flex; align-items: center; justify-content: center; height: 118px; font-size: 44px; background: rgba(246,234,224,.05); }
   .qz-imgopt .cap { display: block; padding: 11px 12px; font-size: 14px; font-weight: 600; color: var(--ink); text-align: left; }
   .qz-imgopt:hover { border-color: var(--line-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); }
@@ -477,12 +477,12 @@ fbq('track','PageView',{});
   // Pool de perguntas com ramificação (when), tipos e pontuação (score 0-10 p/ o medidor de prontidão).
   var POOL = [
     { key:'foco', type:'image', q:'O que você mais quer costurar?', opts:[
-      {v:'vestidos', t:'Vestidos', img:'Vestidos.png', score:8, fb:'Vestido é paixão! 👗'},
-      {v:'blusas', t:'Blusas e tops', img:'Blusas.jpg', score:8, fb:'Blusa combina com tudo ✨'},
-      {v:'saias', t:'Saias', img:'Saias.jpg', score:8, fb:'Saia tem um charme só 💃'},
-      {v:'calcas_macacoes', t:'Calças e macacões', img:'Cal%C3%A7as%20Shorts%20e%20Macacoes.jpg', score:8, fb:'Alfaiataria é elegância 👖'},
-      {v:'infantil', t:'Moda infantil', ic:'🧸', score:8, fb:'Costurar pros pequenos é amor 🧸'},
-      {v:'linha_completa', t:'Um pouco de tudo', ic:'🌈', score:9, fb:'Versátil! Vai amar a variedade 🌈'} ]},
+      {v:'vestidos', t:'Vestidos', img:'vestido-midi-nesgas.png', score:8, fb:'Vestido é paixão! 👗'},
+      {v:'blusas', t:'Blusas e tops', img:'Blusas.png', score:8, fb:'Blusa combina com tudo ✨'},
+      {v:'saias', t:'Saias', img:'Saia.png', score:8, fb:'Saia tem um charme só 💃'},
+      {v:'calcas_macacoes', t:'Calças e macacões', img:'calca-moletom.png', score:8, fb:'Conforto com estilo 👖'},
+      {v:'shorts', t:'Shorts', img:'shorts.png', score:8, fb:'Short é a cara do verão ☀️'},
+      {v:'blazers', t:'Blazers', img:'blazer-feminino.png', score:9, fb:'Alfaiataria é elegância 🤍'} ]},
     { key:'nivel', type:'cards', q:'Como você se descreve na costura hoje?', opts:[
       {v:'iniciante', t:'Tô começando agora', ic:'🌱', score:6, fb:'Todo ateliê começou assim 🌱'},
       {v:'intermediaria', t:'Já costuro, mas quero evoluir', ic:'✂️', score:8, fb:'Bora pro próximo nível ✂️'},
@@ -855,7 +855,7 @@ fbq('track','PageView',{});
       compatibilidade: 93,
       pontos_fortes: ['Você valoriza acabamento e caimento de verdade','Você prefere agir a ficar só planejando','Você quer evoluir com método'],
       beneficio_direcionado: ({modelagem:'Como o que te trava é a modelagem, os moldes já chegam prontos e testados, do PP ao GG.',caimento:'Como o caimento te incomoda, os moldes têm as correções do corpo feminino pra peça cair como de ateliê.',tempo:'Como o seu tempo é curto, o molde chega pronto com vídeo-aula: é só cortar e costurar.',acabamento:'Como você quer acabamento de ateliê, cada molde vem com ficha técnica e vídeo de montagem.'})[a.frustracao] || 'Você recebe moldes profissionais, vídeo-aula e ficha técnica todo mês.',
-      primeira_peca: ({vestidos:'vestido midi',blusas:'blusa lenço',saias:'saia lápis',calcas_macacoes:'calça alfaiataria',infantil:'vestido infantil',linha_completa:'saia lápis'})[a.foco] || 'saia lápis',
+      primeira_peca: ({vestidos:'vestido midi',blusas:'blusa lenço',saias:'saia lápis',calcas_macacoes:'calça de moletom',shorts:'short de alfaiataria',blazers:'blazer de alfaiataria'})[a.foco] || 'saia lápis',
       objecao_quebra: ({preco:'Sai menos que um molde avulso por semana, e você recebe 4 moldes profissionais por mês com vídeo-aula.',medo_nao_usar:'A biblioteca é acumulativa e os moldes não expiram: você usa no seu tempo, sem perder nada.',ja_tenho:'Aqui não é molde solto: é molde testado, do PP ao GG, com vídeo de montagem e ficha técnica.',tempo:'Os moldes chegam prontos e a vídeo-aula é passo a passo: dá pra costurar em poucos minutinhos por vez.'})[a.objecao] || ({testar:'Dá pra começar no plano mensal e sentir no seu ritmo, sem compromisso longo.',conhecer:'Você não precisa saber tudo agora: cada molde vem com vídeo-aula passo a passo.',mergulhar:'Você já está pronta, é só destravar o acesso e começar hoje.'})[a.compromisso] || 'Cada molde vem com vídeo-aula passo a passo, então você nunca fica na mão.',
       cta_texto: ({marca_propria:'Quero construir minha marca',renda_extra:'Quero gerar renda costurando',hobby:'Quero costurar pra mim'})[a.objetivo] || 'Quero assinar agora',
       bonus: ({marca_propria:'Guia de precificação pra sua marca',renda_extra:'Guia de quanto cobrar nas suas peças',hobby:'Guia da sua primeira peça sem erro'})[a.objetivo] || 'Guia da sua primeira peça sem erro'
