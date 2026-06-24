@@ -35,14 +35,12 @@ fbq('track','PageView',{});
     --line: rgba(246,234,224,.14); --line-strong: rgba(246,234,224,.26);
     --ink: #f6eae0; --ink-soft: #ecd7cc; --muted: #d3aaa4;
     --coral: #f0714f; --coral-deep: #d65a39; --coral-hover: #f47c5b; --brass: #e3ad57;
-    --on-coral: #38131a; --on-brass: #3a2407;
+    --on-coral: #38131a; --on-brass: #3a2407; --danger: #ff9a7a;
 
     --ease: cubic-bezier(.16,1,.3,1);
     --shadow-sm: 0 2px 12px rgba(0,0,0,.28);
     --shadow-md: 0 16px 40px rgba(0,0,0,.40);
     --shadow-lg: 0 24px 64px rgba(0,0,0,.50);
-
-    /* z-scale (semantic) */
     --z-toast: 70;
 
     --serif: 'Young Serif', Georgia, 'Times New Roman', serif;
@@ -61,30 +59,21 @@ fbq('track','PageView',{});
   ::selection { background: var(--coral); color: var(--bg); }
 
   .qz-wrap {
-    max-width: 520px; margin: 0 auto; min-height: 100svh;
+    max-width: 540px; margin: 0 auto; min-height: 100svh;
     display: flex; flex-direction: column; justify-content: center;
     padding: 40px 22px 56px;
   }
   .qz-screen { display: none; }
   .qz-screen.active { display: block; }
 
-  /* running-seam motif — replaces the eyebrow chip / icon tile */
-  .stitch {
-    height: 0; width: 46px; border-top: 2px dashed var(--coral);
-    border-radius: 2px; opacity: .85; margin-bottom: 22px;
-  }
+  .stitch { height: 0; width: 46px; border-top: 2px dashed var(--coral); border-radius: 2px; opacity: .85; margin-bottom: 22px; }
   .stitch.center { margin-left: auto; margin-right: auto; }
   .stitch.brass { border-color: var(--brass); }
 
-  /* typography */
-  .display {
-    font-family: var(--serif); font-weight: 400; line-height: 1.1;
-    letter-spacing: -0.01em; color: var(--ink); text-wrap: balance;
-  }
-  .lead { font-size: 16px; color: var(--muted); line-height: 1.7; margin-top: 16px; max-width: 34ch; }
+  .display { font-family: var(--serif); font-weight: 400; line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); text-wrap: balance; }
+  .lead { font-size: 16px; color: var(--muted); line-height: 1.7; margin-top: 16px; max-width: 36ch; }
   .accent { color: var(--coral); }
 
-  /* button */
   .btn-primary {
     position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     background: var(--coral); color: var(--on-coral);
@@ -94,11 +83,7 @@ fbq('track','PageView',{});
     transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .2s;
     overflow: hidden; min-height: 54px;
   }
-  .btn-primary::after {
-    content: ""; position: absolute; inset: 0; border-radius: inherit;
-    background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.30) 50%, transparent 68%);
-    transform: translateX(-130%); transition: transform .7s var(--ease);
-  }
+  .btn-primary::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.30) 50%, transparent 68%); transform: translateX(-130%); transition: transform .7s var(--ease); }
   .btn-primary:hover { transform: translateY(-2px); background: var(--coral-hover); box-shadow: 0 18px 40px rgba(240,113,79,.40), inset 0 -2px 0 rgba(56,19,26,.18); }
   .btn-primary:hover::after { transform: translateX(130%); }
   .btn-primary:active { transform: translateY(0); }
@@ -113,47 +98,38 @@ fbq('track','PageView',{});
   .qz-meta { margin-top: 18px; font-size: 13.5px; color: var(--muted); display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
   .qz-meta .sep { width: 4px; height: 4px; border-radius: 50%; background: var(--brass); opacity: .8; }
   .qz-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
-  .qz-badge {
-    font-size: 12.5px; font-weight: 500; color: var(--ink-soft); background: rgba(246,234,224,.05);
-    border: 1px solid var(--line); border-radius: 100px; padding: 8px 14px;
+  .qz-badge { font-size: 12.5px; font-weight: 500; color: var(--ink-soft); background: rgba(246,234,224,.05); border: 1px solid var(--line); border-radius: 100px; padding: 8px 14px; }
+
+  /* ── LEAD (nome + whatsapp) ── */
+  .qz-lead .display { font-size: clamp(27px, 6.6vw, 36px); }
+  .field { display: block; margin-top: 18px; text-align: left; }
+  .field-lbl { display: block; font-size: 13px; font-weight: 600; color: var(--ink-soft); margin-bottom: 8px; letter-spacing: .01em; }
+  .field input {
+    width: 100%; font-family: var(--sans); font-size: 16px; color: var(--ink); background: var(--surface);
+    border: 1.5px solid var(--line); border-radius: 13px; padding: 15px 16px;
+    transition: border-color .18s, box-shadow .18s;
   }
+  .field input::placeholder { color: rgba(211,170,164,.55); }
+  .field input:focus { outline: none; border-color: var(--coral); box-shadow: 0 0 0 1px var(--coral); }
+  .field input.invalid { border-color: var(--danger); }
+  .field-err { color: var(--danger); font-size: 13.5px; margin-top: 12px; }
+  .lead-fine { font-size: 12.5px; color: var(--muted); margin-top: 16px; line-height: 1.55; }
+  #lead-form .btn-primary { margin-top: 22px; }
 
   /* ── 🅸 QUIZ ── */
+  .qz-greet { font-size: 13px; font-weight: 600; color: var(--coral); margin-bottom: 12px; min-height: 18px; }
   .qz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; }
   .qz-step { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .01em; }
-  .qz-xp {
-    font-size: 13px; font-weight: 700; color: var(--brass); background: rgba(227,173,87,.12);
-    border: 1px solid rgba(227,173,87,.28); border-radius: 100px; padding: 5px 12px; white-space: nowrap;
-  }
+  .qz-xp { font-size: 13px; font-weight: 700; color: var(--brass); background: rgba(227,173,87,.12); border: 1px solid rgba(227,173,87,.28); border-radius: 100px; padding: 5px 12px; white-space: nowrap; }
   .qz-progress { height: 8px; background: rgba(246,234,224,.10); border-radius: 100px; overflow: hidden; margin-bottom: 34px; }
-  .qz-progress-bar {
-    height: 100%; width: 100%; border-radius: 100px;
-    background: linear-gradient(90deg, var(--coral-deep), var(--coral));
-    transform: scaleX(0); transform-origin: left;
-    transition: transform .55s var(--ease);
-  }
-  .qz-question {
-    font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; color: var(--ink);
-    font-size: clamp(23px, 5.6vw, 30px); line-height: 1.2; margin-bottom: 26px; text-wrap: balance;
-  }
+  .qz-progress-bar { height: 100%; width: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--coral-deep), var(--coral)); transform: scaleX(0); transform-origin: left; transition: transform .55s var(--ease); }
+  .qz-question { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; color: var(--ink); font-size: clamp(23px, 5.6vw, 30px); line-height: 1.2; margin-bottom: 26px; text-wrap: balance; }
   .qz-question:focus { outline: none; }
   .qz-options { display: flex; flex-direction: column; gap: 11px; }
-  .qz-option {
-    position: relative; text-align: left; background: var(--surface); border: 1.5px solid var(--line);
-    border-radius: 15px; padding: 15px 16px; font-family: var(--sans); font-size: 16px; color: var(--ink);
-    cursor: pointer; display: flex; align-items: center; gap: 14px; width: 100%;
-    transition: border-color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease), background .18s;
-  }
-  .qz-option .ic {
-    width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center;
-    font-size: 21px; background: rgba(246,234,224,.06); border: 1px solid var(--line);
-    transition: background .18s, transform .18s var(--ease), border-color .18s;
-  }
+  .qz-option { position: relative; text-align: left; background: var(--surface); border: 1.5px solid var(--line); border-radius: 15px; padding: 15px 16px; font-family: var(--sans); font-size: 16px; color: var(--ink); cursor: pointer; display: flex; align-items: center; gap: 14px; width: 100%; transition: border-color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease), background .18s; }
+  .qz-option .ic { width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; font-size: 21px; background: rgba(246,234,224,.06); border: 1px solid var(--line); transition: background .18s, transform .18s var(--ease), border-color .18s; }
   .qz-option .tx { flex: 1; line-height: 1.35; }
-  .qz-option .dot {
-    width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--line-strong);
-    display: grid; place-items: center; color: var(--on-coral); transition: border-color .18s, background .18s, transform .2s var(--ease);
-  }
+  .qz-option .dot { width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--line-strong); display: grid; place-items: center; color: var(--on-coral); transition: border-color .18s, background .18s, transform .2s var(--ease); }
   .qz-option .dot svg { width: 12px; height: 12px; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .2s var(--ease); }
   .qz-option:hover { border-color: var(--line-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); background: var(--surface-2); }
   .qz-option:hover .ic { transform: scale(1.06); }
@@ -162,12 +138,7 @@ fbq('track','PageView',{});
   .qz-option.sel .dot { border-color: var(--coral); background: var(--coral); transform: scale(1.05); }
   .qz-option.sel .dot svg { opacity: 1; transform: scale(1); }
 
-  .qz-toast {
-    position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 160%);
-    background: var(--surface-2); color: var(--ink); font-size: 14px; font-weight: 600;
-    padding: 12px 22px; border-radius: 100px; border: 1px solid var(--line-strong);
-    box-shadow: var(--shadow-lg); transition: transform .4s var(--ease); z-index: var(--z-toast); white-space: nowrap;
-  }
+  .qz-toast { position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 160%); background: var(--surface-2); color: var(--ink); font-size: 14px; font-weight: 600; padding: 12px 22px; border-radius: 100px; border: 1px solid var(--line-strong); box-shadow: var(--shadow-lg); transition: transform .4s var(--ease); z-index: var(--z-toast); white-space: nowrap; }
   .qz-toast.show { transform: translate(-50%, 0); }
 
   /* ── LOADING ── */
@@ -187,67 +158,66 @@ fbq('track','PageView',{});
   .qz-result.active .r1 { animation-delay: .05s; }
   .qz-result.active .r2 { animation-delay: .18s; }
   .qz-result.active .r3 { animation-delay: .34s; }
-  .qz-result.active .r4 { animation-delay: .50s; }
-  .qz-result.active .r5 { animation-delay: .64s; }
+  .qz-result.active .r4 { animation-delay: .48s; }
+  .qz-result.active .r5 { animation-delay: .62s; }
+  .qz-result.active .r6 { animation-delay: .76s; }
   @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
   .ring { position: relative; width: 138px; height: 138px; margin: 0 auto; }
-  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-  .ring .ring-track { fill: none; stroke: rgba(246,234,224,.12); stroke-width: 9; }
-  .ring .ring-fill {
-    fill: none; stroke: var(--coral); stroke-width: 9; stroke-linecap: round;
-    transition: stroke-dashoffset 1.2s var(--ease); filter: drop-shadow(0 0 6px rgba(240,113,79,.45));
-  }
-  .ring-center { position: absolute; inset: 0; display: grid; place-items: center; }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); display: block; }
+  .ring .ring-track { fill: none; stroke: rgba(246,234,224,.12); stroke-width: 8; }
+  .ring .ring-fill { fill: none; stroke: var(--coral); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1.2s var(--ease); }
+  .ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .ring-num { font-family: var(--serif); font-weight: 400; font-size: 38px; color: var(--brass); line-height: 1; }
-  .ring-lbl { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .ring-lbl { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
 
-  .qz-kicker { font-size: 13px; font-weight: 600; color: var(--coral); margin-bottom: 14px; }
-  .qz-arch {
-    font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; text-wrap: balance;
-    font-size: clamp(28px, 7.4vw, 40px); line-height: 1.12; margin: 18px 0 10px; color: var(--ink);
-  }
+  .qz-kicker { font-size: 13px; font-weight: 600; color: var(--coral); margin: 18px 0 0; }
+  .qz-arch { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; text-wrap: balance; font-size: clamp(28px, 7.4vw, 40px); line-height: 1.12; margin: 8px 0 10px; color: var(--ink); }
   .qz-arch:focus { outline: none; }
   .qz-arch .nm { color: var(--coral); display: block; }
   .qz-arch-desc { font-size: 15.5px; color: var(--muted); line-height: 1.68; max-width: 36ch; margin: 0 auto; }
 
-  .qz-panel {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
-    padding: 24px 22px; margin-top: 26px; text-align: left; box-shadow: var(--shadow-sm);
-  }
+  .qz-panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px 22px; margin-top: 26px; text-align: left; box-shadow: var(--shadow-sm); }
   .qz-msg { font-size: 16px; color: var(--ink-soft); line-height: 1.78; }
   .qz-strengths { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
   .qz-strengths li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink); line-height: 1.5; }
-  .qz-check {
-    width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; background: var(--coral); color: var(--on-coral);
-    display: grid; place-items: center; margin-top: 1px;
-  }
+  .qz-check { width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; background: var(--coral); color: var(--on-coral); display: grid; place-items: center; margin-top: 1px; }
   .qz-check svg { width: 12px; height: 12px; }
 
-  .qz-plan {
-    position: relative; background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
-    border: 1.5px solid var(--brass); border-radius: 18px; padding: 30px 22px 26px; margin-top: 16px;
-    text-align: center; box-shadow: var(--shadow-md);
-  }
-  .qz-ribbon {
-    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-    background: var(--brass); color: var(--on-brass); font-size: 12px; font-weight: 700; letter-spacing: .02em;
-    padding: 7px 16px; border-radius: 100px; white-space: nowrap; box-shadow: var(--shadow-sm);
-  }
+  /* prova social */
+  .qz-social { margin-top: 30px; }
+  .qz-avatars { display: flex; align-items: center; justify-content: center; gap: 0; }
+  .qz-avatars img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--bg); margin-left: -10px; box-shadow: var(--shadow-sm); }
+  .qz-avatars img:first-child { margin-left: 0; }
+  .qz-stars { margin-left: 12px; color: var(--brass); font-size: 15px; letter-spacing: 2px; }
+  .qz-social-txt { font-size: 14.5px; color: var(--muted); margin-top: 12px; }
+  .qz-social-txt strong { color: var(--ink); }
+  .qz-quote { position: relative; margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; text-align: left; }
+  .qz-quote p { font-size: 15px; color: var(--ink-soft); line-height: 1.62; font-style: italic; }
+  .qz-quote cite { display: block; margin-top: 10px; font-size: 13px; font-style: normal; color: var(--coral); font-weight: 600; }
+
+  /* peças reais (scroll) */
+  .qz-makes { margin-top: 30px; }
+  .qz-section-h { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .qz-make-scroll { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; margin: 0 -22px; padding-left: 22px; padding-right: 22px; -webkit-overflow-scrolling: touch; }
+  .qz-make-scroll::-webkit-scrollbar { height: 0; }
+  .qz-make-scroll img { flex: 0 0 auto; width: 156px; height: 208px; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); scroll-snap-align: start; box-shadow: var(--shadow-sm); background: var(--surface); }
+
+  /* plano */
+  .qz-plan { position: relative; background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%); border: 1.5px solid var(--brass); border-radius: 18px; padding: 30px 22px 26px; margin-top: 30px; text-align: center; box-shadow: var(--shadow-md); }
+  .qz-ribbon { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--brass); color: var(--on-brass); font-size: 12px; font-weight: 700; letter-spacing: .02em; padding: 7px 16px; border-radius: 100px; white-space: nowrap; box-shadow: var(--shadow-sm); }
   .qz-plan-name { font-family: var(--serif); font-weight: 400; font-size: 28px; color: var(--ink); margin-top: 6px; }
   .qz-plan-price { font-size: 14px; color: var(--brass); margin-top: 6px; font-weight: 600; }
   .qz-plan-why { font-size: 15px; color: var(--muted); line-height: 1.66; margin-top: 14px; }
 
-  .qz-result .btn-primary { margin-top: 26px; }
-  .qz-all { display: inline-block; margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line-strong); padding: 6px 4px; transition: color .18s, border-color .18s; }
+  .qz-result .btn-primary { margin-top: 22px; }
+  .qz-guarantee { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+  .qz-all { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line-strong); padding: 6px 4px; transition: color .18s, border-color .18s; }
   .qz-all:hover { color: var(--ink); border-color: var(--coral); }
   .qz-redo { display: block; margin: 6px auto 0; padding: 8px 12px; background: none; border: 0; font-family: inherit; font-size: 13px; color: var(--muted); cursor: pointer; transition: color .18s; }
   .qz-redo:hover { color: var(--ink-soft); }
 
-  /* foco acessível */
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
-
-  /* entrada suave entre telas */
   .qz-screen.active.fadein { animation: scrim .45s var(--ease) both; }
   @keyframes scrim { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
@@ -265,7 +235,7 @@ fbq('track','PageView',{});
   <section class="qz-screen qz-start active" id="screen-start">
     <div class="stitch"></div>
     <h1 class="display">Descubra o seu <span class="accent">perfil de costureira</span></h1>
-    <p class="lead">Seis perguntas rápidas e a gente revela o seu perfil — e qual plano da assinatura combina com você.</p>
+    <p class="lead">Seis perguntas rápidas e a gente revela o seu perfil e qual plano da assinatura combina com você.</p>
     <button class="btn-primary" id="btn-start">Começar o quiz <span class="arw">→</span></button>
     <div class="qz-meta">
       <span>Leva 1 minuto</span><span class="sep"></span><span>6 perguntas</span><span class="sep"></span><span>resultado na hora</span>
@@ -276,8 +246,29 @@ fbq('track','PageView',{});
     </div>
   </section>
 
+  <!-- 🪪 LEAD (nome + whatsapp) -->
+  <section class="qz-screen qz-lead" id="screen-lead">
+    <div class="stitch"></div>
+    <h2 class="display">Antes de começar, <span class="accent">como te chamo?</span></h2>
+    <p class="lead">Assim seu resultado sai personalizado pra você, e a gente te avisa no WhatsApp quando abrir vaga.</p>
+    <form id="lead-form" novalidate>
+      <label class="field">
+        <span class="field-lbl">Seu nome</span>
+        <input id="lead-name" type="text" name="name" autocomplete="given-name" placeholder="Como você quer ser chamada" required>
+      </label>
+      <label class="field">
+        <span class="field-lbl">Seu WhatsApp</span>
+        <input id="lead-phone" type="tel" name="phone" inputmode="numeric" autocomplete="tel" placeholder="(11) 90000-0000" required>
+      </label>
+      <p class="field-err" id="lead-err" role="alert" hidden></p>
+      <button class="btn-primary btn-block" type="submit">Continuar <span class="arw">→</span></button>
+      <p class="lead-fine">🔒 Usamos seus dados só pra personalizar o resultado e te avisar de novidades. Sem spam.</p>
+    </form>
+  </section>
+
   <!-- 🅸 INTERESSE -->
   <section class="qz-screen" id="screen-quiz">
+    <p class="qz-greet" id="qz-greet"></p>
     <div class="qz-top">
       <span class="qz-step" id="qz-step">Pergunta 1 de 6</span>
       <span class="qz-xp" id="qz-xp">0 pts</span>
@@ -302,15 +293,15 @@ fbq('track','PageView',{});
     <div class="stitch center brass rv r1"></div>
     <div class="ring rv r1">
       <svg viewBox="0 0 138 138" aria-hidden="true">
-        <circle class="ring-track" cx="69" cy="69" r="57"/>
-        <circle class="ring-fill" id="qz-ring" cx="69" cy="69" r="57"/>
+        <circle class="ring-track" cx="69" cy="69" r="60"/>
+        <circle class="ring-fill" id="qz-ring" cx="69" cy="69" r="60"/>
       </svg>
       <div class="ring-center">
         <div class="ring-num" id="qz-compat">0%</div>
         <div class="ring-lbl">compatível</div>
       </div>
     </div>
-    <p class="qz-kicker rv r2">O seu perfil saiu</p>
+    <p class="qz-kicker rv r2" id="qz-kicker">O seu perfil saiu</p>
     <h2 class="qz-arch rv r2" id="qz-arch-head" tabindex="-1">Você é <span class="nm" id="qz-arch"></span></h2>
     <p class="qz-arch-desc rv r2" id="qz-arch-desc"></p>
 
@@ -319,16 +310,45 @@ fbq('track','PageView',{});
       <ul class="qz-strengths" id="qz-strengths"></ul>
     </div>
 
-    <div class="qz-plan rv r4">
+    <!-- prova social -->
+    <div class="qz-social rv r4">
+      <div class="qz-avatars">
+        <img src="av-amanda.webp" alt="" width="38" height="38">
+        <img src="av-mariane.webp" alt="" width="38" height="38">
+        <img src="av-rose.webp" alt="" width="38" height="38">
+        <img src="av-silvana.webp" alt="" width="38" height="38">
+        <span class="qz-stars" aria-label="5 estrelas">★★★★★</span>
+      </div>
+      <p class="qz-social-txt"><strong>+200 alunas</strong> já estão costurando com a assinatura.</p>
+      <figure class="qz-quote">
+        <p>"Fiz o macacão assimétrico, amei costurar! Deu vontade de fazer um de cada cor."</p>
+        <cite>Rose, aluna da assinatura</cite>
+      </figure>
+    </div>
+
+    <!-- peças reais -->
+    <div class="qz-makes rv r5">
+      <p class="qz-section-h">Peças reais feitas pelas alunas</p>
+      <div class="qz-make-scroll">
+        <img src="cris-colete.jpg" alt="Colete costurado por uma aluna" loading="lazy">
+        <img src="rose-macacaovermelho.jpg" alt="Macacão vermelho costurado por uma aluna" loading="lazy">
+        <img src="amanda-saiacamadas.jpg" alt="Saia lápis costurada por uma aluna" loading="lazy">
+        <img src="galeria-2.jpeg" alt="Colete floral costurado por uma aluna" loading="lazy">
+      </div>
+    </div>
+
+    <!-- plano + ação -->
+    <div class="qz-plan rv r6">
       <span class="qz-ribbon">⭐ Recomendado pra você</span>
       <div class="qz-plan-name" id="qz-plan-name"></div>
       <div class="qz-plan-price" id="qz-plan-price"></div>
       <p class="qz-plan-why" id="qz-plan-why"></p>
     </div>
 
-    <a class="btn-primary btn-block rv r5" id="qz-cta" href="#">Quero esses moldes <span class="arw">→</span></a>
-    <div class="rv r5">
-      <a class="qz-all" id="qz-all" href="/v5#planos">ver todos os planos</a>
+    <a class="btn-primary btn-block rv r6" id="qz-cta" href="#" target="_blank" rel="noopener">Quero assinar agora <span class="arw">→</span></a>
+    <p class="qz-guarantee rv r6">💛 Acesso imediato após a compra · ambiente seguro Hotmart</p>
+    <div class="rv r6">
+      <a class="qz-all" id="qz-all" href="/v5#planos" target="_blank" rel="noopener">ver todos os planos</a>
       <button type="button" class="qz-redo" id="qz-redo">refazer o quiz</button>
     </div>
   </section>
@@ -343,7 +363,6 @@ fbq('track','PageView',{});
 
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>';
 
-  // ── Perguntas (chaves/valores batem com o /api/quiz) ──
   var QUESTIONS = [
     { key:'nivel', q:'Como você se descreve na costura hoje?', opts:[
       {v:'iniciante', t:'Tô começando agora', ic:'🌱'},
@@ -364,7 +383,7 @@ fbq('track','PageView',{});
       {v:'renda_extra', t:'Quero uma renda extra', ic:'💰'},
       {v:'marca_propria', t:'Quero construir uma marca / ateliê', ic:'🏷️'} ]},
     { key:'tempo', q:'Quanto tempo você consegue dedicar por semana?', opts:[
-      {v:'pouco', t:'Pouco — uns minutinhos', ic:'🕊️'},
+      {v:'pouco', t:'Pouco, uns minutinhos', ic:'🕊️'},
       {v:'medio', t:'Um tempo médio, quando dá', ic:'🌤️'},
       {v:'bastante', t:'Bastante, costura é prioridade', ic:'🔥'} ]},
     { key:'compromisso', q:'E se você recebesse moldes profissionais todo mês?', opts:[
@@ -375,22 +394,30 @@ fbq('track','PageView',{});
   var TOASTS = ['Boa escolha! 🧵','Adorei! ✨','Faz todo sentido 💛','Você tá indo muito bem!','Perfeito 👌','Quase lá! 🎉'];
   var LOADING_MSGS = ['Lendo suas respostas ✨','Cruzando o seu perfil 🧵','Escolhendo o plano ideal 💛','Quase pronto…'];
   var PLANS = {
-    mensal:     { name:'Mensal',     price:'R$ 49,90/mês' },
-    trimestral: { name:'Trimestral', price:'R$ 109,90 · 3 meses (~R$ 36,63/mês)' },
-    anual:      { name:'Anual',      price:'R$ 289,90/ano · menos de R$ 1 por dia' }
+    mensal:     { name:'Mensal',     price:'R$ 49,90/mês',                              value:49.90 },
+    trimestral: { name:'Trimestral', price:'R$ 109,90 · 3 meses (~R$ 36,63/mês)',       value:109.90 },
+    anual:      { name:'Anual',      price:'R$ 289,90/ano · menos de R$ 1 por dia',      value:289.90 }
+  };
+  // Links de checkout Hotmart (mesmos da v5)
+  var CHECKOUT = {
+    mensal:     'https://pay.hotmart.com/E79768335W?off=iv7j24uu&checkoutMode=10',
+    trimestral: 'https://pay.hotmart.com/E79768335W?off=ctoqnxt6&checkoutMode=10&bid=1774540746590',
+    anual:      'https://pay.hotmart.com/E79768335W?off=3357mnxb&checkoutMode=10'
   };
 
   var answers = {}, idx = 0, points = 0, loadingTimer = null;
+  var lead = { name:'', phone:'', first:'' };
   var $ = function(id){ return document.getElementById(id); };
   function show(id){
     var s = document.querySelectorAll('.qz-screen');
     for(var i=0;i<s.length;i++){ s[i].classList.remove('active'); s[i].classList.remove('fadein'); }
     var el = $(id); el.classList.add('active');
-    void el.offsetWidth; el.classList.add('fadein'); // reinicia a animação de entrada
-    var tt = $('qz-toast'); if(tt){ clearTimeout(toast._t); tt.classList.remove('show'); } // não deixa toast vazar entre telas
+    void el.offsetWidth; el.classList.add('fadein');
+    var tt = $('qz-toast'); if(tt){ clearTimeout(toast._t); tt.classList.remove('show'); }
     window.scrollTo(0,0);
   }
   function focusEl(id){ try { var el = $(id); if(el) el.focus({ preventScroll:true }); } catch(e){} }
+  function esc(s){ return String(s||'').replace(/[<>&"]/g, function(c){ return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]; }); }
   function fbqTrack(name, params, custom){
     if(typeof fbq!=='function') return;
     if(custom) fbq('trackCustom', name, params||{});
@@ -398,12 +425,47 @@ fbq('track','PageView',{});
   }
   function eid(){ return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);}); }
   function ck(n){ var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)'); return m?m.pop():''; }
+  function firstName(n){ n = String(n||'').trim().split(/\s+/)[0] || ''; return n ? n.charAt(0).toUpperCase()+n.slice(1) : ''; }
 
   fbqTrack('ViewContent', { content_name:'Quiz Perfil de Costureira', content_category:'Quiz' });
 
+  // hook -> tela de lead
   $('btn-start').addEventListener('click', function(){
     fbqTrack('QuizStart', {}, true);
+    show('screen-lead'); focusEl('lead-name');
+  });
+
+  // máscara de telefone BR
+  function maskPhone(v){
+    v = String(v||'').replace(/\D/g,'').slice(0,11);
+    if(v.length===0) return '';
+    if(v.length<=2) return '('+v;
+    if(v.length<=6) return '('+v.slice(0,2)+') '+v.slice(2);
+    if(v.length<=10) return '('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);
+    return '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);
+  }
+  var phoneEl = $('lead-phone');
+  phoneEl.addEventListener('input', function(){ this.value = maskPhone(this.value); });
+
+  // submit do lead -> começa o quiz
+  $('lead-form').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var nameEl = $('lead-name'), errEl = $('lead-err');
+    var name = nameEl.value.trim();
+    var digits = phoneEl.value.replace(/\D/g,'');
+    var ok = true, msg = '';
+    if(name.length < 2){ ok=false; msg='Conta pra gente como te chamar 💛'; nameEl.classList.add('invalid'); }
+    else { nameEl.classList.remove('invalid'); }
+    if(digits.length < 10 || digits.length > 11){ ok=false; msg = msg || 'Confere o seu WhatsApp com DDD 🙂'; phoneEl.classList.add('invalid'); }
+    else { phoneEl.classList.remove('invalid'); }
+    if(!ok){ errEl.textContent = msg; errEl.hidden = false; return; }
+    errEl.hidden = true;
+
+    lead.name = name; lead.phone = digits; lead.first = firstName(name);
+    fbqTrack('QuizLeadInfo', {}, true);
+
     idx = 0; answers = {}; points = 0;
+    $('qz-greet').textContent = lead.first ? ('Vamos lá, ' + lead.first + '! 🧵') : '';
     show('screen-quiz'); render();
   });
 
@@ -418,11 +480,11 @@ fbq('track','PageView',{});
     item.opts.forEach(function(o){
       var b = document.createElement('button');
       b.className = 'qz-option'; b.type = 'button';
-      b.innerHTML = '<span class="ic" aria-hidden="true">'+o.ic+'</span><span class="tx">'+o.t+'</span><span class="dot" aria-hidden="true">'+CHECK+'</span>';
+      b.innerHTML = '<span class="ic" aria-hidden="true">'+o.ic+'</span><span class="tx">'+esc(o.t)+'</span><span class="dot" aria-hidden="true">'+CHECK+'</span>';
       b.addEventListener('click', function(){ choose(item.key, o.v, b); });
       box.appendChild(b);
     });
-    focusEl('qz-question'); // move o foco pra nova pergunta (teclado/leitor de tela)
+    focusEl('qz-question');
   }
 
   function toast(msg){
@@ -436,7 +498,7 @@ fbq('track','PageView',{});
     points += 10 + Math.floor(Math.random()*8);
     el.classList.add('sel');
     $('qz-xp').textContent = points + ' pts';
-    if(idx < QUESTIONS.length - 1) toast(TOASTS[idx % TOASTS.length]); // não cobre o reveal do resultado
+    if(idx < QUESTIONS.length - 1) toast(TOASTS[idx % TOASTS.length]);
     fbqTrack('QuizProgress', { step: idx+1, key: key }, true);
     setTimeout(function(){
       delete answers['__lock'];
@@ -455,7 +517,11 @@ fbq('track','PageView',{});
     loadingTimer = setInterval(function(){ li=(li+1)%LOADING_MSGS.length; $('qz-loading-msg').textContent = LOADING_MSGS[li]; }, 1200);
 
     var leadId = eid();
-    var payload = { answers: answers, eventId: leadId, fbp: ck('_fbp'), fbc: ck('_fbc'), externalId: localStorage.getItem('_meta_ext_id') || '' };
+    var payload = {
+      answers: answers, eventId: leadId,
+      name: lead.name, phone: lead.phone,
+      fbp: ck('_fbp'), fbc: ck('_fbc'), externalId: localStorage.getItem('_meta_ext_id') || ''
+    };
     var done = false;
     function go(result){ if(done) return; done = true; clearInterval(loadingTimer); renderResult(result, leadId); }
     var guard = setTimeout(function(){ go(clientFallback()); }, 9000);
@@ -468,26 +534,27 @@ fbq('track','PageView',{});
 
   function renderResult(res, leadId){
     var plano = (PLANS[res.plano_recomendado]) ? res.plano_recomendado : 'trimestral';
+    $('qz-kicker').textContent = lead.first ? ('Pronto, ' + lead.first + '! O seu perfil saiu 💛') : 'O seu perfil saiu';
     $('qz-arch').textContent = res.arquetipo || 'A Costureira Visionária';
     $('qz-arch-desc').textContent = res.arquetipo_descricao || '';
     $('qz-msg').textContent = res.mensagem_personalizada || '';
     var ul = $('qz-strengths'); ul.innerHTML = '';
     (res.pontos_fortes || []).forEach(function(p){
       var liEl = document.createElement('li');
-      liEl.innerHTML = '<span class="qz-check" aria-hidden="true">'+CHECK+'</span><span>'+p+'</span>';
+      liEl.innerHTML = '<span class="qz-check" aria-hidden="true">'+CHECK+'</span><span>'+esc(p)+'</span>';
       ul.appendChild(liEl);
     });
     $('qz-plan-name').textContent = PLANS[plano].name;
     $('qz-plan-price').textContent = PLANS[plano].price;
     $('qz-plan-why').textContent = res.motivo_plano || '';
-    $('qz-cta').setAttribute('href', '/v5?plano=' + plano + '#planos');
+    $('qz-cta').setAttribute('href', CHECKOUT[plano] || CHECKOUT.trimestral);
 
     show('screen-result');
-    focusEl('qz-arch-head'); // foco no resultado (teclado/leitor de tela)
+    focusEl('qz-arch-head');
 
-    // anel SVG + contador animados
+    // anel SVG + contador animados (r = 60, casa com o circle do SVG)
     var target = Math.max(80, Math.min(99, parseInt(res.compatibilidade,10) || 92));
-    var R = 57, C = 2 * Math.PI * R, ring = $('qz-ring');
+    var R = 60, C = 2 * Math.PI * R, ring = $('qz-ring');
     if(ring){
       ring.style.strokeDasharray = C.toFixed(1);
       ring.style.strokeDashoffset = C.toFixed(1);
@@ -498,11 +565,15 @@ fbq('track','PageView',{});
     var n = 0, num = $('qz-compat');
     var iv = setInterval(function(){ n += 2; if(n>=target){ n=target; clearInterval(iv); } num.textContent = n + '%'; }, 24);
 
-    // Lead 1x no browser COM eventID (dedup com a CAPI que o servidor já disparou) + custom
+    // Lead 1x no browser COM eventID (dedup com a CAPI server-side) + custom
     if(typeof fbq==='function') fbq('track','Lead',{content_name:'Quiz Perfil de Costureira',content_category:'Quiz'},{eventID:leadId});
     fbqTrack('QuizResult', { arquetipo: res.arquetipo, plano: plano }, true);
 
-    $('qz-cta').addEventListener('click', function(){ fbqTrack('QuizCTAClick', { plano: plano }, true); }, { once:true });
+    // CTA -> InitiateCheckout (Pixel) e segue pro Hotmart
+    $('qz-cta').addEventListener('click', function(){
+      var icId = eid();
+      if(typeof fbq==='function') fbq('track','InitiateCheckout',{content_name:'Assinatura de Moldes',content_category:'Subscription',value:PLANS[plano].value,currency:'BRL',plano:plano},{eventID:icId});
+    }, { once:true });
   }
 
   function clientFallback(){
@@ -514,10 +585,11 @@ fbq('track','PageView',{});
     else if(a.objetivo==='renda_extra') arq='A Artesã Estratégica';
     else if(a.nivel==='iniciante') arq='A Iniciante Apaixonada';
     else if(a.nivel==='avancada') arq='A Modelista de Mão Cheia';
+    var nm = lead.first ? (lead.first + ', o') : 'O';
     return {
       arquetipo: arq,
       arquetipo_descricao: 'Você costura com vontade de evoluir e entregar peças com cara de profissional.',
-      mensagem_personalizada: 'O que te trava não é talento — é ter um molde profissional, testado e pronto chegando todo mês. Com a assinatura você recebe os moldes, a vídeo-aula de montagem e a ficha técnica pra finalmente ver o caimento que você sempre quis.',
+      mensagem_personalizada: nm + ' que te trava não é talento, é ter um molde profissional, testado e pronto chegando todo mês. Com a assinatura você recebe os moldes, a vídeo-aula de montagem e a ficha técnica pra finalmente ver o caimento que você sempre quis.',
       plano_recomendado: plano,
       motivo_plano: 'Esse plano combina com o momento que você está vivendo na costura.',
       compatibilidade: 93,
