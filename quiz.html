@@ -117,7 +117,6 @@ fbq('track','PageView',{});
   #lead-form .btn-primary { margin-top: 22px; }
 
   /* ── 🅸 QUIZ ── */
-  .qz-greet { font-size: 13px; font-weight: 600; color: var(--coral); margin-bottom: 12px; min-height: 18px; }
   .qz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; }
   .qz-step { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .01em; }
   .qz-xp { font-size: 13px; font-weight: 700; color: var(--brass); background: rgba(227,173,87,.12); border: 1px solid rgba(227,173,87,.28); border-radius: 100px; padding: 5px 12px; white-space: nowrap; }
@@ -249,8 +248,8 @@ fbq('track','PageView',{});
   <!-- 🪪 LEAD (nome + whatsapp) -->
   <section class="qz-screen qz-lead" id="screen-lead">
     <div class="stitch"></div>
-    <h2 class="display">Antes de começar, <span class="accent">como te chamo?</span></h2>
-    <p class="lead">Assim seu resultado sai personalizado pra você, e a gente te avisa no WhatsApp quando abrir vaga.</p>
+    <h2 class="display">Seu perfil tá pronto, <span class="accent">falta só um passo</span></h2>
+    <p class="lead">Deixa seu nome e WhatsApp pra revelar o seu resultado personalizado e receber o acesso quando abrir vaga.</p>
     <form id="lead-form" novalidate>
       <label class="field">
         <span class="field-lbl">Seu nome</span>
@@ -261,14 +260,13 @@ fbq('track','PageView',{});
         <input id="lead-phone" type="tel" name="phone" inputmode="numeric" autocomplete="tel" placeholder="(11) 90000-0000" required>
       </label>
       <p class="field-err" id="lead-err" role="alert" hidden></p>
-      <button class="btn-primary btn-block" type="submit">Continuar <span class="arw">→</span></button>
+      <button class="btn-primary btn-block" type="submit">Ver meu resultado <span class="arw">→</span></button>
       <p class="lead-fine">🔒 Usamos seus dados só pra personalizar o resultado e te avisar de novidades. Sem spam.</p>
     </form>
   </section>
 
   <!-- 🅸 INTERESSE -->
   <section class="qz-screen" id="screen-quiz">
-    <p class="qz-greet" id="qz-greet"></p>
     <div class="qz-top">
       <span class="qz-step" id="qz-step">Pergunta 1 de 6</span>
       <span class="qz-xp" id="qz-xp">0 pts</span>
@@ -429,10 +427,11 @@ fbq('track','PageView',{});
 
   fbqTrack('ViewContent', { content_name:'Quiz Perfil de Costureira', content_category:'Quiz' });
 
-  // hook -> tela de lead
+  // hook -> começa o quiz direto (nome/WhatsApp vêm antes do resultado)
   $('btn-start').addEventListener('click', function(){
     fbqTrack('QuizStart', {}, true);
-    show('screen-lead'); focusEl('lead-name');
+    idx = 0; answers = {}; points = 0;
+    show('screen-quiz'); render();
   });
 
   // máscara de telefone BR
@@ -447,7 +446,7 @@ fbq('track','PageView',{});
   var phoneEl = $('lead-phone');
   phoneEl.addEventListener('input', function(){ this.value = maskPhone(this.value); });
 
-  // submit do lead -> começa o quiz
+  // submit do lead (vem depois do quiz) -> calcula e revela o resultado
   $('lead-form').addEventListener('submit', function(ev){
     ev.preventDefault();
     var nameEl = $('lead-name'), errEl = $('lead-err');
@@ -463,10 +462,7 @@ fbq('track','PageView',{});
 
     lead.name = name; lead.phone = digits; lead.first = firstName(name);
     fbqTrack('QuizLeadInfo', {}, true);
-
-    idx = 0; answers = {}; points = 0;
-    $('qz-greet').textContent = lead.first ? ('Vamos lá, ' + lead.first + '! 🧵') : '';
-    show('screen-quiz'); render();
+    computeResult();
   });
 
   function render(){
@@ -504,14 +500,18 @@ fbq('track','PageView',{});
       delete answers['__lock'];
       idx++;
       if(idx < QUESTIONS.length){ render(); }
-      else { finish(); }
+      else { askLead(); }
     }, 420);
   }
 
-  function finish(){
+  function askLead(){
     delete answers['__lock'];
     $('qz-bar').style.transform = 'scaleX(1)';
     var pbar = $('qz-progress'); if(pbar) pbar.setAttribute('aria-valuenow', QUESTIONS.length);
+    show('screen-lead'); focusEl('lead-name');
+  }
+
+  function computeResult(){
     show('screen-loading');
     var li = 0;
     loadingTimer = setInterval(function(){ li=(li+1)%LOADING_MSGS.length; $('qz-loading-msg').textContent = LOADING_MSGS[li]; }, 1200);
@@ -551,6 +551,7 @@ fbq('track','PageView',{});
 
     show('screen-result');
     focusEl('qz-arch-head');
+    startCarousel();
 
     // anel SVG + contador animados (r = 60, casa com o circle do SVG)
     var target = Math.max(80, Math.min(99, parseInt(res.compatibilidade,10) || 92));
@@ -576,6 +577,28 @@ fbq('track','PageView',{});
     }, { once:true });
   }
 
+  // carrossel "peças reais" passando sozinho (pausa ao interagir; respeita reduced-motion)
+  var carouselTimer = null;
+  function startCarousel(){
+    if(carouselTimer){ clearInterval(carouselTimer); carouselTimer = null; }
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var sc = document.querySelector('.qz-make-scroll'); if(!sc) return;
+    var first = sc.querySelector('img'); if(!first) return;
+    if(!sc._carBound){ sc._carBound = true;
+      var rt = null;
+      var pauseFor = function(){ sc._paused = true; clearTimeout(rt); rt = setTimeout(function(){ sc._paused = false; }, 6000); };
+      sc.addEventListener('pointerdown', pauseFor);
+      sc.addEventListener('touchstart', pauseFor, { passive:true });
+      sc.addEventListener('wheel', pauseFor, { passive:true });
+    }
+    carouselTimer = setInterval(function(){
+      if(sc._paused || !$('screen-result').classList.contains('active')) return;
+      var step = first.offsetWidth + 12;
+      if(sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 8){ sc.scrollTo({ left:0, behavior:'smooth' }); }
+      else { sc.scrollBy({ left:step, behavior:'smooth' }); }
+    }, 2600);
+  }
+
   function clientFallback(){
     var a = answers, plano = 'trimestral';
     if(a.objetivo==='marca_propria' || a.compromisso==='mergulhar') plano='anual';
@@ -597,7 +620,7 @@ fbq('track','PageView',{});
     };
   }
 
-  $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; show('screen-start'); focusEl('btn-start'); });
+  $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; lead={ name:'', phone:'', first:'' }; if(carouselTimer){ clearInterval(carouselTimer); carouselTimer=null; } show('screen-start'); focusEl('btn-start'); });
 })();
 </script>
 </body>
