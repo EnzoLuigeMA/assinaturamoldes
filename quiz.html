@@ -34,7 +34,8 @@ fbq('track','PageView',{});
     --bg: #2e1218; --bg-2: #37161d; --surface: #43202a; --surface-2: #512734;
     --line: rgba(246,234,224,.14); --line-strong: rgba(246,234,224,.26);
     --ink: #f6eae0; --ink-soft: #ecd7cc; --muted: #d3aaa4;
-    --coral: #f0714f; --coral-deep: #d65a39; --brass: #e3ad57;
+    --coral: #f0714f; --coral-deep: #d65a39; --coral-hover: #f47c5b; --brass: #e3ad57;
+    --on-coral: #38131a; --on-brass: #3a2407;
 
     --ease: cubic-bezier(.16,1,.3,1);
     --shadow-sm: 0 2px 12px rgba(0,0,0,.28);
@@ -86,7 +87,7 @@ fbq('track','PageView',{});
   /* button */
   .btn-primary {
     position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    background: var(--coral); color: #38131a;
+    background: var(--coral); color: var(--on-coral);
     font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: .005em;
     text-decoration: none; padding: 17px 30px; border: none; border-radius: 14px; cursor: pointer;
     box-shadow: 0 12px 30px rgba(240,113,79,.30), inset 0 -2px 0 rgba(56,19,26,.18);
@@ -98,7 +99,7 @@ fbq('track','PageView',{});
     background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.30) 50%, transparent 68%);
     transform: translateX(-130%); transition: transform .7s var(--ease);
   }
-  .btn-primary:hover { transform: translateY(-2px); background: #f47c5b; box-shadow: 0 18px 40px rgba(240,113,79,.40), inset 0 -2px 0 rgba(56,19,26,.18); }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--coral-hover); box-shadow: 0 18px 40px rgba(240,113,79,.40), inset 0 -2px 0 rgba(56,19,26,.18); }
   .btn-primary:hover::after { transform: translateX(130%); }
   .btn-primary:active { transform: translateY(0); }
   .btn-primary .arw { transition: transform .25s var(--ease); }
@@ -135,6 +136,7 @@ fbq('track','PageView',{});
     font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; color: var(--ink);
     font-size: clamp(23px, 5.6vw, 30px); line-height: 1.2; margin-bottom: 26px; text-wrap: balance;
   }
+  .qz-question:focus { outline: none; }
   .qz-options { display: flex; flex-direction: column; gap: 11px; }
   .qz-option {
     position: relative; text-align: left; background: var(--surface); border: 1.5px solid var(--line);
@@ -150,7 +152,7 @@ fbq('track','PageView',{});
   .qz-option .tx { flex: 1; line-height: 1.35; }
   .qz-option .dot {
     width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--line-strong);
-    display: grid; place-items: center; color: #38131a; transition: border-color .18s, background .18s, transform .2s var(--ease);
+    display: grid; place-items: center; color: var(--on-coral); transition: border-color .18s, background .18s, transform .2s var(--ease);
   }
   .qz-option .dot svg { width: 12px; height: 12px; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .2s var(--ease); }
   .qz-option:hover { border-color: var(--line-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); background: var(--surface-2); }
@@ -205,6 +207,7 @@ fbq('track','PageView',{});
     font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; text-wrap: balance;
     font-size: clamp(28px, 7.4vw, 40px); line-height: 1.12; margin: 18px 0 10px; color: var(--ink);
   }
+  .qz-arch:focus { outline: none; }
   .qz-arch .nm { color: var(--coral); display: block; }
   .qz-arch-desc { font-size: 15.5px; color: var(--muted); line-height: 1.68; max-width: 36ch; margin: 0 auto; }
 
@@ -216,7 +219,7 @@ fbq('track','PageView',{});
   .qz-strengths { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
   .qz-strengths li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink); line-height: 1.5; }
   .qz-check {
-    width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; background: var(--coral); color: #38131a;
+    width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; background: var(--coral); color: var(--on-coral);
     display: grid; place-items: center; margin-top: 1px;
   }
   .qz-check svg { width: 12px; height: 12px; }
@@ -228,7 +231,7 @@ fbq('track','PageView',{});
   }
   .qz-ribbon {
     position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-    background: var(--brass); color: #3a2407; font-size: 12px; font-weight: 700; letter-spacing: .02em;
+    background: var(--brass); color: var(--on-brass); font-size: 12px; font-weight: 700; letter-spacing: .02em;
     padding: 7px 16px; border-radius: 100px; white-space: nowrap; box-shadow: var(--shadow-sm);
   }
   .qz-plan-name { font-family: var(--serif); font-weight: 400; font-size: 28px; color: var(--ink); margin-top: 6px; }
@@ -236,12 +239,12 @@ fbq('track','PageView',{});
   .qz-plan-why { font-size: 15px; color: var(--muted); line-height: 1.66; margin-top: 14px; }
 
   .qz-result .btn-primary { margin-top: 26px; }
-  .qz-all { display: inline-block; margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line-strong); padding-bottom: 2px; transition: color .18s, border-color .18s; }
+  .qz-all { display: inline-block; margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line-strong); padding: 6px 4px; transition: color .18s, border-color .18s; }
   .qz-all:hover { color: var(--ink); border-color: var(--coral); }
-  .qz-redo { display: block; margin-top: 16px; font-size: 13px; color: var(--muted); cursor: pointer; transition: color .18s; }
+  .qz-redo { display: block; margin: 6px auto 0; padding: 8px 12px; background: none; border: 0; font-family: inherit; font-size: 13px; color: var(--muted); cursor: pointer; transition: color .18s; }
   .qz-redo:hover { color: var(--ink-soft); }
 
-  /* focus acessível */
+  /* foco acessível */
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
 
   /* entrada suave entre telas */
@@ -279,26 +282,26 @@ fbq('track','PageView',{});
       <span class="qz-step" id="qz-step">Pergunta 1 de 6</span>
       <span class="qz-xp" id="qz-xp">0 pts</span>
     </div>
-    <div class="qz-progress"><div class="qz-progress-bar" id="qz-bar"></div></div>
-    <h2 class="qz-question" id="qz-question"></h2>
+    <div class="qz-progress" id="qz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" aria-label="Progresso do quiz"><div class="qz-progress-bar" id="qz-bar"></div></div>
+    <h2 class="qz-question" id="qz-question" tabindex="-1"></h2>
     <div class="qz-options" id="qz-options"></div>
   </section>
 
   <!-- transição -->
   <section class="qz-screen qz-loading" id="screen-loading">
-    <div class="qz-loader">
+    <div class="qz-loader" aria-hidden="true">
       <svg viewBox="0 0 74 74"><circle class="lt" cx="37" cy="37" r="33"/><circle class="lf" cx="37" cy="37" r="33"/></svg>
       <div class="needle">🪡</div>
     </div>
     <h2 class="display">Analisando seu perfil…</h2>
-    <p class="qz-loading-msg" id="qz-loading-msg">Lendo suas respostas ✨</p>
+    <p class="qz-loading-msg" id="qz-loading-msg" role="status" aria-live="polite">Lendo suas respostas ✨</p>
   </section>
 
   <!-- 🅳 DESEJO + 🅰️ AÇÃO -->
   <section class="qz-screen qz-result" id="screen-result">
     <div class="stitch center brass rv r1"></div>
     <div class="ring rv r1">
-      <svg viewBox="0 0 138 138">
+      <svg viewBox="0 0 138 138" aria-hidden="true">
         <circle class="ring-track" cx="69" cy="69" r="57"/>
         <circle class="ring-fill" id="qz-ring" cx="69" cy="69" r="57"/>
       </svg>
@@ -308,7 +311,7 @@ fbq('track','PageView',{});
       </div>
     </div>
     <p class="qz-kicker rv r2">O seu perfil saiu</p>
-    <h2 class="qz-arch rv r2">Você é <span class="nm" id="qz-arch"></span></h2>
+    <h2 class="qz-arch rv r2" id="qz-arch-head" tabindex="-1">Você é <span class="nm" id="qz-arch"></span></h2>
     <p class="qz-arch-desc rv r2" id="qz-arch-desc"></p>
 
     <div class="qz-panel rv r3">
@@ -326,13 +329,13 @@ fbq('track','PageView',{});
     <a class="btn-primary btn-block rv r5" id="qz-cta" href="#">Quero esses moldes <span class="arw">→</span></a>
     <div class="rv r5">
       <a class="qz-all" id="qz-all" href="/v5#planos">ver todos os planos</a>
-      <span class="qz-redo" id="qz-redo">refazer o quiz</span>
+      <button type="button" class="qz-redo" id="qz-redo">refazer o quiz</button>
     </div>
   </section>
 
 </div>
 
-<div class="qz-toast" id="qz-toast"></div>
+<div class="qz-toast" id="qz-toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
@@ -384,8 +387,10 @@ fbq('track','PageView',{});
     for(var i=0;i<s.length;i++){ s[i].classList.remove('active'); s[i].classList.remove('fadein'); }
     var el = $(id); el.classList.add('active');
     void el.offsetWidth; el.classList.add('fadein'); // reinicia a animação de entrada
+    var tt = $('qz-toast'); if(tt){ clearTimeout(toast._t); tt.classList.remove('show'); } // não deixa toast vazar entre telas
     window.scrollTo(0,0);
   }
+  function focusEl(id){ try { var el = $(id); if(el) el.focus({ preventScroll:true }); } catch(e){} }
   function fbqTrack(name, params, custom){
     if(typeof fbq!=='function') return;
     if(custom) fbq('trackCustom', name, params||{});
@@ -407,15 +412,17 @@ fbq('track','PageView',{});
     $('qz-step').textContent = 'Pergunta ' + (idx+1) + ' de ' + QUESTIONS.length;
     $('qz-xp').textContent = points + ' pts';
     $('qz-bar').style.transform = 'scaleX(' + (idx/QUESTIONS.length) + ')';
+    var pbar = $('qz-progress'); if(pbar) pbar.setAttribute('aria-valuenow', idx);
     $('qz-question').textContent = item.q;
     var box = $('qz-options'); box.innerHTML = '';
     item.opts.forEach(function(o){
       var b = document.createElement('button');
-      b.className = 'qz-option';
-      b.innerHTML = '<span class="ic">'+o.ic+'</span><span class="tx">'+o.t+'</span><span class="dot">'+CHECK+'</span>';
+      b.className = 'qz-option'; b.type = 'button';
+      b.innerHTML = '<span class="ic" aria-hidden="true">'+o.ic+'</span><span class="tx">'+o.t+'</span><span class="dot" aria-hidden="true">'+CHECK+'</span>';
       b.addEventListener('click', function(){ choose(item.key, o.v, b); });
       box.appendChild(b);
     });
+    focusEl('qz-question'); // move o foco pra nova pergunta (teclado/leitor de tela)
   }
 
   function toast(msg){
@@ -429,7 +436,7 @@ fbq('track','PageView',{});
     points += 10 + Math.floor(Math.random()*8);
     el.classList.add('sel');
     $('qz-xp').textContent = points + ' pts';
-    toast(TOASTS[idx % TOASTS.length]);
+    if(idx < QUESTIONS.length - 1) toast(TOASTS[idx % TOASTS.length]); // não cobre o reveal do resultado
     fbqTrack('QuizProgress', { step: idx+1, key: key }, true);
     setTimeout(function(){
       delete answers['__lock'];
@@ -442,6 +449,7 @@ fbq('track','PageView',{});
   function finish(){
     delete answers['__lock'];
     $('qz-bar').style.transform = 'scaleX(1)';
+    var pbar = $('qz-progress'); if(pbar) pbar.setAttribute('aria-valuenow', QUESTIONS.length);
     show('screen-loading');
     var li = 0;
     loadingTimer = setInterval(function(){ li=(li+1)%LOADING_MSGS.length; $('qz-loading-msg').textContent = LOADING_MSGS[li]; }, 1200);
@@ -466,7 +474,7 @@ fbq('track','PageView',{});
     var ul = $('qz-strengths'); ul.innerHTML = '';
     (res.pontos_fortes || []).forEach(function(p){
       var liEl = document.createElement('li');
-      liEl.innerHTML = '<span class="qz-check">'+CHECK+'</span><span>'+p+'</span>';
+      liEl.innerHTML = '<span class="qz-check" aria-hidden="true">'+CHECK+'</span><span>'+p+'</span>';
       ul.appendChild(liEl);
     });
     $('qz-plan-name').textContent = PLANS[plano].name;
@@ -475,6 +483,7 @@ fbq('track','PageView',{});
     $('qz-cta').setAttribute('href', '/v5?plano=' + plano + '#planos');
 
     show('screen-result');
+    focusEl('qz-arch-head'); // foco no resultado (teclado/leitor de tela)
 
     // anel SVG + contador animados
     var target = Math.max(80, Math.min(99, parseInt(res.compatibilidade,10) || 92));
@@ -516,7 +525,7 @@ fbq('track','PageView',{});
     };
   }
 
-  $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; show('screen-start'); });
+  $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; show('screen-start'); focusEl('btn-start'); });
 })();
 </script>
 </body>
