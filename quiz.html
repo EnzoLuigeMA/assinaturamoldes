@@ -211,10 +211,34 @@ fbq('track','PageView',{});
 
   .qz-result .btn-primary { margin-top: 22px; }
   .qz-guarantee { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
-  .qz-all { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line-strong); padding: 6px 4px; transition: color .18s, border-color .18s; }
+  .qz-all { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; font-family: inherit; color: var(--ink-soft); background: none; border: 0; border-bottom: 1px solid var(--line-strong); padding: 6px 4px; cursor: pointer; transition: color .18s, border-color .18s; }
   .qz-all:hover { color: var(--ink); border-color: var(--coral); }
   .qz-redo { display: block; margin: 6px auto 0; padding: 8px 12px; background: none; border: 0; font-family: inherit; font-size: 13px; color: var(--muted); cursor: pointer; transition: color .18s; }
   .qz-redo:hover { color: var(--ink-soft); }
+
+  /* modal "ver todos os planos" */
+  .qz-modal { position: fixed; inset: 0; z-index: 90; display: flex; align-items: flex-end; justify-content: center; }
+  .qz-modal[hidden] { display: none; }
+  .qz-modal-backdrop { position: absolute; inset: 0; background: rgba(20,8,11,.72); animation: mfade .25s ease; }
+  .qz-modal-card { position: relative; width: 100%; max-width: 540px; max-height: 92svh; overflow-y: auto; background: var(--bg-2); border: 1px solid var(--line-strong); border-radius: 22px 22px 0 0; padding: 28px 22px 30px; box-shadow: var(--shadow-lg); animation: msheet .35s var(--ease); }
+  @keyframes mfade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes msheet { from { transform: translateY(26px); opacity: .5; } to { transform: none; opacity: 1; } }
+  .qz-modal-x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 20px; line-height: 1; cursor: pointer; }
+  .qz-modal-title { font-family: var(--serif); font-weight: 400; font-size: 25px; text-align: center; color: var(--ink); }
+  .qz-modal-sub { text-align: center; color: var(--muted); font-size: 13.5px; margin-top: 6px; margin-bottom: 20px; }
+  .qz-plans { display: flex; flex-direction: column; gap: 12px; }
+  .qz-pcard { position: relative; border: 1.5px solid var(--line); border-radius: 16px; padding: 18px; background: var(--surface); }
+  .qz-pcard.rec { border-color: var(--brass); background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
+  .qz-pcard .pbadge { position: absolute; top: -11px; left: 18px; background: var(--brass); color: var(--on-brass); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
+  .qz-pcard .pname { font-family: var(--serif); font-weight: 400; font-size: 22px; color: var(--ink); }
+  .qz-pcard .pprice { color: var(--brass); font-weight: 600; font-size: 14px; margin-top: 2px; }
+  .qz-pcard .pdesc { color: var(--muted); font-size: 13.5px; margin-top: 6px; line-height: 1.5; }
+  .qz-pcard .pbtn { margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px; border-radius: 12px; font-weight: 700; font-size: 14px; text-decoration: none; cursor: pointer; }
+  .qz-pcard .pbtn .arw { transition: transform .2s var(--ease); }
+  .qz-pcard .pbtn:hover .arw { transform: translateX(3px); }
+  .qz-pcard .pbtn-rec { background: var(--coral); color: var(--on-coral); }
+  .qz-pcard .pbtn-alt { background: transparent; color: var(--ink); border: 1.5px solid var(--line-strong); }
+  @media (min-width: 560px) { .qz-modal { align-items: center; } .qz-modal-card { border-radius: 22px; } }
 
   :focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
   .qz-screen.active.fadein { animation: scrim .45s var(--ease) both; }
@@ -324,14 +348,19 @@ fbq('track','PageView',{});
       </figure>
     </div>
 
-    <!-- peças reais -->
+    <!-- peças reais (mesmas fotos da seção "Direto do grupo das alunas" da home) -->
     <div class="qz-makes rv r5">
       <p class="qz-section-h">Peças reais feitas pelas alunas</p>
       <div class="qz-make-scroll">
-        <img src="cris-colete.jpg" alt="Colete costurado por uma aluna" loading="lazy">
-        <img src="rose-macacaovermelho.jpg" alt="Macacão vermelho costurado por uma aluna" loading="lazy">
-        <img src="amanda-saiacamadas.jpg" alt="Saia lápis costurada por uma aluna" loading="lazy">
-        <img src="galeria-2.jpeg" alt="Colete floral costurado por uma aluna" loading="lazy">
+        <img src="rose-macacaovermelho.jpg" alt="Macacão assimétrico costurado por uma aluna" loading="lazy">
+        <img src="rose-blusaeshow.jpg" alt="Blusa lenço e short costurados por uma aluna" loading="lazy">
+        <img src="saia-lapis-preta.jpg" alt="Saia lápis preta costurada por uma aluna" loading="lazy">
+        <img src="saia-lapis-festa.jpg" alt="Saia lápis de festa costurada por uma aluna" loading="lazy">
+        <img src="amanda-saiacamadas.jpg" alt="Saia em camadas costurada por uma aluna" loading="lazy">
+        <img src="cris-colete.jpg" alt="Colete Max costurado por uma aluna" loading="lazy">
+        <img src="mariane-blusa.jpg" alt="Blusa costurada por uma aluna" loading="lazy">
+        <img src="andressa-saia.jpg" alt="Saia costurada por uma aluna" loading="lazy">
+        <img src="silvana-blusa.jpg" alt="Blusa costurada por uma aluna" loading="lazy">
       </div>
     </div>
 
@@ -346,11 +375,22 @@ fbq('track','PageView',{});
     <a class="btn-primary btn-block rv r6" id="qz-cta" href="#" target="_blank" rel="noopener">Quero assinar agora <span class="arw">→</span></a>
     <p class="qz-guarantee rv r6">💛 Acesso imediato após a compra · ambiente seguro Hotmart</p>
     <div class="rv r6">
-      <a class="qz-all" id="qz-all" href="/v5#planos" target="_blank" rel="noopener">ver todos os planos</a>
+      <button type="button" class="qz-all" id="qz-all">ver todos os planos</button>
       <button type="button" class="qz-redo" id="qz-redo">refazer o quiz</button>
     </div>
   </section>
 
+</div>
+
+<!-- modal: todos os planos (destaque no recomendado) -->
+<div class="qz-modal" id="plans-modal" hidden>
+  <div class="qz-modal-backdrop" data-close></div>
+  <div class="qz-modal-card" role="dialog" aria-modal="true" aria-labelledby="plans-modal-title">
+    <button type="button" class="qz-modal-x" data-close aria-label="Fechar">&times;</button>
+    <h3 class="qz-modal-title" id="plans-modal-title">Escolha o seu plano</h3>
+    <p class="qz-modal-sub">Em destaque, o que combina com o seu perfil.</p>
+    <div class="qz-plans" id="plans-list"></div>
+  </div>
 </div>
 
 <div class="qz-toast" id="qz-toast" role="status" aria-live="polite"></div>
@@ -534,6 +574,7 @@ fbq('track','PageView',{});
 
   function renderResult(res, leadId){
     var plano = (PLANS[res.plano_recomendado]) ? res.plano_recomendado : 'trimestral';
+    currentPlano = plano;
     $('qz-kicker').textContent = lead.first ? ('Pronto, ' + lead.first + '! O seu perfil saiu 💛') : 'O seu perfil saiu';
     $('qz-arch').textContent = res.arquetipo || 'A Costureira Visionária';
     $('qz-arch-desc').textContent = res.arquetipo_descricao || '';
@@ -621,6 +662,41 @@ fbq('track','PageView',{});
   }
 
   $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; lead={ name:'', phone:'', first:'' }; if(carouselTimer){ clearInterval(carouselTimer); carouselTimer=null; } show('screen-start'); focusEl('btn-start'); });
+
+  // ── modal "ver todos os planos" (sempre destaca o plano do perfil) ──
+  var currentPlano = 'trimestral';
+  var PLAN_DESC = {
+    mensal: 'Pra começar leve, no seu ritmo, mês a mês.',
+    trimestral: 'Pra pegar ritmo e ver a evolução em 3 meses.',
+    anual: 'Melhor custo-benefício, menos de R$ 1 por dia.'
+  };
+  function planCheckout(pl){
+    if(typeof fbq==='function') fbq('track','InitiateCheckout',{content_name:'Assinatura de Moldes',content_category:'Subscription',value:PLANS[pl].value,currency:'BRL',plano:pl},{eventID:eid()});
+  }
+  function openPlans(){
+    var list = $('plans-list'); list.innerHTML = '';
+    var order = [currentPlano].concat(['anual','trimestral','mensal'].filter(function(p){ return p !== currentPlano; }));
+    order.forEach(function(pl){
+      var rec = (pl === currentPlano);
+      var card = document.createElement('div');
+      card.className = 'qz-pcard' + (rec ? ' rec' : '');
+      card.innerHTML = (rec ? '<span class="pbadge">⭐ Recomendado pra você</span>' : '') +
+        '<div class="pname">'+PLANS[pl].name+'</div>'+
+        '<div class="pprice">'+PLANS[pl].price+'</div>'+
+        '<div class="pdesc">'+PLAN_DESC[pl]+'</div>'+
+        '<a class="pbtn '+(rec?'pbtn-rec':'pbtn-alt')+'" href="'+CHECKOUT[pl]+'" target="_blank" rel="noopener" data-plan="'+pl+'">Assinar o '+PLANS[pl].name.toLowerCase()+' <span class="arw">→</span></a>';
+      list.appendChild(card);
+    });
+    Array.prototype.forEach.call(list.querySelectorAll('.pbtn'), function(b){
+      b.addEventListener('click', function(){ planCheckout(this.getAttribute('data-plan')); });
+    });
+    $('plans-modal').hidden = false; document.body.style.overflow = 'hidden';
+    fbqTrack('QuizViewPlans', { recomendado: currentPlano }, true);
+  }
+  function closePlans(){ $('plans-modal').hidden = true; document.body.style.overflow = ''; }
+  $('qz-all').addEventListener('click', openPlans);
+  Array.prototype.forEach.call(document.querySelectorAll('#plans-modal [data-close]'), function(el){ el.addEventListener('click', closePlans); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !$('plans-modal').hidden) closePlans(); });
 })();
 </script>
 </body>
