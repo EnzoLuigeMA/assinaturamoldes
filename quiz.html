@@ -387,9 +387,14 @@ fbq('track','PageView',{});
         <img src="Saias.jpg" alt="Molde de saia disponível na assinatura" loading="lazy">
         <img src="Cal%C3%A7as%20Shorts%20e%20Macacoes.jpg" alt="Molde de calça e macacão disponível na assinatura" loading="lazy">
         <img src="Blazers%20e%20Sobreposi%C3%A7%C3%B5es.jpg" alt="Molde de blazer e sobreposição disponível na assinatura" loading="lazy">
-        <img src="Blusas%282%29.jpg" alt="Molde de blusa disponível na assinatura" loading="lazy">
-        <img src="Vestidos%282%29.png" alt="Molde de vestido disponível na assinatura" loading="lazy">
-        <img src="Saias%283%29.jpg" alt="Molde de saia disponível na assinatura" loading="lazy">
+        <img src="Blusas%281%29.jpg" alt="Molde de blusa disponível na assinatura" loading="lazy">
+        <img src="Vestidos%281%29.png" alt="Molde de vestido disponível na assinatura" loading="lazy">
+        <img src="Saias%281%29.jpg" alt="Molde de saia disponível na assinatura" loading="lazy">
+        <img src="Cal%C3%A7as%20Shorts%20e%20Macacoes%281%29.jpg" alt="Molde de calça e macacão disponível na assinatura" loading="lazy">
+        <img src="Blazers%20e%20Sobreposi%C3%A7%C3%B5es%281%29.jpg" alt="Molde de blazer e sobreposição disponível na assinatura" loading="lazy">
+        <img src="Blusas%284%29.jpg" alt="Molde de blusa disponível na assinatura" loading="lazy">
+        <img src="Vestidos%284%29.png" alt="Molde de vestido disponível na assinatura" loading="lazy">
+        <img src="Saias%285%29.jpg" alt="Molde de saia disponível na assinatura" loading="lazy">
       </div>
       <p class="qz-cat-note">Todo mês entram <strong>4 modelos novos</strong>, com acesso na hora ao assinar.</p>
     </div>
@@ -655,12 +660,10 @@ fbq('track','PageView',{});
     }, { once:true });
   }
 
-  // carrossel "peças reais" passando sozinho (pausa ao interagir; respeita reduced-motion)
-  var carouselTimer = null;
-  function startCarousel(){
-    if(carouselTimer){ clearInterval(carouselTimer); carouselTimer = null; }
-    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var sc = document.querySelector('.qz-make-scroll'); if(!sc) return;
+  // faixas passando sozinhas (peças e modelos); pausa ao interagir; respeita reduced-motion
+  var carouselTimers = [];
+  function autoScroll(sel, interval){
+    var sc = document.querySelector(sel); if(!sc) return;
     var first = sc.querySelector('img'); if(!first) return;
     if(!sc._carBound){ sc._carBound = true;
       var rt = null;
@@ -669,12 +672,18 @@ fbq('track','PageView',{});
       sc.addEventListener('touchstart', pauseFor, { passive:true });
       sc.addEventListener('wheel', pauseFor, { passive:true });
     }
-    carouselTimer = setInterval(function(){
+    carouselTimers.push(setInterval(function(){
       if(sc._paused || !$('screen-result').classList.contains('active')) return;
       var step = first.offsetWidth + 12;
       if(sc.scrollLeft + sc.clientWidth >= sc.scrollWidth - 8){ sc.scrollTo({ left:0, behavior:'smooth' }); }
       else { sc.scrollBy({ left:step, behavior:'smooth' }); }
-    }, 2600);
+    }, interval));
+  }
+  function startCarousel(){
+    carouselTimers.forEach(clearInterval); carouselTimers = [];
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    autoScroll('.qz-make-scroll', 2600);
+    autoScroll('.qz-cat-scroll', 3000);
   }
 
   function clientFallback(){
@@ -702,7 +711,7 @@ fbq('track','PageView',{});
     };
   }
 
-  $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; lead={ name:'', phone:'', first:'' }; if(carouselTimer){ clearInterval(carouselTimer); carouselTimer=null; } show('screen-start'); focusEl('btn-start'); });
+  $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; lead={ name:'', phone:'', first:'' }; carouselTimers.forEach(clearInterval); carouselTimers=[]; show('screen-start'); focusEl('btn-start'); });
 
   // ── modal "ver todos os planos" (sempre destaca o plano do perfil) ──
   var currentPlano = 'trimestral';
