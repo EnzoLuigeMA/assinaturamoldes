@@ -1,0 +1,9 @@
+{
+  "name": "assinatura-moldes-quiz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Quiz gamificado (Haiku) — funil AIDA da Assinatura de Moldes",
+  "dependencies": {
+    "@anthropic-ai/sdk": ">=0.40.0"
+  }
+}

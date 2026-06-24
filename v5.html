@@ -964,6 +964,27 @@ fbq('track','PageView',{},{eventID:_pvEid});
     }, { threshold: 0.25 });
     vids.forEach(function(v){ io.observe(v); });
   })();
+
+  // Vindo do /quiz: destaca o plano recomendado (?plano=mensal|trimestral|anual)
+  (function(){
+    var plano=(new URLSearchParams(location.search).get('plano')||'').toLowerCase();
+    if(!plano) return;
+    var btn=null;
+    document.querySelectorAll('[data-plan]').forEach(function(b){
+      if((b.getAttribute('data-plan')||'').toLowerCase()===plano) btn=b;
+    });
+    if(!btn) return;
+    var card=btn.closest('.plan-card'); if(!card) return;
+    if(!card.classList.contains('featured')){
+      card.style.borderColor='var(--wine)';
+      card.style.boxShadow='0 12px 40px rgba(125,46,70,0.18)';
+    }
+    var badge=document.createElement('div');
+    badge.textContent='⭐ Recomendado pra você';
+    badge.style.cssText='background:var(--wine);color:#fff;font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;display:inline-block;padding:6px 14px;border-radius:100px;margin-bottom:14px;';
+    card.insertBefore(badge, card.firstChild);
+    setTimeout(function(){ card.scrollIntoView({behavior:'smooth',block:'center'}); }, 300);
+  })();
 </script>
 </body>
 </html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descubra seu perfil de costureira — Assinatura de Moldes</title>
+<meta name="description" content="Faça o quiz e descubra seu perfil de costureira + o plano de assinatura ideal pra você. Leva 1 minuto.">
+
+<!-- Meta Pixel Base (público — sem token; a CAPI roda no /api/quiz) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+var _extId=localStorage.getItem('_meta_ext_id');
+if(!_extId){_extId='ext_'+'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);});localStorage.setItem('_meta_ext_id',_extId);}
+fbq('init','246033433475773',{country:'br',external_id:_extId});
+fbq('track','PageView',{});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=246033433475773&ev=PageView&noscript=1"/></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --wine: #7d2e46; --wine-dark: #5c1f32; --wine-soft: #a14a64; --blush: #f5e8ec;
+    --cream: #faf7f4; --stone: #e8e0d8; --ink: #1e1714; --muted: #6b5c55; --white: #fff;
+    --gold: #c79a5b;
+    --ease: cubic-bezier(.16,1,.3,1);
+    --shadow-sm: 0 2px 10px rgba(30,23,20,.05);
+    --shadow-md: 0 12px 36px rgba(125,46,70,.12);
+    --shadow-lg: 0 20px 60px rgba(125,46,70,.18);
+  }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Inter', sans-serif; color: var(--ink); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; min-height: 100svh;
+    background:
+      radial-gradient(1200px 520px at 50% -8%, var(--blush) 0%, rgba(245,232,236,0) 60%),
+      linear-gradient(180deg, #fdfbf9 0%, var(--cream) 100%);
+    background-attachment: fixed;
+  }
+  ::selection { background: var(--blush); color: var(--wine-dark); }
+
+  .qz-wrap {
+    max-width: 520px; margin: 0 auto; min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 36px 22px 56px;
+  }
+  .qz-screen { display: none; }
+  .qz-screen.active { display: block; }
+
+  /* tipografia */
+  .qz-eyebrow {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--wine); margin-bottom: 16px;
+  }
+  .qz-eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--wine); opacity: .55; }
+  .qz-title {
+    font-family: 'Playfair Display', serif; font-weight: 600; line-height: 1.12;
+    letter-spacing: -0.01em; color: var(--ink); font-size: clamp(28px, 7vw, 42px);
+  }
+  .qz-title em { font-style: italic; color: var(--wine); }
+  .qz-sub { font-size: 15.5px; color: var(--muted); line-height: 1.7; margin-top: 16px; }
+
+  /* botão */
+  .btn-primary {
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(180deg, var(--wine) 0%, var(--wine-dark) 100%); color: var(--white);
+    font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; padding: 17px 34px; border: none; border-radius: 100px; cursor: pointer;
+    box-shadow: var(--shadow-md); transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .2s;
+    overflow: hidden;
+  }
+  .btn-primary::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.18) 50%, transparent 70%);
+    transform: translateX(-130%); transition: transform .6s var(--ease);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .btn-primary:hover::after { transform: translateX(130%); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary .arw { transition: transform .25s var(--ease); }
+  .btn-primary:hover .arw { transform: translateX(4px); }
+  .btn-block { display: flex; width: 100%; }
+
+  /* ── 🅰️ START ── */
+  .qz-start { text-align: center; }
+  .qz-seal {
+    width: 60px; height: 60px; margin: 0 auto 22px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 26px;
+    background: radial-gradient(circle at 50% 35%, var(--blush), #fff);
+    border: 1px solid var(--stone); box-shadow: var(--shadow-sm);
+  }
+  .qz-start .btn-primary { margin-top: 30px; }
+  .qz-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+  .qz-badge {
+    font-size: 11.5px; font-weight: 500; color: var(--muted); background: rgba(255,255,255,.7);
+    border: 1px solid var(--stone); border-radius: 100px; padding: 7px 14px; backdrop-filter: blur(4px);
+  }
+
+  /* ── 🅸 QUIZ ── */
+  .qz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .qz-step { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .qz-xp {
+    font-size: 11.5px; font-weight: 700; color: var(--wine); background: var(--blush);
+    border-radius: 100px; padding: 4px 11px; letter-spacing: .02em;
+  }
+  .qz-progress { height: 7px; background: var(--stone); border-radius: 100px; overflow: hidden; margin-bottom: 34px; }
+  .qz-progress-bar {
+    height: 100%; width: 0; border-radius: 100px;
+    background: linear-gradient(90deg, var(--wine-soft), var(--wine));
+    transition: width .55s var(--ease);
+  }
+  .qz-question {
+    font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.01em;
+    font-size: clamp(22px, 5.2vw, 29px); line-height: 1.22; margin-bottom: 24px;
+  }
+  .qz-options { display: flex; flex-direction: column; gap: 11px; }
+  .qz-option {
+    position: relative; text-align: left; background: var(--white); border: 1.5px solid var(--stone);
+    border-radius: 14px; padding: 16px 18px; font-family: inherit; font-size: 15.5px; color: var(--ink);
+    cursor: pointer; display: flex; align-items: center; gap: 14px;
+    transition: border-color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease);
+    box-shadow: var(--shadow-sm);
+  }
+  .qz-option .ic {
+    width: 40px; height: 40px; flex-shrink: 0; border-radius: 11px; display: grid; place-items: center;
+    font-size: 21px; background: var(--blush); transition: background .18s, transform .18s var(--ease);
+  }
+  .qz-option .tx { flex: 1; line-height: 1.35; }
+  .qz-option .dot {
+    width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--stone);
+    display: grid; place-items: center; color: #fff; transition: border-color .18s, background .18s, transform .2s var(--ease);
+  }
+  .qz-option .dot svg { width: 11px; height: 11px; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .2s var(--ease); }
+  .qz-option:hover { border-color: var(--wine-soft); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .qz-option:hover .ic { transform: scale(1.06); }
+  .qz-option.sel { border-color: var(--wine); box-shadow: var(--shadow-md); }
+  .qz-option.sel .ic { background: var(--wine); }
+  .qz-option.sel .dot { border-color: var(--wine); background: var(--wine); transform: scale(1.05); }
+  .qz-option.sel .dot svg { opacity: 1; transform: scale(1); }
+
+  .qz-toast {
+    position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 150%);
+    background: var(--ink); color: #fff; font-size: 13.5px; font-weight: 500;
+    padding: 12px 22px; border-radius: 100px; box-shadow: 0 14px 40px rgba(0,0,0,.3);
+    transition: transform .4s var(--ease); z-index: 60; white-space: nowrap;
+  }
+  .qz-toast.show { transform: translate(-50%, 0); }
+
+  /* ── LOADING ── */
+  .qz-loading { text-align: center; padding: 20px 0; }
+  .qz-loader { width: 70px; height: 70px; margin: 0 auto 28px; position: relative; }
+  .qz-loader svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .qz-loader .lt { fill: none; stroke: var(--stone); stroke-width: 6; }
+  .qz-loader .lf { fill: none; stroke: var(--wine); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 60 140; animation: loaderspin 1.15s linear infinite; }
+  @keyframes loaderspin { to { stroke-dashoffset: -200; } }
+  .qz-loader .needle { position: absolute; inset: 0; display: grid; place-items: center; font-size: 24px; }
+  .qz-loading-msg { font-size: 15px; color: var(--muted); min-height: 22px; }
+
+  /* ── 🅳 RESULT ── */
+  .qz-result { text-align: center; }
+  .qz-result.active .rv { animation: rise .7s var(--ease) both; }
+  .qz-result.active .r1 { animation-delay: .05s; }
+  .qz-result.active .r2 { animation-delay: .18s; }
+  .qz-result.active .r3 { animation-delay: .32s; }
+  .qz-result.active .r4 { animation-delay: .46s; }
+  .qz-result.active .r5 { animation-delay: .60s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  .ring { position: relative; width: 132px; height: 132px; margin: 4px auto 0; }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring .ring-track { fill: none; stroke: var(--blush); stroke-width: 9; }
+  .ring .ring-fill {
+    fill: none; stroke: var(--wine); stroke-width: 9; stroke-linecap: round;
+    transition: stroke-dashoffset 1.2s var(--ease);
+  }
+  .ring-center { position: absolute; inset: 0; display: grid; place-items: center; }
+  .ring-num { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 36px; color: var(--wine); line-height: 1; }
+  .ring-lbl { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+
+  .qz-arch {
+    font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.01em;
+    font-size: clamp(27px, 7vw, 40px); line-height: 1.12; margin: 20px 0 10px; color: var(--ink);
+  }
+  .qz-arch .nm { color: var(--wine); display: block; }
+  .qz-arch-desc { font-size: 15px; color: var(--muted); line-height: 1.65; max-width: 420px; margin: 0 auto; }
+
+  .qz-card {
+    background: var(--white); border: 1px solid var(--stone); border-radius: 18px;
+    padding: 24px 22px; margin-top: 24px; text-align: left; box-shadow: var(--shadow-sm);
+  }
+  .qz-msg { font-size: 15.5px; color: var(--ink); line-height: 1.78; }
+  .qz-strengths { list-style: none; margin-top: 18px; display: flex; flex-direction: column; gap: 11px; }
+  .qz-strengths li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; color: var(--ink); line-height: 1.5; }
+  .qz-check {
+    width: 21px; height: 21px; flex-shrink: 0; border-radius: 50%; background: var(--wine); color: #fff;
+    display: grid; place-items: center; margin-top: 1px;
+  }
+  .qz-check svg { width: 11px; height: 11px; }
+
+  .qz-plan {
+    position: relative; background: linear-gradient(180deg, #fff 0%, var(--blush) 100%);
+    border: 1.5px solid var(--wine); border-radius: 18px; padding: 26px 22px 24px; margin-top: 18px;
+    text-align: center; box-shadow: var(--shadow-md); overflow: hidden;
+  }
+  .qz-ribbon {
+    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+    background: var(--wine); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; padding: 6px 16px; border-radius: 100px; white-space: nowrap;
+  }
+  .qz-plan-name { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 27px; color: var(--ink); margin-top: 28px; }
+  .qz-plan-price { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+  .qz-plan-why { font-size: 14.5px; color: var(--ink); line-height: 1.65; margin-top: 14px; }
+
+  .qz-result .btn-primary { margin-top: 24px; }
+  .qz-all { display: inline-block; margin-top: 18px; font-size: 13px; font-weight: 500; color: var(--wine); text-decoration: none; border-bottom: 1px solid rgba(125,46,70,.3); padding-bottom: 1px; }
+  .qz-all:hover { border-color: var(--wine); }
+  .qz-redo { display: block; margin-top: 16px; font-size: 12.5px; color: var(--muted); cursor: pointer; }
+  .qz-redo:hover { color: var(--ink); }
+
+  /* foco acessível */
+  :focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; border-radius: 4px; }
+
+  /* entrada suave entre telas */
+  .qz-screen.active.fadein { animation: scrim .45s var(--ease) both; }
+  @keyframes scrim { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001s !important; transition-duration: .001s !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="qz-wrap">
+
+  <!-- 🅰️ ATENÇÃO -->
+  <section class="qz-screen qz-start active" id="screen-start">
+    <div class="qz-seal">🪡</div>
+    <span class="qz-eyebrow">Quiz da Costureira · 1 minuto</span>
+    <h1 class="qz-title">Descubra o seu <em>perfil de costureira</em></h1>
+    <p class="qz-sub">Responda 6 perguntas rápidas e a gente revela o seu perfil — e qual plano da assinatura combina com você.</p>
+    <button class="btn-primary" id="btn-start">Começar o quiz <span class="arw">→</span></button>
+    <div class="qz-badges">
+      <span class="qz-badge">🧵 6 perguntas</span>
+      <span class="qz-badge">⚡ Resultado na hora</span>
+      <span class="qz-badge">💛 +200 alunas</span>
+    </div>
+  </section>
+
+  <!-- 🅸 INTERESSE -->
+  <section class="qz-screen" id="screen-quiz">
+    <div class="qz-top">
+      <span class="qz-step" id="qz-step">Pergunta 1 de 6</span>
+      <span class="qz-xp" id="qz-xp">0 pts</span>
+    </div>
+    <div class="qz-progress"><div class="qz-progress-bar" id="qz-bar"></div></div>
+    <h2 class="qz-question" id="qz-question"></h2>
+    <div class="qz-options" id="qz-options"></div>
+  </section>
+
+  <!-- transição -->
+  <section class="qz-screen qz-loading" id="screen-loading">
+    <div class="qz-loader">
+      <svg viewBox="0 0 70 70"><circle class="lt" cx="35" cy="35" r="31"/><circle class="lf" cx="35" cy="35" r="31"/></svg>
+      <div class="needle">🪡</div>
+    </div>
+    <h2 class="qz-title" style="font-size:clamp(23px,5.4vw,31px)">Analisando seu perfil…</h2>
+    <p class="qz-loading-msg" id="qz-loading-msg">Lendo suas respostas ✨</p>
+  </section>
+
+  <!-- 🅳 DESEJO + 🅰️ AÇÃO -->
+  <section class="qz-screen qz-result" id="screen-result">
+    <span class="qz-eyebrow rv r1">Seu resultado saiu</span>
+    <div class="ring rv r1">
+      <svg viewBox="0 0 132 132">
+        <circle class="ring-track" cx="66" cy="66" r="57"/>
+        <circle class="ring-fill" id="qz-ring" cx="66" cy="66" r="57"/>
+      </svg>
+      <div class="ring-center">
+        <div class="ring-num" id="qz-compat">0%</div>
+        <div class="ring-lbl">compatível</div>
+      </div>
+    </div>
+    <h2 class="qz-arch rv r2">Você é <span class="nm" id="qz-arch"></span></h2>
+    <p class="qz-arch-desc rv r2" id="qz-arch-desc"></p>
+
+    <div class="qz-card rv r3">
+      <p class="qz-msg" id="qz-msg"></p>
+      <ul class="qz-strengths" id="qz-strengths"></ul>
+    </div>
+
+    <div class="qz-plan rv r4">
+      <span class="qz-ribbon">⭐ Recomendado pra você</span>
+      <div class="qz-plan-name" id="qz-plan-name"></div>
+      <div class="qz-plan-price" id="qz-plan-price"></div>
+      <p class="qz-plan-why" id="qz-plan-why"></p>
+    </div>
+
+    <a class="btn-primary btn-block rv r5" id="qz-cta" href="#">Quero esses moldes <span class="arw">→</span></a>
+    <div class="rv r5">
+      <a class="qz-all" id="qz-all" href="/v5#planos">ver todos os planos</a>
+      <span class="qz-redo" id="qz-redo">refazer o quiz</span>
+    </div>
+  </section>
+
+</div>
+
+<div class="qz-toast" id="qz-toast"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>';
+
+  // ── Perguntas (chaves/valores batem com o /api/quiz) ──
+  var QUESTIONS = [
+    { key:'nivel', q:'Como você se descreve na costura hoje?', opts:[
+      {v:'iniciante', t:'Tô começando agora', ic:'🌱'},
+      {v:'intermediaria', t:'Já costuro, mas quero evoluir', ic:'✂️'},
+      {v:'avancada', t:'Domino a máquina, quero moldes à altura', ic:'🧵'} ]},
+    { key:'foco', q:'O que você mais ama (ou quer) costurar?', opts:[
+      {v:'blusas_vestidos', t:'Blusas e vestidos', ic:'👗'},
+      {v:'calcas_alfaiataria', t:'Calças e alfaiataria', ic:'👖'},
+      {v:'infantil', t:'Moda infantil', ic:'🧸'},
+      {v:'linha_completa', t:'Um pouco de tudo', ic:'🌈'} ]},
+    { key:'frustracao', q:'Qual é a sua MAIOR frustração hoje?', opts:[
+      {v:'modelagem', t:'Travo na modelagem do molde', ic:'📐'},
+      {v:'caimento', t:'A peça fica "feita em casa", sem caimento', ic:'🪡'},
+      {v:'tempo', t:'Perco horas refazendo molde', ic:'⏳'},
+      {v:'acabamento', t:'Falta acabamento de ateliê', ic:'✨'} ]},
+    { key:'objetivo', q:'Pra onde você quer levar a sua costura?', opts:[
+      {v:'hobby', t:'É o meu hobby, meu respiro', ic:'💛'},
+      {v:'renda_extra', t:'Quero uma renda extra', ic:'💰'},
+      {v:'marca_propria', t:'Quero construir uma marca / ateliê', ic:'🏷️'} ]},
+    { key:'tempo', q:'Quanto tempo você consegue dedicar por semana?', opts:[
+      {v:'pouco', t:'Pouco — uns minutinhos', ic:'🕊️'},
+      {v:'medio', t:'Um tempo médio, quando dá', ic:'🌤️'},
+      {v:'bastante', t:'Bastante, costura é prioridade', ic:'🔥'} ]},
+    { key:'compromisso', q:'E se você recebesse moldes profissionais todo mês?', opts:[
+      {v:'testar', t:'Queria testar com calma primeiro', ic:'🤔'},
+      {v:'conhecer', t:'Queria conhecer e pegar ritmo', ic:'🚶‍♀️'},
+      {v:'mergulhar', t:'Quero mergulhar de vez!', ic:'🌊'} ]}
+  ];
+  var TOASTS = ['Boa escolha! 🧵','Adorei! ✨','Faz todo sentido 💛','Você tá indo muito bem!','Perfeito 👌','Quase lá! 🎉'];
+  var LOADING_MSGS = ['Lendo suas respostas ✨','Cruzando o seu perfil 🧵','Escolhendo o plano ideal 💛','Quase pronto…'];
+  var PLANS = {
+    mensal:     { name:'Mensal',     price:'R$ 49,90/mês' },
+    trimestral: { name:'Trimestral', price:'R$ 109,90 · 3 meses (~R$ 36,63/mês)' },
+    anual:      { name:'Anual',      price:'R$ 289,90/ano · menos de R$ 1 por dia' }
+  };
+
+  var answers = {}, idx = 0, points = 0, loadingTimer = null;
+  var $ = function(id){ return document.getElementById(id); };
+  function show(id){
+    var s = document.querySelectorAll('.qz-screen');
+    for(var i=0;i<s.length;i++){ s[i].classList.remove('active'); s[i].classList.remove('fadein'); }
+    var el = $(id); el.classList.add('active');
+    void el.offsetWidth; el.classList.add('fadein'); // reinicia a animação de entrada
+    window.scrollTo(0,0);
+  }
+  function fbqTrack(name, params, custom){
+    if(typeof fbq!=='function') return;
+    if(custom) fbq('trackCustom', name, params||{});
+    else fbq('track', name, params||{});
+  }
+  function eid(){ return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);}); }
+  function ck(n){ var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)'); return m?m.pop():''; }
+
+  fbqTrack('ViewContent', { content_name:'Quiz Perfil de Costureira', content_category:'Quiz' });
+
+  $('btn-start').addEventListener('click', function(){
+    fbqTrack('QuizStart', {}, true);
+    idx = 0; answers = {}; points = 0;
+    show('screen-quiz'); render();
+  });
+
+  function render(){
+    var item = QUESTIONS[idx];
+    $('qz-step').textContent = 'Pergunta ' + (idx+1) + ' de ' + QUESTIONS.length;
+    $('qz-xp').textContent = points + ' pts';
+    $('qz-bar').style.width = Math.round((idx/QUESTIONS.length)*100) + '%';
+    $('qz-question').textContent = item.q;
+    var box = $('qz-options'); box.innerHTML = '';
+    item.opts.forEach(function(o){
+      var b = document.createElement('button');
+      b.className = 'qz-option';
+      b.innerHTML = '<span class="ic">'+o.ic+'</span><span class="tx">'+o.t+'</span><span class="dot">'+CHECK+'</span>';
+      b.addEventListener('click', function(){ choose(item.key, o.v, b); });
+      box.appendChild(b);
+    });
+  }
+
+  function toast(msg){
+    var t = $('qz-toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('show'); }, 1100);
+  }
+
+  function choose(key, value, el){
+    if(answers['__lock']) return; answers['__lock'] = true;
+    answers[key] = value;
+    points += 10 + Math.floor(Math.random()*8);
+    el.classList.add('sel');
+    $('qz-xp').textContent = points + ' pts';
+    toast(TOASTS[idx % TOASTS.length]);
+    fbqTrack('QuizProgress', { step: idx+1, key: key }, true);
+    setTimeout(function(){
+      delete answers['__lock'];
+      idx++;
+      if(idx < QUESTIONS.length){ render(); }
+      else { finish(); }
+    }, 420);
+  }
+
+  function finish(){
+    delete answers['__lock'];
+    $('qz-bar').style.width = '100%';
+    show('screen-loading');
+    var li = 0;
+    loadingTimer = setInterval(function(){ li=(li+1)%LOADING_MSGS.length; $('qz-loading-msg').textContent = LOADING_MSGS[li]; }, 1200);
+
+    var leadId = eid();
+    var payload = { answers: answers, eventId: leadId, fbp: ck('_fbp'), fbc: ck('_fbc'), externalId: localStorage.getItem('_meta_ext_id') || '' };
+    var done = false;
+    function go(result){ if(done) return; done = true; clearInterval(loadingTimer); renderResult(result, leadId); }
+    var guard = setTimeout(function(){ go(clientFallback()); }, 9000);
+
+    fetch('/api/quiz', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) })
+      .then(function(r){ return r.json(); })
+      .then(function(data){ clearTimeout(guard); go(data); })
+      .catch(function(){ clearTimeout(guard); go(clientFallback()); });
+  }
+
+  function renderResult(res, leadId){
+    var plano = (PLANS[res.plano_recomendado]) ? res.plano_recomendado : 'trimestral';
+    $('qz-arch').textContent = res.arquetipo || 'A Costureira Visionária';
+    $('qz-arch-desc').textContent = res.arquetipo_descricao || '';
+    $('qz-msg').textContent = res.mensagem_personalizada || '';
+    var ul = $('qz-strengths'); ul.innerHTML = '';
+    (res.pontos_fortes || []).forEach(function(p){
+      var liEl = document.createElement('li');
+      liEl.innerHTML = '<span class="qz-check">'+CHECK+'</span><span>'+p+'</span>';
+      ul.appendChild(liEl);
+    });
+    $('qz-plan-name').textContent = PLANS[plano].name;
+    $('qz-plan-price').textContent = PLANS[plano].price;
+    $('qz-plan-why').textContent = res.motivo_plano || '';
+    $('qz-cta').setAttribute('href', '/v5?plano=' + plano + '#planos');
+
+    show('screen-result');
+
+    // anel SVG + contador animados
+    var target = Math.max(80, Math.min(99, parseInt(res.compatibilidade,10) || 92));
+    var R = 57, C = 2 * Math.PI * R, ring = $('qz-ring');
+    if(ring){
+      ring.style.strokeDasharray = C.toFixed(1);
+      ring.style.strokeDashoffset = C.toFixed(1);
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        ring.style.strokeDashoffset = (C * (1 - target/100)).toFixed(1);
+      }); });
+    }
+    var n = 0, num = $('qz-compat');
+    var iv = setInterval(function(){ n += 2; if(n>=target){ n=target; clearInterval(iv); } num.textContent = n + '%'; }, 24);
+
+    // Lead 1x no browser COM eventID (dedup com a CAPI que o servidor já disparou) + custom
+    if(typeof fbq==='function') fbq('track','Lead',{content_name:'Quiz Perfil de Costureira',content_category:'Quiz'},{eventID:leadId});
+    fbqTrack('QuizResult', { arquetipo: res.arquetipo, plano: plano }, true);
+
+    $('qz-cta').addEventListener('click', function(){ fbqTrack('QuizCTAClick', { plano: plano }, true); }, { once:true });
+  }
+
+  function clientFallback(){
+    var a = answers, plano = 'trimestral';
+    if(a.objetivo==='marca_propria' || a.compromisso==='mergulhar') plano='anual';
+    else if(a.compromisso==='testar') plano='mensal';
+    var arq = 'A Costureira Visionária';
+    if(a.objetivo==='marca_propria') arq='A Empreendedora da Costura';
+    else if(a.objetivo==='renda_extra') arq='A Artesã Estratégica';
+    else if(a.nivel==='iniciante') arq='A Iniciante Apaixonada';
+    else if(a.nivel==='avancada') arq='A Modelista de Mão Cheia';
+    return {
+      arquetipo: arq,
+      arquetipo_descricao: 'Você costura com vontade de evoluir e entregar peças com cara de profissional.',
+      mensagem_personalizada: 'O que te trava não é talento — é ter um molde profissional, testado e pronto chegando todo mês. Com a assinatura você recebe os moldes, a vídeo-aula de montagem e a ficha técnica pra finalmente ver o caimento que você sempre quis.',
+      plano_recomendado: plano,
+      motivo_plano: 'Esse plano combina com o momento que você está vivendo na costura.',
+      compatibilidade: 93,
+      pontos_fortes: ['Você valoriza acabamento e caimento de verdade','Você prefere agir a ficar só planejando','Você quer evoluir com método']
+    };
+  }
+
+  $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; show('screen-start'); });
+})();
+</script>
+</body>
+</html>
