@@ -571,7 +571,7 @@ fbq('track','PageView',{});
     {src:'silvana-blusa.jpg', cat:['blusas','vestidos'], alt:'Blusa costurada por uma aluna'}
   ];
 
-  var answers = {}, scoreSum = 0, scoreCount = 0, readiness = 0, loadingTimer = null, urgTimer = null, currentPlano = 'trimestral';
+  var answers = {}, scoreSum = 0, scoreCount = 0, readiness = 0, loadingTimer = null, urgTimer = null, currentPlano = 'trimestral', currentLeadId = '';
   var lead = { name:'', phone:'', first:'' };
   var $ = function(id){ return document.getElementById(id); };
   function show(id){
@@ -825,7 +825,8 @@ fbq('track','PageView',{});
     $('qz-plan-name').textContent = PLANS[plano].name;
     $('qz-plan-price').textContent = PLANS[plano].price;
     $('qz-plan-why').textContent = res.motivo_plano || '';
-    $('qz-cta').setAttribute('href', CHECKOUT[plano] || CHECKOUT.trimestral);
+    currentLeadId = leadId;
+    $('qz-cta').setAttribute('href', (CHECKOUT[plano] || CHECKOUT.trimestral) + '&sck=' + encodeURIComponent(leadId));
 
     show('screen-result');
     focusEl('qz-arch-head');
@@ -931,7 +932,7 @@ fbq('track','PageView',{});
         '<div class="pname">'+PLANS[pl].name+'</div>'+
         '<div class="pprice">'+PLANS[pl].price+'</div>'+
         '<div class="pdesc">'+PLAN_DESC[pl]+'</div>'+
-        '<a class="pbtn '+(rec?'pbtn-rec':'pbtn-alt')+'" href="'+CHECKOUT[pl]+'" target="_blank" rel="noopener" data-plan="'+pl+'">Assinar o '+PLANS[pl].name.toLowerCase()+' <span class="arw">→</span></a>';
+        '<a class="pbtn '+(rec?'pbtn-rec':'pbtn-alt')+'" href="'+CHECKOUT[pl]+(currentLeadId?'&sck='+encodeURIComponent(currentLeadId):'')+'" target="_blank" rel="noopener" data-plan="'+pl+'">Assinar o '+PLANS[pl].name.toLowerCase()+' <span class="arw">→</span></a>';
       list.appendChild(card);
     });
     Array.prototype.forEach.call(list.querySelectorAll('.pbtn'), function(b){
