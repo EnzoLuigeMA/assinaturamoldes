@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Descubra seu perfil de costureira — Assinatura de Moldes</title>
 <meta name="description" content="Faça o quiz e descubra seu perfil de costureira + o plano de assinatura ideal pra você. Leva 1 minuto.">
+<meta name="theme-color" content="#2e1218">
 
 <!-- Meta Pixel Base (público — sem token; a CAPI roda no /api/quiz) -->
 <script>
@@ -25,66 +26,79 @@ fbq('track','PageView',{});
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --wine: #7d2e46; --wine-dark: #5c1f32; --wine-soft: #a14a64; --blush: #f5e8ec;
-    --cream: #faf7f4; --stone: #e8e0d8; --ink: #1e1714; --muted: #6b5c55; --white: #fff;
-    --gold: #c79a5b;
+    /* atelier-at-night — see DESIGN.md */
+    --bg: #2e1218; --bg-2: #37161d; --surface: #43202a; --surface-2: #512734;
+    --line: rgba(246,234,224,.14); --line-strong: rgba(246,234,224,.26);
+    --ink: #f6eae0; --ink-soft: #ecd7cc; --muted: #d3aaa4;
+    --coral: #f0714f; --coral-deep: #d65a39; --brass: #e3ad57;
+
     --ease: cubic-bezier(.16,1,.3,1);
-    --shadow-sm: 0 2px 10px rgba(30,23,20,.05);
-    --shadow-md: 0 12px 36px rgba(125,46,70,.12);
-    --shadow-lg: 0 20px 60px rgba(125,46,70,.18);
+    --shadow-sm: 0 2px 12px rgba(0,0,0,.28);
+    --shadow-md: 0 16px 40px rgba(0,0,0,.40);
+    --shadow-lg: 0 24px 64px rgba(0,0,0,.50);
+
+    /* z-scale (semantic) */
+    --z-toast: 70;
+
+    --serif: 'Young Serif', Georgia, 'Times New Roman', serif;
+    --sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   }
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    font-family: 'Inter', sans-serif; color: var(--ink); line-height: 1.6;
+    font-family: var(--sans); color: var(--ink); line-height: 1.65;
     -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; min-height: 100svh;
     background:
-      radial-gradient(1200px 520px at 50% -8%, var(--blush) 0%, rgba(245,232,236,0) 60%),
-      linear-gradient(180deg, #fdfbf9 0%, var(--cream) 100%);
+      radial-gradient(1100px 620px at 50% -12%, rgba(240,113,79,.16) 0%, rgba(240,113,79,0) 56%),
+      radial-gradient(760px 520px at 50% 116%, rgba(227,173,87,.08) 0%, rgba(227,173,87,0) 60%),
+      var(--bg);
     background-attachment: fixed;
   }
-  ::selection { background: var(--blush); color: var(--wine-dark); }
+  ::selection { background: var(--coral); color: var(--bg); }
 
   .qz-wrap {
     max-width: 520px; margin: 0 auto; min-height: 100svh;
     display: flex; flex-direction: column; justify-content: center;
-    padding: 36px 22px 56px;
+    padding: 40px 22px 56px;
   }
   .qz-screen { display: none; }
   .qz-screen.active { display: block; }
 
-  /* tipografia */
-  .qz-eyebrow {
-    display: inline-flex; align-items: center; gap: 7px;
-    font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--wine); margin-bottom: 16px;
+  /* running-seam motif — replaces the eyebrow chip / icon tile */
+  .stitch {
+    height: 0; width: 46px; border-top: 2px dashed var(--coral);
+    border-radius: 2px; opacity: .85; margin-bottom: 22px;
   }
-  .qz-eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--wine); opacity: .55; }
-  .qz-title {
-    font-family: 'Playfair Display', serif; font-weight: 600; line-height: 1.12;
-    letter-spacing: -0.01em; color: var(--ink); font-size: clamp(28px, 7vw, 42px);
-  }
-  .qz-title em { font-style: italic; color: var(--wine); }
-  .qz-sub { font-size: 15.5px; color: var(--muted); line-height: 1.7; margin-top: 16px; }
+  .stitch.center { margin-left: auto; margin-right: auto; }
+  .stitch.brass { border-color: var(--brass); }
 
-  /* botão */
+  /* typography */
+  .display {
+    font-family: var(--serif); font-weight: 400; line-height: 1.1;
+    letter-spacing: -0.01em; color: var(--ink); text-wrap: balance;
+  }
+  .lead { font-size: 16px; color: var(--muted); line-height: 1.7; margin-top: 16px; max-width: 34ch; }
+  .accent { color: var(--coral); }
+
+  /* button */
   .btn-primary {
     position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    background: linear-gradient(180deg, var(--wine) 0%, var(--wine-dark) 100%); color: var(--white);
-    font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none; padding: 17px 34px; border: none; border-radius: 100px; cursor: pointer;
-    box-shadow: var(--shadow-md); transition: transform .25s var(--ease), box-shadow .25s var(--ease), filter .2s;
-    overflow: hidden;
+    background: var(--coral); color: #38131a;
+    font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: .005em;
+    text-decoration: none; padding: 17px 30px; border: none; border-radius: 14px; cursor: pointer;
+    box-shadow: 0 12px 30px rgba(240,113,79,.30), inset 0 -2px 0 rgba(56,19,26,.18);
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .2s;
+    overflow: hidden; min-height: 54px;
   }
   .btn-primary::after {
     content: ""; position: absolute; inset: 0; border-radius: inherit;
-    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.18) 50%, transparent 70%);
-    transform: translateX(-130%); transition: transform .6s var(--ease);
+    background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.30) 50%, transparent 68%);
+    transform: translateX(-130%); transition: transform .7s var(--ease);
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .btn-primary:hover { transform: translateY(-2px); background: #f47c5b; box-shadow: 0 18px 40px rgba(240,113,79,.40), inset 0 -2px 0 rgba(56,19,26,.18); }
   .btn-primary:hover::after { transform: translateX(130%); }
   .btn-primary:active { transform: translateY(0); }
   .btn-primary .arw { transition: transform .25s var(--ease); }
@@ -92,143 +106,143 @@ fbq('track','PageView',{});
   .btn-block { display: flex; width: 100%; }
 
   /* ── 🅰️ START ── */
-  .qz-start { text-align: center; }
-  .qz-seal {
-    width: 60px; height: 60px; margin: 0 auto 22px; border-radius: 50%;
-    display: grid; place-items: center; font-size: 26px;
-    background: radial-gradient(circle at 50% 35%, var(--blush), #fff);
-    border: 1px solid var(--stone); box-shadow: var(--shadow-sm);
-  }
+  .qz-start { text-align: left; }
+  .qz-start .display { font-size: clamp(32px, 8.5vw, 44px); }
   .qz-start .btn-primary { margin-top: 30px; }
-  .qz-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+  .qz-meta { margin-top: 18px; font-size: 13.5px; color: var(--muted); display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+  .qz-meta .sep { width: 4px; height: 4px; border-radius: 50%; background: var(--brass); opacity: .8; }
+  .qz-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
   .qz-badge {
-    font-size: 11.5px; font-weight: 500; color: var(--muted); background: rgba(255,255,255,.7);
-    border: 1px solid var(--stone); border-radius: 100px; padding: 7px 14px; backdrop-filter: blur(4px);
+    font-size: 12.5px; font-weight: 500; color: var(--ink-soft); background: rgba(246,234,224,.05);
+    border: 1px solid var(--line); border-radius: 100px; padding: 8px 14px;
   }
 
   /* ── 🅸 QUIZ ── */
-  .qz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-  .qz-step { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .qz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; }
+  .qz-step { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .01em; }
   .qz-xp {
-    font-size: 11.5px; font-weight: 700; color: var(--wine); background: var(--blush);
-    border-radius: 100px; padding: 4px 11px; letter-spacing: .02em;
+    font-size: 13px; font-weight: 700; color: var(--brass); background: rgba(227,173,87,.12);
+    border: 1px solid rgba(227,173,87,.28); border-radius: 100px; padding: 5px 12px; white-space: nowrap;
   }
-  .qz-progress { height: 7px; background: var(--stone); border-radius: 100px; overflow: hidden; margin-bottom: 34px; }
+  .qz-progress { height: 8px; background: rgba(246,234,224,.10); border-radius: 100px; overflow: hidden; margin-bottom: 34px; }
   .qz-progress-bar {
-    height: 100%; width: 0; border-radius: 100px;
-    background: linear-gradient(90deg, var(--wine-soft), var(--wine));
-    transition: width .55s var(--ease);
+    height: 100%; width: 100%; border-radius: 100px;
+    background: linear-gradient(90deg, var(--coral-deep), var(--coral));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .55s var(--ease);
   }
   .qz-question {
-    font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.01em;
-    font-size: clamp(22px, 5.2vw, 29px); line-height: 1.22; margin-bottom: 24px;
+    font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; color: var(--ink);
+    font-size: clamp(23px, 5.6vw, 30px); line-height: 1.2; margin-bottom: 26px; text-wrap: balance;
   }
   .qz-options { display: flex; flex-direction: column; gap: 11px; }
   .qz-option {
-    position: relative; text-align: left; background: var(--white); border: 1.5px solid var(--stone);
-    border-radius: 14px; padding: 16px 18px; font-family: inherit; font-size: 15.5px; color: var(--ink);
-    cursor: pointer; display: flex; align-items: center; gap: 14px;
-    transition: border-color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease);
-    box-shadow: var(--shadow-sm);
+    position: relative; text-align: left; background: var(--surface); border: 1.5px solid var(--line);
+    border-radius: 15px; padding: 15px 16px; font-family: var(--sans); font-size: 16px; color: var(--ink);
+    cursor: pointer; display: flex; align-items: center; gap: 14px; width: 100%;
+    transition: border-color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease), background .18s;
   }
   .qz-option .ic {
-    width: 40px; height: 40px; flex-shrink: 0; border-radius: 11px; display: grid; place-items: center;
-    font-size: 21px; background: var(--blush); transition: background .18s, transform .18s var(--ease);
+    width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center;
+    font-size: 21px; background: rgba(246,234,224,.06); border: 1px solid var(--line);
+    transition: background .18s, transform .18s var(--ease), border-color .18s;
   }
   .qz-option .tx { flex: 1; line-height: 1.35; }
   .qz-option .dot {
-    width: 20px; height: 20px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--stone);
-    display: grid; place-items: center; color: #fff; transition: border-color .18s, background .18s, transform .2s var(--ease);
+    width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; border: 2px solid var(--line-strong);
+    display: grid; place-items: center; color: #38131a; transition: border-color .18s, background .18s, transform .2s var(--ease);
   }
-  .qz-option .dot svg { width: 11px; height: 11px; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .2s var(--ease); }
-  .qz-option:hover { border-color: var(--wine-soft); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .qz-option .dot svg { width: 12px; height: 12px; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .2s var(--ease); }
+  .qz-option:hover { border-color: var(--line-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); background: var(--surface-2); }
   .qz-option:hover .ic { transform: scale(1.06); }
-  .qz-option.sel { border-color: var(--wine); box-shadow: var(--shadow-md); }
-  .qz-option.sel .ic { background: var(--wine); }
-  .qz-option.sel .dot { border-color: var(--wine); background: var(--wine); transform: scale(1.05); }
+  .qz-option.sel { border-color: var(--coral); background: var(--surface-2); box-shadow: 0 0 0 1px var(--coral), var(--shadow-md); }
+  .qz-option.sel .ic { background: rgba(240,113,79,.18); border-color: rgba(240,113,79,.5); }
+  .qz-option.sel .dot { border-color: var(--coral); background: var(--coral); transform: scale(1.05); }
   .qz-option.sel .dot svg { opacity: 1; transform: scale(1); }
 
   .qz-toast {
-    position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 150%);
-    background: var(--ink); color: #fff; font-size: 13.5px; font-weight: 500;
-    padding: 12px 22px; border-radius: 100px; box-shadow: 0 14px 40px rgba(0,0,0,.3);
-    transition: transform .4s var(--ease); z-index: 60; white-space: nowrap;
+    position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 160%);
+    background: var(--surface-2); color: var(--ink); font-size: 14px; font-weight: 600;
+    padding: 12px 22px; border-radius: 100px; border: 1px solid var(--line-strong);
+    box-shadow: var(--shadow-lg); transition: transform .4s var(--ease); z-index: var(--z-toast); white-space: nowrap;
   }
   .qz-toast.show { transform: translate(-50%, 0); }
 
   /* ── LOADING ── */
-  .qz-loading { text-align: center; padding: 20px 0; }
-  .qz-loader { width: 70px; height: 70px; margin: 0 auto 28px; position: relative; }
+  .qz-loading { text-align: center; padding: 24px 0; }
+  .qz-loader { width: 74px; height: 74px; margin: 0 auto 30px; position: relative; }
   .qz-loader svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-  .qz-loader .lt { fill: none; stroke: var(--stone); stroke-width: 6; }
-  .qz-loader .lf { fill: none; stroke: var(--wine); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 60 140; animation: loaderspin 1.15s linear infinite; }
-  @keyframes loaderspin { to { stroke-dashoffset: -200; } }
-  .qz-loader .needle { position: absolute; inset: 0; display: grid; place-items: center; font-size: 24px; }
-  .qz-loading-msg { font-size: 15px; color: var(--muted); min-height: 22px; }
+  .qz-loader .lt { fill: none; stroke: rgba(246,234,224,.14); stroke-width: 6; }
+  .qz-loader .lf { fill: none; stroke: var(--coral); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 60 150; animation: loaderspin 1.15s linear infinite; }
+  @keyframes loaderspin { to { stroke-dashoffset: -210; } }
+  .qz-loader .needle { position: absolute; inset: 0; display: grid; place-items: center; font-size: 26px; }
+  .qz-loading .display { font-size: clamp(24px, 6vw, 32px); }
+  .qz-loading-msg { font-size: 15px; color: var(--muted); min-height: 22px; margin-top: 12px; }
 
   /* ── 🅳 RESULT ── */
   .qz-result { text-align: center; }
   .qz-result.active .rv { animation: rise .7s var(--ease) both; }
   .qz-result.active .r1 { animation-delay: .05s; }
   .qz-result.active .r2 { animation-delay: .18s; }
-  .qz-result.active .r3 { animation-delay: .32s; }
-  .qz-result.active .r4 { animation-delay: .46s; }
-  .qz-result.active .r5 { animation-delay: .60s; }
-  @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .qz-result.active .r3 { animation-delay: .34s; }
+  .qz-result.active .r4 { animation-delay: .50s; }
+  .qz-result.active .r5 { animation-delay: .64s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
-  .ring { position: relative; width: 132px; height: 132px; margin: 4px auto 0; }
+  .ring { position: relative; width: 138px; height: 138px; margin: 0 auto; }
   .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-  .ring .ring-track { fill: none; stroke: var(--blush); stroke-width: 9; }
+  .ring .ring-track { fill: none; stroke: rgba(246,234,224,.12); stroke-width: 9; }
   .ring .ring-fill {
-    fill: none; stroke: var(--wine); stroke-width: 9; stroke-linecap: round;
-    transition: stroke-dashoffset 1.2s var(--ease);
+    fill: none; stroke: var(--coral); stroke-width: 9; stroke-linecap: round;
+    transition: stroke-dashoffset 1.2s var(--ease); filter: drop-shadow(0 0 6px rgba(240,113,79,.45));
   }
   .ring-center { position: absolute; inset: 0; display: grid; place-items: center; }
-  .ring-num { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 36px; color: var(--wine); line-height: 1; }
-  .ring-lbl { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 3px; }
+  .ring-num { font-family: var(--serif); font-weight: 400; font-size: 38px; color: var(--brass); line-height: 1; }
+  .ring-lbl { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
 
+  .qz-kicker { font-size: 13px; font-weight: 600; color: var(--coral); margin-bottom: 14px; }
   .qz-arch {
-    font-family: 'Playfair Display', serif; font-weight: 600; letter-spacing: -0.01em;
-    font-size: clamp(27px, 7vw, 40px); line-height: 1.12; margin: 20px 0 10px; color: var(--ink);
+    font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; text-wrap: balance;
+    font-size: clamp(28px, 7.4vw, 40px); line-height: 1.12; margin: 18px 0 10px; color: var(--ink);
   }
-  .qz-arch .nm { color: var(--wine); display: block; }
-  .qz-arch-desc { font-size: 15px; color: var(--muted); line-height: 1.65; max-width: 420px; margin: 0 auto; }
+  .qz-arch .nm { color: var(--coral); display: block; }
+  .qz-arch-desc { font-size: 15.5px; color: var(--muted); line-height: 1.68; max-width: 36ch; margin: 0 auto; }
 
-  .qz-card {
-    background: var(--white); border: 1px solid var(--stone); border-radius: 18px;
-    padding: 24px 22px; margin-top: 24px; text-align: left; box-shadow: var(--shadow-sm);
+  .qz-panel {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+    padding: 24px 22px; margin-top: 26px; text-align: left; box-shadow: var(--shadow-sm);
   }
-  .qz-msg { font-size: 15.5px; color: var(--ink); line-height: 1.78; }
-  .qz-strengths { list-style: none; margin-top: 18px; display: flex; flex-direction: column; gap: 11px; }
-  .qz-strengths li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; color: var(--ink); line-height: 1.5; }
+  .qz-msg { font-size: 16px; color: var(--ink-soft); line-height: 1.78; }
+  .qz-strengths { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .qz-strengths li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink); line-height: 1.5; }
   .qz-check {
-    width: 21px; height: 21px; flex-shrink: 0; border-radius: 50%; background: var(--wine); color: #fff;
+    width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; background: var(--coral); color: #38131a;
     display: grid; place-items: center; margin-top: 1px;
   }
-  .qz-check svg { width: 11px; height: 11px; }
+  .qz-check svg { width: 12px; height: 12px; }
 
   .qz-plan {
-    position: relative; background: linear-gradient(180deg, #fff 0%, var(--blush) 100%);
-    border: 1.5px solid var(--wine); border-radius: 18px; padding: 26px 22px 24px; margin-top: 18px;
-    text-align: center; box-shadow: var(--shadow-md); overflow: hidden;
+    position: relative; background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+    border: 1.5px solid var(--brass); border-radius: 18px; padding: 30px 22px 26px; margin-top: 16px;
+    text-align: center; box-shadow: var(--shadow-md);
   }
   .qz-ribbon {
-    position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
-    background: var(--wine); color: #fff; font-size: 10.5px; font-weight: 700; letter-spacing: .12em;
-    text-transform: uppercase; padding: 6px 16px; border-radius: 100px; white-space: nowrap;
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--brass); color: #3a2407; font-size: 12px; font-weight: 700; letter-spacing: .02em;
+    padding: 7px 16px; border-radius: 100px; white-space: nowrap; box-shadow: var(--shadow-sm);
   }
-  .qz-plan-name { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 27px; color: var(--ink); margin-top: 28px; }
-  .qz-plan-price { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
-  .qz-plan-why { font-size: 14.5px; color: var(--ink); line-height: 1.65; margin-top: 14px; }
+  .qz-plan-name { font-family: var(--serif); font-weight: 400; font-size: 28px; color: var(--ink); margin-top: 6px; }
+  .qz-plan-price { font-size: 14px; color: var(--brass); margin-top: 6px; font-weight: 600; }
+  .qz-plan-why { font-size: 15px; color: var(--muted); line-height: 1.66; margin-top: 14px; }
 
-  .qz-result .btn-primary { margin-top: 24px; }
-  .qz-all { display: inline-block; margin-top: 18px; font-size: 13px; font-weight: 500; color: var(--wine); text-decoration: none; border-bottom: 1px solid rgba(125,46,70,.3); padding-bottom: 1px; }
-  .qz-all:hover { border-color: var(--wine); }
-  .qz-redo { display: block; margin-top: 16px; font-size: 12.5px; color: var(--muted); cursor: pointer; }
-  .qz-redo:hover { color: var(--ink); }
+  .qz-result .btn-primary { margin-top: 26px; }
+  .qz-all { display: inline-block; margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--line-strong); padding-bottom: 2px; transition: color .18s, border-color .18s; }
+  .qz-all:hover { color: var(--ink); border-color: var(--coral); }
+  .qz-redo { display: block; margin-top: 16px; font-size: 13px; color: var(--muted); cursor: pointer; transition: color .18s; }
+  .qz-redo:hover { color: var(--ink-soft); }
 
-  /* foco acessível */
-  :focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; border-radius: 4px; }
+  /* focus acessível */
+  :focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; border-radius: 6px; }
 
   /* entrada suave entre telas */
   .qz-screen.active.fadein { animation: scrim .45s var(--ease) both; }
@@ -236,6 +250,7 @@ fbq('track','PageView',{});
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .001s !important; transition-duration: .001s !important; }
+    .qz-loader .lf { animation-duration: 1.15s !important; }
   }
 </style>
 </head>
@@ -245,14 +260,15 @@ fbq('track','PageView',{});
 
   <!-- 🅰️ ATENÇÃO -->
   <section class="qz-screen qz-start active" id="screen-start">
-    <div class="qz-seal">🪡</div>
-    <span class="qz-eyebrow">Quiz da Costureira · 1 minuto</span>
-    <h1 class="qz-title">Descubra o seu <em>perfil de costureira</em></h1>
-    <p class="qz-sub">Responda 6 perguntas rápidas e a gente revela o seu perfil — e qual plano da assinatura combina com você.</p>
+    <div class="stitch"></div>
+    <h1 class="display">Descubra o seu <span class="accent">perfil de costureira</span></h1>
+    <p class="lead">Seis perguntas rápidas e a gente revela o seu perfil — e qual plano da assinatura combina com você.</p>
     <button class="btn-primary" id="btn-start">Começar o quiz <span class="arw">→</span></button>
+    <div class="qz-meta">
+      <span>Leva 1 minuto</span><span class="sep"></span><span>6 perguntas</span><span class="sep"></span><span>resultado na hora</span>
+    </div>
     <div class="qz-badges">
-      <span class="qz-badge">🧵 6 perguntas</span>
-      <span class="qz-badge">⚡ Resultado na hora</span>
+      <span class="qz-badge">🧵 Moldes profissionais</span>
       <span class="qz-badge">💛 +200 alunas</span>
     </div>
   </section>
@@ -271,30 +287,31 @@ fbq('track','PageView',{});
   <!-- transição -->
   <section class="qz-screen qz-loading" id="screen-loading">
     <div class="qz-loader">
-      <svg viewBox="0 0 70 70"><circle class="lt" cx="35" cy="35" r="31"/><circle class="lf" cx="35" cy="35" r="31"/></svg>
+      <svg viewBox="0 0 74 74"><circle class="lt" cx="37" cy="37" r="33"/><circle class="lf" cx="37" cy="37" r="33"/></svg>
       <div class="needle">🪡</div>
     </div>
-    <h2 class="qz-title" style="font-size:clamp(23px,5.4vw,31px)">Analisando seu perfil…</h2>
+    <h2 class="display">Analisando seu perfil…</h2>
     <p class="qz-loading-msg" id="qz-loading-msg">Lendo suas respostas ✨</p>
   </section>
 
   <!-- 🅳 DESEJO + 🅰️ AÇÃO -->
   <section class="qz-screen qz-result" id="screen-result">
-    <span class="qz-eyebrow rv r1">Seu resultado saiu</span>
+    <div class="stitch center brass rv r1"></div>
     <div class="ring rv r1">
-      <svg viewBox="0 0 132 132">
-        <circle class="ring-track" cx="66" cy="66" r="57"/>
-        <circle class="ring-fill" id="qz-ring" cx="66" cy="66" r="57"/>
+      <svg viewBox="0 0 138 138">
+        <circle class="ring-track" cx="69" cy="69" r="57"/>
+        <circle class="ring-fill" id="qz-ring" cx="69" cy="69" r="57"/>
       </svg>
       <div class="ring-center">
         <div class="ring-num" id="qz-compat">0%</div>
         <div class="ring-lbl">compatível</div>
       </div>
     </div>
+    <p class="qz-kicker rv r2">O seu perfil saiu</p>
     <h2 class="qz-arch rv r2">Você é <span class="nm" id="qz-arch"></span></h2>
     <p class="qz-arch-desc rv r2" id="qz-arch-desc"></p>
 
-    <div class="qz-card rv r3">
+    <div class="qz-panel rv r3">
       <p class="qz-msg" id="qz-msg"></p>
       <ul class="qz-strengths" id="qz-strengths"></ul>
     </div>
@@ -389,7 +406,7 @@ fbq('track','PageView',{});
     var item = QUESTIONS[idx];
     $('qz-step').textContent = 'Pergunta ' + (idx+1) + ' de ' + QUESTIONS.length;
     $('qz-xp').textContent = points + ' pts';
-    $('qz-bar').style.width = Math.round((idx/QUESTIONS.length)*100) + '%';
+    $('qz-bar').style.transform = 'scaleX(' + (idx/QUESTIONS.length) + ')';
     $('qz-question').textContent = item.q;
     var box = $('qz-options'); box.innerHTML = '';
     item.opts.forEach(function(o){
@@ -424,7 +441,7 @@ fbq('track','PageView',{});
 
   function finish(){
     delete answers['__lock'];
-    $('qz-bar').style.width = '100%';
+    $('qz-bar').style.transform = 'scaleX(1)';
     show('screen-loading');
     var li = 0;
     loadingTimer = setInterval(function(){ li=(li+1)%LOADING_MSGS.length; $('qz-loading-msg').textContent = LOADING_MSGS[li]; }, 1200);
