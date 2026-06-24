@@ -26,7 +26,10 @@ fbq('track','PageView',{});
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://connect.facebook.net">
+<!-- fonte NÃO-bloqueante: a página pinta na hora (fallback do sistema) e troca pela web font ao carregar -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap"></noscript>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -394,10 +397,10 @@ fbq('track','PageView',{});
     <!-- prova social direcionada ao perfil -->
     <div class="qz-social rv r4">
       <div class="qz-avatars">
-        <img src="av-amanda.webp" alt="" width="38" height="38">
-        <img src="av-mariane.webp" alt="" width="38" height="38">
-        <img src="av-rose.webp" alt="" width="38" height="38">
-        <img src="av-silvana.webp" alt="" width="38" height="38">
+        <img src="av-amanda.webp" alt="" width="38" height="38" loading="lazy">
+        <img src="av-mariane.webp" alt="" width="38" height="38" loading="lazy">
+        <img src="av-rose.webp" alt="" width="38" height="38" loading="lazy">
+        <img src="av-silvana.webp" alt="" width="38" height="38" loading="lazy">
         <span class="qz-stars" aria-label="5 estrelas">★★★★★</span>
       </div>
       <p class="qz-social-txt"><strong>+200 alunas</strong> já estão costurando com a assinatura.</p>
