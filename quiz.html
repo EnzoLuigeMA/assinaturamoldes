@@ -202,6 +202,18 @@ fbq('track','PageView',{});
   .qz-make-scroll::-webkit-scrollbar { height: 0; }
   .qz-make-scroll img { flex: 0 0 auto; width: 156px; height: 208px; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); scroll-snap-align: start; box-shadow: var(--shadow-sm); background: var(--surface); }
 
+  /* catálogo de modelos (thumbnails do catálogo em cards claros) */
+  .qz-cat-scroll { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 22px 6px; margin: 0 -22px; -webkit-overflow-scrolling: touch; }
+  .qz-cat-scroll::-webkit-scrollbar { height: 0; }
+  .qz-cat-scroll img { flex: 0 0 auto; width: 168px; height: 210px; object-fit: contain; background: #fff; border-radius: 14px; border: 1px solid var(--line); padding: 8px; scroll-snap-align: start; box-shadow: var(--shadow-sm); }
+  .qz-cat-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .qz-cat-note strong { color: var(--brass); }
+
+  /* linhas personalizadas do Haiku no resultado */
+  .qz-benefit { font-size: 15px; color: var(--coral); font-weight: 600; line-height: 1.5; margin-bottom: 12px; }
+  .qz-firstpiece { margin-top: 18px; font-size: 14.5px; color: var(--ink-soft); background: rgba(240,113,79,.08); border: 1px solid rgba(240,113,79,.22); border-radius: 12px; padding: 12px 14px; }
+  .qz-objection { font-size: 14px; color: var(--muted); font-style: italic; line-height: 1.55; max-width: 38ch; margin: 4px auto 16px; }
+
   /* plano */
   .qz-plan { position: relative; background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%); border: 1.5px solid var(--brass); border-radius: 18px; padding: 30px 22px 26px; margin-top: 30px; text-align: center; box-shadow: var(--shadow-md); }
   .qz-ribbon { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--brass); color: var(--on-brass); font-size: 12px; font-weight: 700; letter-spacing: .02em; padding: 7px 16px; border-radius: 100px; white-space: nowrap; box-shadow: var(--shadow-sm); }
@@ -328,8 +340,10 @@ fbq('track','PageView',{});
     <p class="qz-arch-desc rv r2" id="qz-arch-desc"></p>
 
     <div class="qz-panel rv r3">
+      <p class="qz-benefit" id="qz-benefit"></p>
       <p class="qz-msg" id="qz-msg"></p>
       <ul class="qz-strengths" id="qz-strengths"></ul>
+      <p class="qz-firstpiece" id="qz-firstpiece"></p>
     </div>
 
     <!-- prova social -->
@@ -364,6 +378,22 @@ fbq('track','PageView',{});
       </div>
     </div>
 
+    <!-- veja antes de assinar: modelos do catálogo -->
+    <div class="qz-makes rv r6">
+      <p class="qz-section-h">Veja antes de assinar — modelos da assinatura</p>
+      <div class="qz-cat-scroll">
+        <img src="Blusas.jpg" alt="Molde de blusa disponível na assinatura" loading="lazy">
+        <img src="Vestidos.png" alt="Molde de vestido disponível na assinatura" loading="lazy">
+        <img src="Saias.jpg" alt="Molde de saia disponível na assinatura" loading="lazy">
+        <img src="Cal%C3%A7as%20Shorts%20e%20Macacoes.jpg" alt="Molde de calça e macacão disponível na assinatura" loading="lazy">
+        <img src="Blazers%20e%20Sobreposi%C3%A7%C3%B5es.jpg" alt="Molde de blazer e sobreposição disponível na assinatura" loading="lazy">
+        <img src="Blusas%282%29.jpg" alt="Molde de blusa disponível na assinatura" loading="lazy">
+        <img src="Vestidos%282%29.png" alt="Molde de vestido disponível na assinatura" loading="lazy">
+        <img src="Saias%283%29.jpg" alt="Molde de saia disponível na assinatura" loading="lazy">
+      </div>
+      <p class="qz-cat-note">Todo mês entram <strong>4 modelos novos</strong>, com acesso na hora ao assinar.</p>
+    </div>
+
     <!-- plano + ação -->
     <div class="qz-plan rv r6">
       <span class="qz-ribbon">⭐ Recomendado pra você</span>
@@ -372,7 +402,8 @@ fbq('track','PageView',{});
       <p class="qz-plan-why" id="qz-plan-why"></p>
     </div>
 
-    <a class="btn-primary btn-block rv r6" id="qz-cta" href="#" target="_blank" rel="noopener">Quero assinar agora <span class="arw">→</span></a>
+    <p class="qz-objection rv r6" id="qz-objection"></p>
+    <a class="btn-primary btn-block rv r6" id="qz-cta" href="#" target="_blank" rel="noopener"><span id="qz-cta-text">Quero assinar agora</span> <span class="arw">→</span></a>
     <p class="qz-guarantee rv r6">💛 Acesso imediato após a compra · ambiente seguro Hotmart</p>
     <div class="rv r6">
       <button type="button" class="qz-all" id="qz-all">ver todos os planos</button>
@@ -455,6 +486,7 @@ fbq('track','PageView',{});
     window.scrollTo(0,0);
   }
   function focusEl(id){ try { var el = $(id); if(el) el.focus({ preventScroll:true }); } catch(e){} }
+  function setLine(id, text){ var el = $(id); if(!el) return; if(text){ el.textContent = text; el.style.display = ''; } else { el.style.display = 'none'; } }
   function esc(s){ return String(s||'').replace(/[<>&"]/g, function(c){ return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]; }); }
   function fbqTrack(name, params, custom){
     if(typeof fbq!=='function') return;
@@ -578,6 +610,7 @@ fbq('track','PageView',{});
     $('qz-kicker').textContent = lead.first ? ('Pronto, ' + lead.first + '! O seu perfil saiu 💛') : 'O seu perfil saiu';
     $('qz-arch').textContent = res.arquetipo || 'A Costureira Visionária';
     $('qz-arch-desc').textContent = res.arquetipo_descricao || '';
+    setLine('qz-benefit', res.beneficio_direcionado);
     $('qz-msg').textContent = res.mensagem_personalizada || '';
     var ul = $('qz-strengths'); ul.innerHTML = '';
     (res.pontos_fortes || []).forEach(function(p){
@@ -585,6 +618,10 @@ fbq('track','PageView',{});
       liEl.innerHTML = '<span class="qz-check" aria-hidden="true">'+CHECK+'</span><span>'+esc(p)+'</span>';
       ul.appendChild(liEl);
     });
+    if(res.primeira_peca){ $('qz-firstpiece').textContent = '✂️ Comece pela ' + res.primeira_peca; $('qz-firstpiece').style.display = ''; }
+    else { $('qz-firstpiece').style.display = 'none'; }
+    setLine('qz-objection', res.objecao_quebra);
+    $('qz-cta-text').textContent = res.cta_texto || 'Quero assinar agora';
     $('qz-plan-name').textContent = PLANS[plano].name;
     $('qz-plan-price').textContent = PLANS[plano].price;
     $('qz-plan-why').textContent = res.motivo_plano || '';
@@ -657,7 +694,11 @@ fbq('track','PageView',{});
       plano_recomendado: plano,
       motivo_plano: 'Esse plano combina com o momento que você está vivendo na costura.',
       compatibilidade: 93,
-      pontos_fortes: ['Você valoriza acabamento e caimento de verdade','Você prefere agir a ficar só planejando','Você quer evoluir com método']
+      pontos_fortes: ['Você valoriza acabamento e caimento de verdade','Você prefere agir a ficar só planejando','Você quer evoluir com método'],
+      beneficio_direcionado: ({modelagem:'Como o que te trava é a modelagem, os moldes já chegam prontos e testados, do PP ao GG.',caimento:'Como o caimento te incomoda, os moldes têm as correções do corpo feminino pra peça cair como de ateliê.',tempo:'Como o seu tempo é curto, o molde chega pronto com vídeo-aula: é só cortar e costurar.',acabamento:'Como você quer acabamento de ateliê, cada molde vem com ficha técnica e vídeo de montagem.'})[a.frustracao] || 'Você recebe moldes profissionais, vídeo-aula e ficha técnica todo mês.',
+      primeira_peca: ({blusas_vestidos:'blusa lenço',calcas_alfaiataria:'calça alfaiataria',infantil:'vestido infantil',linha_completa:'saia lápis'})[a.foco] || 'saia lápis',
+      objecao_quebra: ({testar:'Dá pra começar no plano mensal e sentir no seu ritmo, sem compromisso longo.',conhecer:'Você não precisa saber tudo agora: cada molde vem com vídeo-aula passo a passo.',mergulhar:'Você já está pronta, é só destravar o acesso e começar hoje.'})[a.compromisso] || 'Cada molde vem com vídeo-aula passo a passo, então você nunca fica na mão.',
+      cta_texto: ({marca_propria:'Quero construir minha marca',renda_extra:'Quero gerar renda costurando',hobby:'Quero costurar pra mim'})[a.objetivo] || 'Quero assinar agora'
     };
   }
 
