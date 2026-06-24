@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Descubra seu perfil de costureira — Assinatura de Moldes</title>
-<meta name="description" content="Faça o quiz e descubra seu perfil de costureira + o plano de assinatura ideal pra você. Leva 1 minuto.">
+<meta name="description" content="Faça o quiz e descubra seu perfil de costureira + o plano de assinatura ideal pra você. Leva 2 minutos.">
 <meta name="theme-color" content="#2e1218">
 
 <!-- Meta Pixel Base (público — sem token; a CAPI roda no /api/quiz) -->
@@ -117,12 +117,18 @@ fbq('track','PageView',{});
   #lead-form .btn-primary { margin-top: 22px; }
 
   /* ── 🅸 QUIZ ── */
-  .qz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; }
+  .qz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 12px; }
   .qz-step { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .01em; }
-  .qz-xp { font-size: 13px; font-weight: 700; color: var(--brass); background: rgba(227,173,87,.12); border: 1px solid rgba(227,173,87,.28); border-radius: 100px; padding: 5px 12px; white-space: nowrap; }
-  .qz-progress { height: 8px; background: rgba(246,234,224,.10); border-radius: 100px; overflow: hidden; margin-bottom: 34px; }
+  .qz-progress { height: 8px; background: rgba(246,234,224,.10); border-radius: 100px; overflow: hidden; margin-bottom: 9px; }
   .qz-progress-bar { height: 100%; width: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--coral-deep), var(--coral)); transform: scaleX(0); transform-origin: left; transition: transform .55s var(--ease); }
-  .qz-question { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; color: var(--ink); font-size: clamp(23px, 5.6vw, 30px); line-height: 1.2; margin-bottom: 26px; text-wrap: balance; }
+  /* medidor de prontidão (régua de qualificação gamificada) */
+  .qz-meter-row { display: flex; align-items: center; gap: 10px; margin-bottom: 30px; }
+  .qz-meter-lbl { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--brass); white-space: nowrap; }
+  .qz-meter { flex: 1; height: 7px; background: rgba(227,173,87,.14); border-radius: 100px; overflow: hidden; }
+  .qz-meter-fill { height: 100%; width: 100%; border-radius: 100px; background: linear-gradient(90deg, #b9842f, var(--brass)); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+  .qz-meter-val { font-size: 12.5px; font-weight: 800; color: var(--brass); white-space: nowrap; min-width: 36px; text-align: right; }
+
+  .qz-question { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; color: var(--ink); font-size: clamp(23px, 5.6vw, 30px); line-height: 1.2; margin-bottom: 22px; text-wrap: balance; }
   .qz-question:focus { outline: none; }
   .qz-options { display: flex; flex-direction: column; gap: 11px; }
   .qz-option { position: relative; text-align: left; background: var(--surface); border: 1.5px solid var(--line); border-radius: 15px; padding: 15px 16px; font-family: var(--sans); font-size: 16px; color: var(--ink); cursor: pointer; display: flex; align-items: center; gap: 14px; width: 100%; transition: border-color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease), background .18s; }
@@ -137,7 +143,29 @@ fbq('track','PageView',{});
   .qz-option.sel .dot { border-color: var(--coral); background: var(--coral); transform: scale(1.05); }
   .qz-option.sel .dot svg { opacity: 1; transform: scale(1); }
 
-  .qz-toast { position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 160%); background: var(--surface-2); color: var(--ink); font-size: 14px; font-weight: 600; padding: 12px 22px; border-radius: 100px; border: 1px solid var(--line-strong); box-shadow: var(--shadow-lg); transition: transform .4s var(--ease); z-index: var(--z-toast); white-space: nowrap; }
+  /* pergunta com imagem */
+  .qz-imgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+  .qz-imgopt { position: relative; border: 1.5px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); cursor: pointer; padding: 0; font-family: var(--sans); transition: border-color .18s var(--ease), transform .18s var(--ease), box-shadow .18s var(--ease); }
+  .qz-imgopt .ph { display: block; width: 100%; height: 118px; object-fit: cover; background: #fff; }
+  .qz-imgopt .emoji { display: flex; align-items: center; justify-content: center; height: 118px; font-size: 44px; background: rgba(246,234,224,.05); }
+  .qz-imgopt .cap { display: block; padding: 11px 12px; font-size: 14px; font-weight: 600; color: var(--ink); text-align: left; }
+  .qz-imgopt:hover { border-color: var(--line-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .qz-imgopt.sel { border-color: var(--coral); box-shadow: 0 0 0 1px var(--coral), var(--shadow-md); }
+  .qz-imgopt .imgcheck { position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; border-radius: 50%; background: var(--coral); color: var(--on-coral); display: grid; place-items: center; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .2s var(--ease); box-shadow: var(--shadow-sm); }
+  .qz-imgopt .imgcheck svg { width: 12px; height: 12px; }
+  .qz-imgopt.sel .imgcheck { opacity: 1; transform: scale(1); }
+
+  /* pergunta com slider */
+  .qz-slider-wrap { display: block; padding: 6px 2px 0; }
+  .qz-slider-val { text-align: center; font-family: var(--serif); font-size: 30px; color: var(--coral); margin-bottom: 6px; min-height: 38px; }
+  .qz-slider-val small { font-size: 15px; color: var(--muted); font-family: var(--sans); }
+  input[type=range].qz-range { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 100px; background: var(--surface-2); outline: none; margin: 14px 0 6px; }
+  input[type=range].qz-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: var(--coral); border: 3px solid var(--bg); box-shadow: var(--shadow-md); cursor: pointer; }
+  input[type=range].qz-range::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--coral); border: 3px solid var(--bg); box-shadow: var(--shadow-md); cursor: pointer; }
+  .qz-slider-ticks { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .qz-slider-wrap .btn-primary { margin-top: 26px; width: 100%; }
+
+  .qz-toast { position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 160%); background: var(--surface-2); color: var(--ink); font-size: 14px; font-weight: 600; padding: 12px 22px; border-radius: 100px; border: 1px solid var(--line-strong); box-shadow: var(--shadow-lg); transition: transform .4s var(--ease); z-index: var(--z-toast); white-space: nowrap; max-width: 90vw; overflow: hidden; text-overflow: ellipsis; }
   .qz-toast.show { transform: translate(-50%, 0); }
 
   /* ── LOADING ── */
@@ -177,11 +205,13 @@ fbq('track','PageView',{});
   .qz-arch-desc { font-size: 15.5px; color: var(--muted); line-height: 1.68; max-width: 36ch; margin: 0 auto; }
 
   .qz-panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px 22px; margin-top: 26px; text-align: left; box-shadow: var(--shadow-sm); }
+  .qz-benefit { font-size: 15px; color: var(--coral); font-weight: 600; line-height: 1.5; margin-bottom: 12px; }
   .qz-msg { font-size: 16px; color: var(--ink-soft); line-height: 1.78; }
   .qz-strengths { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
   .qz-strengths li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink); line-height: 1.5; }
   .qz-check { width: 22px; height: 22px; flex-shrink: 0; border-radius: 50%; background: var(--coral); color: var(--on-coral); display: grid; place-items: center; margin-top: 1px; }
   .qz-check svg { width: 12px; height: 12px; }
+  .qz-firstpiece { margin-top: 18px; font-size: 14.5px; color: var(--ink-soft); background: rgba(240,113,79,.08); border: 1px solid rgba(240,113,79,.22); border-radius: 12px; padding: 12px 14px; }
 
   /* prova social */
   .qz-social { margin-top: 30px; }
@@ -195,23 +225,18 @@ fbq('track','PageView',{});
   .qz-quote p { font-size: 15px; color: var(--ink-soft); line-height: 1.62; font-style: italic; }
   .qz-quote cite { display: block; margin-top: 10px; font-size: 13px; font-style: normal; color: var(--coral); font-weight: 600; }
 
-  /* peças reais (scroll) */
+  /* faixas (peças reais + catálogo) */
   .qz-makes { margin-top: 30px; }
   .qz-section-h { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
   .qz-make-scroll { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; margin: 0 -22px; padding-left: 22px; padding-right: 22px; -webkit-overflow-scrolling: touch; }
   .qz-make-scroll::-webkit-scrollbar { height: 0; }
   .qz-make-scroll img { flex: 0 0 auto; width: 156px; height: 208px; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); scroll-snap-align: start; box-shadow: var(--shadow-sm); background: var(--surface); }
-
-  /* catálogo de modelos (thumbnails do catálogo em cards claros) */
   .qz-cat-scroll { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 22px 6px; margin: 0 -22px; -webkit-overflow-scrolling: touch; }
   .qz-cat-scroll::-webkit-scrollbar { height: 0; }
   .qz-cat-scroll img { flex: 0 0 auto; width: 168px; height: 210px; object-fit: contain; background: #fff; border-radius: 14px; border: 1px solid var(--line); padding: 8px; scroll-snap-align: start; box-shadow: var(--shadow-sm); }
   .qz-cat-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
   .qz-cat-note strong { color: var(--brass); }
 
-  /* linhas personalizadas do Haiku no resultado */
-  .qz-benefit { font-size: 15px; color: var(--coral); font-weight: 600; line-height: 1.5; margin-bottom: 12px; }
-  .qz-firstpiece { margin-top: 18px; font-size: 14.5px; color: var(--ink-soft); background: rgba(240,113,79,.08); border: 1px solid rgba(240,113,79,.22); border-radius: 12px; padding: 12px 14px; }
   .qz-objection { font-size: 14px; color: var(--muted); font-style: italic; line-height: 1.55; max-width: 38ch; margin: 4px auto 16px; }
 
   /* plano */
@@ -220,8 +245,13 @@ fbq('track','PageView',{});
   .qz-plan-name { font-family: var(--serif); font-weight: 400; font-size: 28px; color: var(--ink); margin-top: 6px; }
   .qz-plan-price { font-size: 14px; color: var(--brass); margin-top: 6px; font-weight: 600; }
   .qz-plan-why { font-size: 15px; color: var(--muted); line-height: 1.66; margin-top: 14px; }
+  .qz-plan-bonus { margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--brass); background: rgba(227,173,87,.10); border: 1px solid rgba(227,173,87,.28); border-radius: 12px; padding: 11px 14px; }
 
-  .qz-result .btn-primary { margin-top: 22px; }
+  /* urgência honesta (condição da sessão) */
+  .qz-urgency { font-size: 13.5px; color: var(--ink-soft); background: rgba(240,113,79,.10); border: 1px solid rgba(240,113,79,.24); border-radius: 100px; padding: 10px 18px; margin-top: 20px; display: inline-block; }
+  .qz-urgency strong { color: var(--coral); font-variant-numeric: tabular-nums; }
+
+  .qz-result .btn-primary { margin-top: 18px; }
   .qz-guarantee { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
   .qz-all { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; font-family: inherit; color: var(--ink-soft); background: none; border: 0; border-bottom: 1px solid var(--line-strong); padding: 6px 4px; cursor: pointer; transition: color .18s, border-color .18s; }
   .qz-all:hover { color: var(--ink); border-color: var(--coral); }
@@ -270,10 +300,10 @@ fbq('track','PageView',{});
   <section class="qz-screen qz-start active" id="screen-start">
     <div class="stitch"></div>
     <h1 class="display">Descubra o seu <span class="accent">perfil de costureira</span></h1>
-    <p class="lead">Seis perguntas rápidas e a gente revela o seu perfil e qual plano da assinatura combina com você.</p>
+    <p class="lead">Responda umas perguntas rápidas e a gente revela o seu perfil de costureira e o plano da assinatura ideal pra você.</p>
     <button class="btn-primary" id="btn-start">Começar o quiz <span class="arw">→</span></button>
     <div class="qz-meta">
-      <span>Leva 1 minuto</span><span class="sep"></span><span>6 perguntas</span><span class="sep"></span><span>resultado na hora</span>
+      <span>⚡ 2 minutinhos</span><span class="sep"></span><span>diagnóstico personalizado</span><span class="sep"></span><span>resultado na hora</span>
     </div>
     <div class="qz-badges">
       <span class="qz-badge">🧵 Moldes profissionais</span>
@@ -304,10 +334,14 @@ fbq('track','PageView',{});
   <!-- 🅸 INTERESSE -->
   <section class="qz-screen" id="screen-quiz">
     <div class="qz-top">
-      <span class="qz-step" id="qz-step">Pergunta 1 de 6</span>
-      <span class="qz-xp" id="qz-xp">0 pts</span>
+      <span class="qz-step" id="qz-step">Pergunta 1 de 11</span>
     </div>
-    <div class="qz-progress" id="qz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" aria-label="Progresso do quiz"><div class="qz-progress-bar" id="qz-bar"></div></div>
+    <div class="qz-progress" id="qz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="11" aria-valuenow="0" aria-label="Progresso do quiz"><div class="qz-progress-bar" id="qz-bar"></div></div>
+    <div class="qz-meter-row" aria-hidden="true">
+      <span class="qz-meter-lbl">⚡ Prontidão</span>
+      <div class="qz-meter"><div class="qz-meter-fill" id="qz-meter-fill"></div></div>
+      <span class="qz-meter-val" id="qz-meter-val">0%</span>
+    </div>
     <h2 class="qz-question" id="qz-question" tabindex="-1"></h2>
     <div class="qz-options" id="qz-options"></div>
   </section>
@@ -346,7 +380,7 @@ fbq('track','PageView',{});
       <p class="qz-firstpiece" id="qz-firstpiece"></p>
     </div>
 
-    <!-- prova social -->
+    <!-- prova social direcionada ao perfil -->
     <div class="qz-social rv r4">
       <div class="qz-avatars">
         <img src="av-amanda.webp" alt="" width="38" height="38">
@@ -357,12 +391,12 @@ fbq('track','PageView',{});
       </div>
       <p class="qz-social-txt"><strong>+200 alunas</strong> já estão costurando com a assinatura.</p>
       <figure class="qz-quote">
-        <p>"Fiz o macacão assimétrico, amei costurar! Deu vontade de fazer um de cada cor."</p>
-        <cite>Rose, aluna da assinatura</cite>
+        <p id="qz-quote-text">"Fiz o macacão assimétrico, amei costurar! Deu vontade de fazer um de cada cor."</p>
+        <cite id="qz-quote-cite">Rose, aluna da assinatura</cite>
       </figure>
     </div>
 
-    <!-- peças reais (mesmas fotos da seção "Direto do grupo das alunas" da home) -->
+    <!-- peças reais feitas pelas alunas -->
     <div class="qz-makes rv r5">
       <p class="qz-section-h">Peças reais feitas pelas alunas</p>
       <div class="qz-make-scroll">
@@ -405,8 +439,10 @@ fbq('track','PageView',{});
       <div class="qz-plan-name" id="qz-plan-name"></div>
       <div class="qz-plan-price" id="qz-plan-price"></div>
       <p class="qz-plan-why" id="qz-plan-why"></p>
+      <p class="qz-plan-bonus" id="qz-bonus"></p>
     </div>
 
+    <div class="qz-urgency rv r6" id="qz-urgency">⏳ Condição desta sessão expira em <strong id="qz-timer">15:00</strong></div>
     <p class="qz-objection rv r6" id="qz-objection"></p>
     <a class="btn-primary btn-block rv r6" id="qz-cta" href="#" target="_blank" rel="noopener"><span id="qz-cta-text">Quero assinar agora</span> <span class="arw">→</span></a>
     <p class="qz-guarantee rv r6">💛 Acesso imediato após a compra · ambiente seguro Hotmart</p>
@@ -436,50 +472,93 @@ fbq('track','PageView',{});
   'use strict';
 
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>';
+  var TOTAL = 11; // base (9) + 1 ramificação de nível + 1 ramificação de objetivo
 
-  var QUESTIONS = [
-    { key:'nivel', q:'Como você se descreve na costura hoje?', opts:[
-      {v:'iniciante', t:'Tô começando agora', ic:'🌱'},
-      {v:'intermediaria', t:'Já costuro, mas quero evoluir', ic:'✂️'},
-      {v:'avancada', t:'Domino a máquina, quero moldes à altura', ic:'🧵'} ]},
-    { key:'foco', q:'O que você mais ama (ou quer) costurar?', opts:[
-      {v:'blusas_vestidos', t:'Blusas e vestidos', ic:'👗'},
-      {v:'calcas_alfaiataria', t:'Calças e alfaiataria', ic:'👖'},
-      {v:'infantil', t:'Moda infantil', ic:'🧸'},
-      {v:'linha_completa', t:'Um pouco de tudo', ic:'🌈'} ]},
-    { key:'frustracao', q:'Qual é a sua MAIOR frustração hoje?', opts:[
-      {v:'modelagem', t:'Travo na modelagem do molde', ic:'📐'},
-      {v:'caimento', t:'A peça fica "feita em casa", sem caimento', ic:'🪡'},
-      {v:'tempo', t:'Perco horas refazendo molde', ic:'⏳'},
-      {v:'acabamento', t:'Falta acabamento de ateliê', ic:'✨'} ]},
-    { key:'objetivo', q:'Pra onde você quer levar a sua costura?', opts:[
-      {v:'hobby', t:'É o meu hobby, meu respiro', ic:'💛'},
-      {v:'renda_extra', t:'Quero uma renda extra', ic:'💰'},
-      {v:'marca_propria', t:'Quero construir uma marca / ateliê', ic:'🏷️'} ]},
-    { key:'tempo', q:'Quanto tempo você consegue dedicar por semana?', opts:[
-      {v:'pouco', t:'Pouco, uns minutinhos', ic:'🕊️'},
-      {v:'medio', t:'Um tempo médio, quando dá', ic:'🌤️'},
-      {v:'bastante', t:'Bastante, costura é prioridade', ic:'🔥'} ]},
-    { key:'compromisso', q:'E se você recebesse moldes profissionais todo mês?', opts:[
-      {v:'testar', t:'Queria testar com calma primeiro', ic:'🤔'},
-      {v:'conhecer', t:'Queria conhecer e pegar ritmo', ic:'🚶‍♀️'},
-      {v:'mergulhar', t:'Quero mergulhar de vez!', ic:'🌊'} ]}
+  // Pool de perguntas com ramificação (when), tipos e pontuação (score 0-10 p/ o medidor de prontidão).
+  var POOL = [
+    { key:'foco', type:'image', q:'O que você mais quer costurar?', opts:[
+      {v:'vestidos', t:'Vestidos', img:'Vestidos.png', score:8, fb:'Vestido é paixão! 👗'},
+      {v:'blusas', t:'Blusas e tops', img:'Blusas.jpg', score:8, fb:'Blusa combina com tudo ✨'},
+      {v:'saias', t:'Saias', img:'Saias.jpg', score:8, fb:'Saia tem um charme só 💃'},
+      {v:'calcas_macacoes', t:'Calças e macacões', img:'Cal%C3%A7as%20Shorts%20e%20Macacoes.jpg', score:8, fb:'Alfaiataria é elegância 👖'},
+      {v:'infantil', t:'Moda infantil', ic:'🧸', score:8, fb:'Costurar pros pequenos é amor 🧸'},
+      {v:'linha_completa', t:'Um pouco de tudo', ic:'🌈', score:9, fb:'Versátil! Vai amar a variedade 🌈'} ]},
+    { key:'nivel', type:'cards', q:'Como você se descreve na costura hoje?', opts:[
+      {v:'iniciante', t:'Tô começando agora', ic:'🌱', score:6, fb:'Todo ateliê começou assim 🌱'},
+      {v:'intermediaria', t:'Já costuro, mas quero evoluir', ic:'✂️', score:8, fb:'Bora pro próximo nível ✂️'},
+      {v:'avancada', t:'Domino a máquina, quero moldes à altura', ic:'🧵', score:9, fb:'Você merece moldes profissionais 🧵'} ]},
+    { key:'frustracao', type:'cards', q:'Qual é a sua MAIOR frustração hoje?', opts:[
+      {v:'modelagem', t:'Travo na modelagem do molde', ic:'📐', score:8, fb:'A gente resolve isso 📐'},
+      {v:'caimento', t:'A peça fica "feita em casa", sem caimento', ic:'🪡', score:9, fb:'Caimento é com a gente 🪡'},
+      {v:'tempo', t:'Perco horas refazendo molde', ic:'⏳', score:8, fb:'Molde pronto economiza horas ⏳'},
+      {v:'acabamento', t:'Falta acabamento de ateliê', ic:'✨', score:9, fb:'Acabamento de ateliê vem aí ✨'} ]},
+    { key:'inseguranca', type:'cards', when:function(a){return a.nivel==='iniciante';}, q:'O que mais te dá insegurança?', opts:[
+      {v:'corte', t:'Medo de cortar errado o tecido', ic:'✂️', score:7, fb:'Molde testado tira esse medo ✂️'},
+      {v:'numeracao', t:'Acertar a numeração / tamanho', ic:'📏', score:7, fb:'Do PP ao GG, já vem certo 📏'},
+      {v:'maquina', t:'Domar a máquina', ic:'🧵', score:6, fb:'A vídeo-aula te guia 🧵'},
+      {v:'desistir', t:'Começar e não terminar', ic:'😅', score:6, fb:'Passo a passo até o fim 💛'} ]},
+    { key:'proximo_nivel', type:'cards', when:function(a){return a.nivel==='intermediaria'||a.nivel==='avancada';}, q:'O que falta pro seu próximo nível?', opts:[
+      {v:'modelagem', t:'Modelagem mais complexa', ic:'📐', score:8, fb:'Moldes pra te desafiar 📐'},
+      {v:'acabamento', t:'Acabamento profissional', ic:'✨', score:9, fb:'Ficha técnica de ateliê ✨'},
+      {v:'produtividade', t:'Produzir mais rápido', ic:'⚡', score:9, fb:'Molde pronto = mais produção ⚡'},
+      {v:'escala', t:'Escalar pra vender', ic:'📈', score:10, fb:'Bora escalar 📈'} ]},
+    { key:'objetivo', type:'cards', q:'Pra onde você quer levar a sua costura?', opts:[
+      {v:'hobby', t:'É o meu hobby, meu respiro', ic:'💛', score:7, fb:'Costurar cura 💛'},
+      {v:'renda_extra', t:'Quero uma renda extra', ic:'💰', score:9, fb:'Costura que paga as contas 💰'},
+      {v:'marca_propria', t:'Quero construir uma marca / ateliê', ic:'🏷️', score:10, fb:'Sua marca começa aqui 🏷️'} ]},
+    { key:'meta_renda', type:'slider', when:function(a){return a.objetivo==='renda_extra';}, q:'Quanto você quer faturar por mês costurando?', slider:{ min:0, max:4, step:1, def:1, labels:['R$500','R$1k','R$2k','R$3,5k','R$5k+'],
+      resolve:function(v){ return [
+        {v:'ate500', score:7, fb:'Começo que já paga o material 💰', label:'até R$ 500/mês'},
+        {v:'ate1000', score:8, fb:'Mil por mês muda o jogo 💪', label:'~ R$ 1 mil/mês'},
+        {v:'ate2000', score:9, fb:'Renda de verdade 🚀', label:'~ R$ 2 mil/mês'},
+        {v:'ate3500', score:10, fb:'Você pensa grande 🔥', label:'~ R$ 3,5 mil/mês'},
+        {v:'acima3500', score:10, fb:'Mentalidade de ateliê 👑', label:'R$ 5 mil+/mês'} ][v]; } }},
+    { key:'marca_estagio', type:'cards', when:function(a){return a.objetivo==='marca_propria';}, q:'Sobre a sua marca, você está…', opts:[
+      {v:'sonho', t:'Ainda é um sonho', ic:'🌙', score:8, fb:'Todo sonho começa com 1 peça 🌙'},
+      {v:'comecando', t:'Começando agora', ic:'🌱', score:9, fb:'Hora de acelerar 🌱'},
+      {v:'vendendo', t:'Já vendo, quero crescer', ic:'📈', score:10, fb:'Bora escalar sua marca 📈'} ]},
+    { key:'hobby_motivo', type:'cards', when:function(a){return a.objetivo==='hobby';}, q:'Costurar pra você é mais sobre…', opts:[
+      {v:'relaxar', t:'Relaxar e desligar a cabeça', ic:'🌿', score:7, fb:'Seu respiro 🌿'},
+      {v:'criar', t:'Criar coisas únicas', ic:'🎨', score:8, fb:'Criatividade sem limite 🎨'},
+      {v:'vestir_bem', t:'Vestir o que não acho na loja', ic:'👗', score:8, fb:'Roupa do seu jeito 👗'},
+      {v:'presentear', t:'Presentear quem amo', ic:'🎁', score:7, fb:'Presente costurado é amor 🎁'} ]},
+    { key:'tempo', type:'slider', q:'Quanto tempo por semana você consegue dedicar?', slider:{ min:0, max:3, step:1, def:1, labels:['1h','3h','6h','10h+'],
+      resolve:function(v){ return [
+        {v:'pouco', score:6, fb:'Dá pra costurar em minutinhos ⏱️', label:'~ 1h por semana'},
+        {v:'pouco', score:7, fb:'Pouquinho já rende ⏱️', label:'~ 3h por semana'},
+        {v:'medio', score:8, fb:'Tempo bom! 🌤️', label:'~ 6h por semana'},
+        {v:'bastante', score:10, fb:'Costura é prioridade 🔥', label:'10h+ por semana'} ][v]; } }},
+    { key:'confianca', type:'slider', q:'De 1 a 10, qual a sua confiança pra encarar um molde novo?', slider:{ min:1, max:10, step:1, def:6, labels:['1','10'],
+      resolve:function(v){ var sc = v<=3?6:(v<=7?8:10); var fb = v<=3?'A gente te dá segurança 💛':(v<=7?'A confiança vem com o passo a passo 💪':'Que confiança! 🔥'); return { v:String(v), score:sc, fb:fb, label:v+' <small>/ 10</small>' }; } }},
+    { key:'objecao', type:'cards', q:'O que mais te segura pra assinar hoje?', opts:[
+      {v:'preco', t:'O preço / orçamento', ic:'💸', score:7, fb:'Vou te mostrar que cabe no bolso 💸'},
+      {v:'medo_nao_usar', t:'Medo de não usar', ic:'🤔', score:7, fb:'A biblioteca é sua pra sempre 🤔'},
+      {v:'ja_tenho', t:'Já tenho muitos moldes', ic:'🗂️', score:8, fb:'Aqui é molde testado, com vídeo 🗂️'},
+      {v:'tempo', t:'Acho que não vou ter tempo', ic:'⏳', score:7, fb:'Molde pronto poupa seu tempo ⏳'} ]},
+    { key:'compromisso', type:'cards', q:'E se você recebesse moldes profissionais todo mês?', opts:[
+      {v:'testar', t:'Queria testar com calma primeiro', ic:'🤔', score:7, fb:'Dá pra começar leve 🤔'},
+      {v:'conhecer', t:'Queria conhecer e pegar ritmo', ic:'🚶‍♀️', score:8, fb:'Vamos pegar ritmo juntas 🚶‍♀️'},
+      {v:'mergulhar', t:'Quero mergulhar de vez!', ic:'🌊', score:10, fb:'Adorei a energia! 🌊'} ]},
+    { key:'visao', type:'cards', q:'Daqui a 6 meses, você quer estar…', opts:[
+      {v:'seguranca', t:'Costurando com segurança pra mim', ic:'💛', score:8, fb:'Você vai chegar lá 💛'},
+      {v:'vendendo', t:'Vendendo as minhas peças', ic:'💰', score:9, fb:'Costura que vira renda 💰'},
+      {v:'marca', t:'Com a minha marca no ar', ic:'🏷️', score:10, fb:'Sua marca te espera 🏷️'},
+      {v:'ensinando', t:'Confiante pra até ensinar', ic:'🎓', score:10, fb:'De aluna a referência 🎓'} ]}
   ];
-  var TOASTS = ['Boa escolha! 🧵','Adorei! ✨','Faz todo sentido 💛','Você tá indo muito bem!','Perfeito 👌','Quase lá! 🎉'];
-  var LOADING_MSGS = ['Lendo suas respostas ✨','Cruzando o seu perfil 🧵','Escolhendo o plano ideal 💛','Quase pronto…'];
+
+  var LOADING_MSGS = ['Lendo suas respostas ✨','Cruzando o seu perfil 🧵','Calculando a compatibilidade 💛','Escolhendo o plano ideal…','Quase pronto…'];
   var PLANS = {
     mensal:     { name:'Mensal',     price:'R$ 49,90/mês',                              value:49.90 },
     trimestral: { name:'Trimestral', price:'R$ 109,90 · 3 meses (~R$ 36,63/mês)',       value:109.90 },
     anual:      { name:'Anual',      price:'R$ 289,90/ano · menos de R$ 1 por dia',      value:289.90 }
   };
-  // Links de checkout Hotmart (mesmos da v5)
   var CHECKOUT = {
     mensal:     'https://pay.hotmart.com/E79768335W?off=iv7j24uu&checkoutMode=10',
     trimestral: 'https://pay.hotmart.com/E79768335W?off=ctoqnxt6&checkoutMode=10&bid=1774540746590',
     anual:      'https://pay.hotmart.com/E79768335W?off=3357mnxb&checkoutMode=10'
   };
 
-  var answers = {}, idx = 0, points = 0, loadingTimer = null;
+  var answers = {}, scoreSum = 0, scoreCount = 0, readiness = 0, loadingTimer = null, urgTimer = null, currentPlano = 'trimestral';
   var lead = { name:'', phone:'', first:'' };
   var $ = function(id){ return document.getElementById(id); };
   function show(id){
@@ -507,8 +586,8 @@ fbq('track','PageView',{});
   // hook -> começa o quiz direto (nome/WhatsApp vêm antes do resultado)
   $('btn-start').addEventListener('click', function(){
     fbqTrack('QuizStart', {}, true);
-    idx = 0; answers = {}; points = 0;
-    show('screen-quiz'); render();
+    answers = {}; scoreSum = 0; scoreCount = 0; readiness = 0;
+    show('screen-quiz'); step();
   });
 
   // máscara de telefone BR
@@ -542,60 +621,96 @@ fbq('track','PageView',{});
     computeResult();
   });
 
-  function render(){
-    var item = QUESTIONS[idx];
-    $('qz-step').textContent = 'Pergunta ' + (idx+1) + ' de ' + QUESTIONS.length;
-    $('qz-xp').textContent = points + ' pts';
-    $('qz-bar').style.transform = 'scaleX(' + (idx/QUESTIONS.length) + ')';
-    var pbar = $('qz-progress'); if(pbar) pbar.setAttribute('aria-valuenow', idx);
-    $('qz-question').textContent = item.q;
+  // ── engine: ramificação + tipos ──
+  function answeredCount(){ var n=0; for(var k in answers){ if(answers.hasOwnProperty(k) && k!=='__lock') n++; } return n; }
+  function applicable(q){ return !q.when || q.when(answers); }
+  function nextQuestion(){
+    for(var i=0;i<POOL.length;i++){ var q=POOL[i]; if(applicable(q) && !(q.key in answers)) return q; }
+    return null;
+  }
+  function updateMeter(){
+    var f=$('qz-meter-fill'); if(f) f.style.transform = 'scaleX(' + (readiness/100) + ')';
+    var v=$('qz-meter-val'); if(v) v.textContent = readiness + '%';
+  }
+  function step(){
+    var q = nextQuestion();
+    if(!q){ askLead(); return; }
+    renderQuestion(q);
+  }
+  function renderQuestion(q){
+    var sn = answeredCount() + 1;
+    $('qz-step').textContent = 'Pergunta ' + sn + ' de ' + TOTAL;
+    $('qz-bar').style.transform = 'scaleX(' + ((sn-1)/TOTAL) + ')';
+    var pbar = $('qz-progress'); if(pbar) pbar.setAttribute('aria-valuenow', sn-1);
+    updateMeter();
+    $('qz-question').textContent = q.q;
     var box = $('qz-options'); box.innerHTML = '';
-    item.opts.forEach(function(o){
-      var b = document.createElement('button');
-      b.className = 'qz-option'; b.type = 'button';
-      b.innerHTML = '<span class="ic" aria-hidden="true">'+o.ic+'</span><span class="tx">'+esc(o.t)+'</span><span class="dot" aria-hidden="true">'+CHECK+'</span>';
-      b.addEventListener('click', function(){ choose(item.key, o.v, b); });
-      box.appendChild(b);
-    });
+    if(q.type==='image'){ box.className='qz-imgrid'; renderImage(q, box); }
+    else if(q.type==='slider'){ box.className='qz-slider-wrap'; renderSlider(q, box); }
+    else { box.className='qz-options'; renderCards(q, box); }
     focusEl('qz-question');
   }
-
+  function renderCards(q, box){
+    q.opts.forEach(function(o){
+      var b = document.createElement('button'); b.className='qz-option'; b.type='button';
+      b.innerHTML = '<span class="ic" aria-hidden="true">'+o.ic+'</span><span class="tx">'+esc(o.t)+'</span><span class="dot" aria-hidden="true">'+CHECK+'</span>';
+      b.addEventListener('click', function(){ b.classList.add('sel'); answer(q.key, o.v, o.score, o.fb); });
+      box.appendChild(b);
+    });
+  }
+  function renderImage(q, box){
+    q.opts.forEach(function(o){
+      var b = document.createElement('button'); b.className='qz-imgopt'; b.type='button';
+      var media = o.img ? '<img class="ph" src="'+o.img+'" alt="" loading="lazy">' : '<span class="emoji" aria-hidden="true">'+o.ic+'</span>';
+      b.innerHTML = media + '<span class="cap">'+esc(o.t)+'</span><span class="imgcheck" aria-hidden="true">'+CHECK+'</span>';
+      b.addEventListener('click', function(){ b.classList.add('sel'); answer(q.key, o.v, o.score, o.fb); });
+      box.appendChild(b);
+    });
+  }
+  function renderSlider(q, box){
+    var s = q.slider;
+    var valEl = document.createElement('div'); valEl.className='qz-slider-val';
+    var range = document.createElement('input'); range.type='range'; range.className='qz-range';
+    range.min=s.min; range.max=s.max; range.step=s.step; range.value=(s.def!=null?s.def:s.min);
+    range.setAttribute('aria-label', q.q);
+    var ticks = document.createElement('div'); ticks.className='qz-slider-ticks';
+    (s.labels||[]).forEach(function(l){ var sp=document.createElement('span'); sp.textContent=l; ticks.appendChild(sp); });
+    var btn = document.createElement('button'); btn.className='btn-primary'; btn.type='button'; btn.innerHTML='Continuar <span class="arw">→</span>';
+    function upd(){ var r=s.resolve(parseInt(range.value,10)); valEl.innerHTML = r.label; }
+    range.addEventListener('input', upd);
+    btn.addEventListener('click', function(){ var r=s.resolve(parseInt(range.value,10)); answer(q.key, r.v, r.score, r.fb); });
+    box.appendChild(valEl); box.appendChild(range); box.appendChild(ticks); box.appendChild(btn);
+    upd();
+  }
   function toast(msg){
     var t = $('qz-toast'); t.textContent = msg; t.classList.add('show');
-    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('show'); }, 1100);
+    clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('show'); }, 1200);
   }
-
-  function choose(key, value, el){
-    if(answers['__lock']) return; answers['__lock'] = true;
+  function answer(key, value, score, fb){
+    if(answers.__lock) return; answers.__lock = true;
     answers[key] = value;
-    points += 10 + Math.floor(Math.random()*8);
-    el.classList.add('sel');
-    $('qz-xp').textContent = points + ' pts';
-    if(idx < QUESTIONS.length - 1) toast(TOASTS[idx % TOASTS.length]);
-    fbqTrack('QuizProgress', { step: idx+1, key: key }, true);
-    setTimeout(function(){
-      delete answers['__lock'];
-      idx++;
-      if(idx < QUESTIONS.length){ render(); }
-      else { askLead(); }
-    }, 420);
+    scoreSum += (score||7); scoreCount++;
+    readiness = Math.max(readiness, Math.round(scoreSum/(scoreCount*10)*100));
+    updateMeter();
+    fbqTrack('QuizProgress', { step: answeredCount(), key: key }, true);
+    if(fb) toast(fb);
+    setTimeout(function(){ delete answers.__lock; step(); }, 460);
   }
-
   function askLead(){
-    delete answers['__lock'];
+    delete answers.__lock;
     $('qz-bar').style.transform = 'scaleX(1)';
-    var pbar = $('qz-progress'); if(pbar) pbar.setAttribute('aria-valuenow', QUESTIONS.length);
+    var pbar = $('qz-progress'); if(pbar) pbar.setAttribute('aria-valuenow', TOTAL);
     show('screen-lead'); focusEl('lead-name');
   }
 
   function computeResult(){
     show('screen-loading');
     var li = 0;
-    loadingTimer = setInterval(function(){ li=(li+1)%LOADING_MSGS.length; $('qz-loading-msg').textContent = LOADING_MSGS[li]; }, 1200);
+    loadingTimer = setInterval(function(){ li=(li+1)%LOADING_MSGS.length; $('qz-loading-msg').textContent = LOADING_MSGS[li]; }, 1100);
 
     var leadId = eid();
     var payload = {
-      answers: answers, eventId: leadId,
+      answers: answers, eventId: leadId, readiness: readiness,
       name: lead.name, phone: lead.phone,
       fbp: ck('_fbp'), fbc: ck('_fbc'), externalId: localStorage.getItem('_meta_ext_id') || ''
     };
@@ -607,6 +722,38 @@ fbq('track','PageView',{});
       .then(function(r){ return r.json(); })
       .then(function(data){ clearTimeout(guard); go(data); })
       .catch(function(){ clearTimeout(guard); go(clientFallback()); });
+  }
+
+  // anel "% compatível" é determinístico (vem do medidor de prontidão)
+  function compatFromReadiness(){ return Math.max(80, Math.min(99, 80 + Math.round((readiness/100)*19))); }
+
+  // prova social direcionada ao perfil
+  function setProof(a){
+    var seg = (a.objetivo==='marca_propria'||a.objetivo==='renda_extra') ? 'vende' : (a.nivel==='iniciante' ? 'inicio' : 'evolui');
+    var P = {
+      vende:  { t:'"Fiz o macacão assimétrico, amei costurar! Já penso em fazer de várias cores."', c:'Rose, aluna da assinatura' },
+      inicio: { t:'"Fiz a minha primeira peça da assinatura, a saia lápis. É bem fácil de fazer, eu amei!"', c:'Amanda, aluna da assinatura' },
+      evolui: { t:'"Já fiz essa blusa, fica uma gracinha e é uma delícia de fazer."', c:'Silvana, aluna da assinatura' }
+    }[seg];
+    $('qz-quote-text').textContent = P.t;
+    $('qz-quote-cite').textContent = P.c;
+  }
+
+  // urgência honesta: condição "desta sessão" (evergreen ~15 min, persiste na sessão)
+  function startUrgency(){
+    var KEY='quiz_offer_deadline';
+    var now = Date.now();
+    var dl = parseInt(sessionStorage.getItem(KEY)||'0',10);
+    if(!dl || dl < now){ dl = now + 15*60*1000; try{ sessionStorage.setItem(KEY, String(dl)); }catch(e){} }
+    var el = $('qz-timer');
+    function tick(){
+      var left = Math.max(0, dl - Date.now());
+      var m = Math.floor(left/60000), s = Math.floor((left%60000)/1000);
+      if(el) el.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+      if(left<=0 && urgTimer){ clearInterval(urgTimer); urgTimer=null; }
+    }
+    if(urgTimer) clearInterval(urgTimer);
+    tick(); urgTimer = setInterval(tick, 1000);
   }
 
   function renderResult(res, leadId){
@@ -625,6 +772,8 @@ fbq('track','PageView',{});
     });
     if(res.primeira_peca){ $('qz-firstpiece').textContent = '✂️ Comece pela ' + res.primeira_peca; $('qz-firstpiece').style.display = ''; }
     else { $('qz-firstpiece').style.display = 'none'; }
+    setProof(answers);
+    setLine('qz-bonus', res.bonus ? ('🎁 Assine hoje e ganhe: ' + res.bonus) : '');
     setLine('qz-objection', res.objecao_quebra);
     $('qz-cta-text').textContent = res.cta_texto || 'Quero assinar agora';
     $('qz-plan-name').textContent = PLANS[plano].name;
@@ -635,9 +784,10 @@ fbq('track','PageView',{});
     show('screen-result');
     focusEl('qz-arch-head');
     startCarousel();
+    startUrgency();
 
     // anel SVG + contador animados (r = 60, casa com o circle do SVG)
-    var target = Math.max(80, Math.min(99, parseInt(res.compatibilidade,10) || 92));
+    var target = compatFromReadiness();
     var R = 60, C = 2 * Math.PI * R, ring = $('qz-ring');
     if(ring){
       ring.style.strokeDasharray = C.toFixed(1);
@@ -651,7 +801,7 @@ fbq('track','PageView',{});
 
     // Lead 1x no browser COM eventID (dedup com a CAPI server-side) + custom
     if(typeof fbq==='function') fbq('track','Lead',{content_name:'Quiz Perfil de Costureira',content_category:'Quiz'},{eventID:leadId});
-    fbqTrack('QuizResult', { arquetipo: res.arquetipo, plano: plano }, true);
+    fbqTrack('QuizResult', { arquetipo: res.arquetipo, plano: plano, compat: target }, true);
 
     // CTA -> InitiateCheckout (Pixel) e segue pro Hotmart
     $('qz-cta').addEventListener('click', function(){
@@ -705,16 +855,16 @@ fbq('track','PageView',{});
       compatibilidade: 93,
       pontos_fortes: ['Você valoriza acabamento e caimento de verdade','Você prefere agir a ficar só planejando','Você quer evoluir com método'],
       beneficio_direcionado: ({modelagem:'Como o que te trava é a modelagem, os moldes já chegam prontos e testados, do PP ao GG.',caimento:'Como o caimento te incomoda, os moldes têm as correções do corpo feminino pra peça cair como de ateliê.',tempo:'Como o seu tempo é curto, o molde chega pronto com vídeo-aula: é só cortar e costurar.',acabamento:'Como você quer acabamento de ateliê, cada molde vem com ficha técnica e vídeo de montagem.'})[a.frustracao] || 'Você recebe moldes profissionais, vídeo-aula e ficha técnica todo mês.',
-      primeira_peca: ({blusas_vestidos:'blusa lenço',calcas_alfaiataria:'calça alfaiataria',infantil:'vestido infantil',linha_completa:'saia lápis'})[a.foco] || 'saia lápis',
-      objecao_quebra: ({testar:'Dá pra começar no plano mensal e sentir no seu ritmo, sem compromisso longo.',conhecer:'Você não precisa saber tudo agora: cada molde vem com vídeo-aula passo a passo.',mergulhar:'Você já está pronta, é só destravar o acesso e começar hoje.'})[a.compromisso] || 'Cada molde vem com vídeo-aula passo a passo, então você nunca fica na mão.',
-      cta_texto: ({marca_propria:'Quero construir minha marca',renda_extra:'Quero gerar renda costurando',hobby:'Quero costurar pra mim'})[a.objetivo] || 'Quero assinar agora'
+      primeira_peca: ({vestidos:'vestido midi',blusas:'blusa lenço',saias:'saia lápis',calcas_macacoes:'calça alfaiataria',infantil:'vestido infantil',linha_completa:'saia lápis'})[a.foco] || 'saia lápis',
+      objecao_quebra: ({preco:'Sai menos que um molde avulso por semana, e você recebe 4 moldes profissionais por mês com vídeo-aula.',medo_nao_usar:'A biblioteca é acumulativa e os moldes não expiram: você usa no seu tempo, sem perder nada.',ja_tenho:'Aqui não é molde solto: é molde testado, do PP ao GG, com vídeo de montagem e ficha técnica.',tempo:'Os moldes chegam prontos e a vídeo-aula é passo a passo: dá pra costurar em poucos minutinhos por vez.'})[a.objecao] || ({testar:'Dá pra começar no plano mensal e sentir no seu ritmo, sem compromisso longo.',conhecer:'Você não precisa saber tudo agora: cada molde vem com vídeo-aula passo a passo.',mergulhar:'Você já está pronta, é só destravar o acesso e começar hoje.'})[a.compromisso] || 'Cada molde vem com vídeo-aula passo a passo, então você nunca fica na mão.',
+      cta_texto: ({marca_propria:'Quero construir minha marca',renda_extra:'Quero gerar renda costurando',hobby:'Quero costurar pra mim'})[a.objetivo] || 'Quero assinar agora',
+      bonus: ({marca_propria:'Guia de precificação pra sua marca',renda_extra:'Guia de quanto cobrar nas suas peças',hobby:'Guia da sua primeira peça sem erro'})[a.objetivo] || 'Guia da sua primeira peça sem erro'
     };
   }
 
-  $('qz-redo').addEventListener('click', function(){ idx=0; answers={}; points=0; lead={ name:'', phone:'', first:'' }; carouselTimers.forEach(clearInterval); carouselTimers=[]; show('screen-start'); focusEl('btn-start'); });
+  $('qz-redo').addEventListener('click', function(){ answers={}; scoreSum=0; scoreCount=0; readiness=0; lead={ name:'', phone:'', first:'' }; carouselTimers.forEach(clearInterval); carouselTimers=[]; if(urgTimer){ clearInterval(urgTimer); urgTimer=null; } show('screen-start'); focusEl('btn-start'); });
 
   // ── modal "ver todos os planos" (sempre destaca o plano do perfil) ──
-  var currentPlano = 'trimestral';
   var PLAN_DESC = {
     mensal: 'Pra começar leve, no seu ritmo, mês a mês.',
     trimestral: 'Pra pegar ritmo e ver a evolução em 3 meses.',
