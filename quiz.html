@@ -853,11 +853,7 @@ fbq('track','PageView',{});
     if(typeof fbq==='function') fbq('track','Lead',{content_name:'Quiz Perfil de Costureira',content_category:'Quiz'},{eventID:leadId});
     fbqTrack('QuizResult', { arquetipo: res.arquetipo, plano: plano, compat: target }, true);
 
-    // CTA -> InitiateCheckout (Pixel) e segue pro Hotmart
-    $('qz-cta').addEventListener('click', function(){
-      var icId = eid();
-      if(typeof fbq==='function') fbq('track','InitiateCheckout',{content_name:'Assinatura de Moldes',content_category:'Subscription',value:PLANS[plano].value,currency:'BRL',plano:plano},{eventID:icId});
-    }, { once:true });
+    // InitiateCheckout agora é rastreado SÓ pelo Hotmart (fonte única). O CTA navega pro checkout normalmente.
   }
 
   // faixas passando sozinhas (peças e modelos); pausa ao interagir; respeita reduced-motion
@@ -921,9 +917,7 @@ fbq('track','PageView',{});
     trimestral: 'Pra pegar ritmo e ver a evolução em 3 meses.',
     anual: 'Melhor custo-benefício, menos de R$ 1 por dia.'
   };
-  function planCheckout(pl){
-    if(typeof fbq==='function') fbq('track','InitiateCheckout',{content_name:'Assinatura de Moldes',content_category:'Subscription',value:PLANS[pl].value,currency:'BRL',plano:pl},{eventID:eid()});
-  }
+  function planCheckout(pl){ /* InitiateCheckout agora é rastreado só pelo Hotmart (fonte única) */ }
   function openPlans(){
     var list = $('plans-list'); list.innerHTML = '';
     var order = [currentPlano].concat(['anual','trimestral','mensal'].filter(function(p){ return p !== currentPlano; }));

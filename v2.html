@@ -1293,33 +1293,11 @@ document.querySelectorAll('[data-reveal]').forEach(el=>observer.observe(el));
     pObs.observe(pricingEl);
   }
 
-  // 4) InitiateCheckout — CLICK on plan checkout button
+  // 4) Checkout — InitiateCheckout agora é rastreado SÓ pelo Hotmart (fonte única, sem duplicar)
   document.querySelectorAll('.plan-cta').forEach(function(btn){
     btn.addEventListener('click',function(e){
       e.preventDefault();
-      var href=this.getAttribute('href');
-      var plan=this.getAttribute('data-plan')||'';
-      var val=parseFloat(this.getAttribute('data-value'))||0;
-      var cid='assinatura-moldes-'+plan.toLowerCase();
-
-      var params={
-        content_name:'Assinatura de Moldes — Plano '+plan,
-        content_category:'Assinatura de Moldes',
-        content_type:'product',
-        content_ids:[cid],
-        contents:[{id:cid,quantity:1,item_price:val}],
-        value:val,
-        currency:'BRL',
-        num_items:1
-      };
-
-      var id=eid();
-      if(typeof fbq==='function'){
-        fbq('track','InitiateCheckout',params,{eventID:id});
-      }
-      capi('InitiateCheckout',id,params);
-
-      setTimeout(function(){window.open(href,'_blank');},300);
+      window.open(this.getAttribute('href'),'_blank');
     });
   });
 

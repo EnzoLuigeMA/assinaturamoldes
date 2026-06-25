@@ -937,18 +937,7 @@ fbq('track','PageView',{},{eventID:_pvEid});
     var pricingEl=document.getElementById('planos');
     if(pricingEl){var atcDone=false;var pObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!atcDone){atcDone=true;dual('AddToCart',{content_name:'Assinatura de Moldes',content_type:'product',content_ids:['assinatura-moldes'],contents:[{id:'assinatura-moldes',quantity:1,item_price:49.90}],currency:'BRL',value:49.90});pObs.unobserve(e.target);}});},{threshold:0.25});pObs.observe(pricingEl);}
 
-    // 4) InitiateCheckout — clique no botão de plano (Pixel + CAPI, mesmo event_id)
-    document.querySelectorAll('[data-plan]').forEach(function(btn){
-      btn.addEventListener('click',function(){
-        var plan=this.getAttribute('data-plan')||'';
-        var val=parseFloat(this.getAttribute('data-value'))||0;
-        var cid='assinatura-moldes-'+plan.toLowerCase();
-        var params={content_name:'Assinatura de Moldes — Plano '+plan,content_category:'Assinatura de Moldes',content_type:'product',content_ids:[cid],contents:[{id:cid,quantity:1,item_price:val}],value:val,currency:'BRL',num_items:1};
-        var id=eid();
-        if(typeof fbq==='function')fbq('track','InitiateCheckout',params,{eventID:id});
-        capi('InitiateCheckout',id,params);
-      });
-    });
+    // 4) InitiateCheckout — agora rastreado SÓ pelo Hotmart (fonte única). Os botões [data-plan] navegam pro checkout normalmente.
   })();
 
   // Vídeos lazy: só carregam/tocam quando entram na tela (economiza dados no mobile)
