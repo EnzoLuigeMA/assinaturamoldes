@@ -361,19 +361,37 @@ h1 em{font-style:italic;color:var(--gold-light)}
   };
   var p=plans[plan]||plans.mensal;
 
-  // ── PURCHASE — the critical conversion event ──
-  // Note: Hotmart will also fire its own Purchase via postback.
-  // This fires on thank-you page load as an additional signal with proper dedup.
-  dual('Purchase',{
-    content_name:'Assinatura de Moldes — Plano '+p.name,
-    content_category:'Assinatura de Moldes',
-    content_type:'product',
-    content_ids:[p.id],
-    contents:[{id:p.id,quantity:1,item_price:p.value}],
-    value:p.value,
-    currency:'BRL',
-    num_items:1
-  });
+  // ── PURCHASE — fonte ÚNICA e deduplicada ──
+  // event_id determinístico (transação do Hotmart, ou id estável por sessão) + guard
+  // de "disparo único": recarregar/reabrir a página NÃO conta compra de novo.
+  // Pixel e CAPI usam o MESMO event_id (deduplicam entre si = 1 compra).
+  // ⚠️ NÃO instale o Pixel da Meta DENTRO do Hotmart — senão o Hotmart dispara um
+  //    Purchase próprio (event_id diferente) e a mesma venda conta em dobro/triplo.
+  function purchaseId(){
+    var q=new URLSearchParams(location.search);
+    var tx=q.get('transaction')||q.get('transaction_id')||q.get('tid')||q.get('order')||q.get('hottok')||'';
+    if(tx) return 'purchase_'+tx;
+    var k='_purchase_eid', id=sessionStorage.getItem(k);
+    if(!id){ id='purchase_'+eid(); try{sessionStorage.setItem(k,id);}catch(e){} }
+    return id;
+  }
+  var _pid=purchaseId(), _pkey='_purchase_fired_'+_pid, _pfired=false;
+  try{ _pfired=!!localStorage.getItem(_pkey); }catch(e){}
+  if(!_pfired){
+    var _pdata={
+      content_name:'Assinatura de Moldes — Plano '+p.name,
+      content_category:'Assinatura de Moldes',
+      content_type:'product',
+      content_ids:[p.id],
+      contents:[{id:p.id,quantity:1,item_price:p.value}],
+      value:p.value,
+      currency:'BRL',
+      num_items:1
+    };
+    if(typeof fbq==='function')fbq('track','Purchase',_pdata,{eventID:_pid});
+    capi('Purchase',_pid,_pdata);
+    try{ localStorage.setItem(_pkey,'1'); }catch(e){}
+  }
 
   // ── CompleteRegistration — when user clicks WhatsApp group link ──
   window.trackGroupJoin=function(){
