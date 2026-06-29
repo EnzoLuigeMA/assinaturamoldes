@@ -1,0 +1,32 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{--bg:#2e1218;--surface:#43202a;--ink:#f6eae0;--inks:#ecd7cc;--muted:#d3aaa4;--coral:#f0714f;--brass:#e3ad57;--onc:#38131a;--serif:'Young Serif',Georgia,serif;--sans:'Hanken Grotesk',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:#222}
+.stage{width:1080px;height:1350px;position:relative;overflow:hidden;color:var(--ink);background:var(--bg);display:flex;flex-direction:column}
+.photo{height:690px;background:#1a0d11 url('../saia-lapis-preta.jpg') 50% 30%/150% auto no-repeat;position:relative}
+.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(46,18,24,0) 52%,rgba(46,18,24,.92) 100%)}
+.body{flex:1;padding:50px 64px 58px;display:flex;flex-direction:column;background:radial-gradient(900px 520px at 50% 130%,rgba(240,113,79,.16),rgba(240,113,79,0) 62%),linear-gradient(180deg,var(--surface),var(--bg))}
+.seam{height:0;border-top:3px dashed var(--coral);width:64px;margin-bottom:24px}
+h1{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.06;font-size:76px;text-wrap:balance}
+h1 .hl{color:var(--coral)}
+.sub{font-size:27px;line-height:1.5;color:var(--inks);margin-top:20px;max-width:31ch}
+.selo{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-top:24px;font-size:20px;font-weight:700;color:var(--brass);background:rgba(227,173,87,.12);border:1px solid rgba(227,173,87,.32);border-radius:100px;padding:11px 19px}
+.spacer{flex:1}
+.cta{display:inline-flex;align-items:center;gap:14px;align-self:flex-start;background:var(--coral);color:var(--onc);font-weight:800;font-size:30px;border-radius:18px;padding:23px 38px;box-shadow:0 18px 40px rgba(240,113,79,.34)}
+.micro{margin-top:15px;color:var(--muted);font-weight:600;font-size:21px}
+</style></head><body>
+<div class="stage">
+  <div class="photo"></div>
+  <div class="body">
+    <div class="seam"></div>
+    <h1>Feito em casa.<br>Com <span class="hl">caimento de ateliê.</span></h1>
+    <p class="sub">O segredo não é a máquina — é a modelagem certa, do PP ao GG, já corrigida pro corpo feminino.</p>
+    <span class="selo">⭐ molde profissional, testado peça por peça</span>
+    <div class="spacer"></div>
+    <span class="cta">Descobrir meu perfil →</span>
+    <div class="micro">leva 2 min · resultado na hora</div>
+  </div>
+</div>
+</body></html>

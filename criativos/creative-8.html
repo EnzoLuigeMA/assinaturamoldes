@@ -1,0 +1,35 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link rel="stylesheet" href="fonts.css">
+<style>
+:root{--bg:#2e1218;--surface:#43202a;--ink:#f6eae0;--inks:#ecd7cc;--muted:#d3aaa4;--coral:#f0714f;--brass:#e3ad57;--onc:#38131a;--serif:'Young Serif',Georgia,serif;--sans:'Hanken Grotesk',system-ui,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:#222}
+.stage{width:1080px;height:1920px;position:relative;overflow:hidden;color:var(--ink);background:radial-gradient(1100px 720px at 50% -6%,rgba(227,173,87,.14),rgba(227,173,87,0) 56%),radial-gradient(820px 600px at 50% 112%,rgba(240,113,79,.1),rgba(240,113,79,0) 60%),var(--bg);display:flex;flex-direction:column;justify-content:space-between;padding:140px 78px 120px;text-align:center;align-items:center}
+.hook{font-size:33px;font-weight:600;color:var(--inks);line-height:1.4;max-width:24ch}
+.seal{width:440px;height:440px;margin:10px 0}
+h1{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.08;font-size:80px;text-wrap:balance}
+h1 .hl{color:var(--coral)}
+.sub{font-size:29px;line-height:1.5;color:var(--inks);margin-top:24px;max-width:30ch}
+.cta{display:inline-flex;align-items:center;gap:14px;background:var(--coral);color:var(--onc);font-weight:800;font-size:34px;border-radius:20px;padding:28px 46px;box-shadow:0 20px 46px rgba(240,113,79,.36);margin-top:40px}
+.micro{margin-top:18px;color:var(--muted);font-weight:600;font-size:23px}
+.block{display:flex;flex-direction:column;align-items:center}
+</style></head><body>
+<div class="stage">
+  <div class="hook">E se não for pra você? Você sai sem perder nada.</div>
+  <svg class="seal" viewBox="0 0 200 200" fill="none">
+    <circle cx="100" cy="100" r="92" stroke="#e3ad57" stroke-width="2" stroke-dasharray="2 7" opacity=".8"/>
+    <circle cx="100" cy="100" r="80" stroke="#e3ad57" stroke-width="3"/>
+    <circle cx="100" cy="100" r="73" stroke="#e3ad57" stroke-width="1" opacity=".5"/>
+    <text x="100" y="92" text-anchor="middle" font-family="Young Serif,serif" font-size="62" fill="#e3ad57">7</text>
+    <text x="100" y="120" text-anchor="middle" font-family="Hanken Grotesk,sans-serif" font-size="20" font-weight="800" letter-spacing="6" fill="#f6eae0">DIAS</text>
+    <text x="100" y="146" text-anchor="middle" font-family="Hanken Grotesk,sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#d3aaa4">GARANTIA</text>
+    <g stroke="#f0714f" stroke-width="2.2" stroke-linecap="round"><path d="M64 158 L80 150"/><circle cx="62" cy="159" r="3.4" fill="#f0714f" stroke="none"/><path d="M80 150 q22 -10 40 0" opacity=".6" stroke-dasharray="2 6"/></g>
+  </svg>
+  <div class="block">
+    <h1>7 dias de <span class="hl">garantia incondicional.</span></h1>
+    <p class="sub">Entra, faz sua primeira peça, sente o caimento. Se não te servir, a gente devolve. Simples assim.</p>
+    <span class="cta">Fazer o quiz →</span>
+    <div class="micro">descubra seu perfil em 2 min</div>
+  </div>
+</div>
+</body></html>
