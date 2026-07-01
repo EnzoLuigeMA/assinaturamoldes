@@ -824,7 +824,7 @@ fbq('track','PageView',{});
     if(res.primeira_peca){ $('qz-firstpiece').textContent = '✂️ Comece pela ' + res.primeira_peca; $('qz-firstpiece').style.display = ''; }
     else { $('qz-firstpiece').style.display = 'none'; }
     setProof(answers);
-    setLine('qz-bonus', res.bonus ? ('🎁 Assine hoje e ganhe: ' + res.bonus) : '');
+    setLine('qz-bonus', '');  // sem bônus fantasma — prometer só o que existe nos planos
     setLine('qz-objection', res.objecao_quebra);
     $('qz-cta-text').textContent = res.cta_texto || 'Quero assinar agora';
     $('qz-plan-name').textContent = PLANS[plano].name;
