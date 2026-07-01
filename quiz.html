@@ -256,7 +256,10 @@ fbq('track','PageView',{});
   .qz-plan { position: relative; background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%); border: 1.5px solid var(--brass); border-radius: 18px; padding: 30px 22px 26px; margin-top: 30px; text-align: center; box-shadow: var(--shadow-md); }
   .qz-ribbon { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--brass); color: var(--on-brass); font-size: 12px; font-weight: 700; letter-spacing: .02em; padding: 7px 16px; border-radius: 100px; white-space: nowrap; box-shadow: var(--shadow-sm); }
   .qz-plan-name { font-family: var(--serif); font-weight: 400; font-size: 28px; color: var(--ink); margin-top: 6px; }
-  .qz-plan-price { font-size: 14px; color: var(--brass); margin-top: 6px; font-weight: 600; }
+  .qz-plan-price { margin-top: 12px; }
+  .qz-plan-price .pbig { font-family: var(--serif); font-weight: 400; font-size: 46px; color: var(--brass); line-height: 1; }
+  .qz-plan-price .punit { font-size: 20px; color: var(--brass); font-weight: 700; }
+  .qz-plan-price .pfull { display: block; font-size: 13px; color: var(--muted); margin-top: 8px; font-weight: 500; }
   .qz-plan-why { font-size: 15px; color: var(--muted); line-height: 1.66; margin-top: 14px; }
   .qz-plan-bonus { margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--brass); background: rgba(227,173,87,.10); border: 1px solid rgba(227,173,87,.28); border-radius: 12px; padding: 11px 14px; }
 
@@ -266,10 +269,8 @@ fbq('track','PageView',{});
 
   .qz-result .btn-primary { margin-top: 18px; }
   .qz-guarantee { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
-  .qz-all { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; font-family: inherit; color: var(--ink-soft); background: none; border: 0; border-bottom: 1px solid var(--line-strong); padding: 6px 4px; cursor: pointer; transition: color .18s, border-color .18s; }
-  .qz-all:hover { color: var(--ink); border-color: var(--coral); }
-  .qz-redo { display: block; margin: 6px auto 0; padding: 8px 12px; background: none; border: 0; font-family: inherit; font-size: 13px; color: var(--muted); cursor: pointer; transition: color .18s; }
-  .qz-redo:hover { color: var(--ink-soft); }
+  .qz-all { display: flex; width: 100%; align-items: center; justify-content: center; gap: 8px; margin-top: 14px; font-family: inherit; font-size: 15px; font-weight: 700; color: var(--coral); background: rgba(240,113,79,.09); border: 1.5px solid var(--coral); border-radius: 14px; padding: 15px 20px; min-height: 52px; cursor: pointer; transition: background .18s, transform .2s var(--ease); }
+  .qz-all:hover { background: rgba(240,113,79,.18); transform: translateY(-2px); }
 
   /* modal "ver todos os planos" */
   .qz-modal { position: fixed; inset: 0; z-index: 90; display: flex; align-items: flex-end; justify-content: center; }
@@ -286,8 +287,13 @@ fbq('track','PageView',{});
   .qz-pcard.rec { border-color: var(--brass); background: linear-gradient(180deg, var(--surface-2), var(--surface)); }
   .qz-pcard .pbadge { position: absolute; top: -11px; left: 18px; background: var(--brass); color: var(--on-brass); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
   .qz-pcard .pname { font-family: var(--serif); font-weight: 400; font-size: 22px; color: var(--ink); }
-  .qz-pcard .pprice { color: var(--brass); font-weight: 600; font-size: 14px; margin-top: 2px; }
-  .qz-pcard .pdesc { color: var(--muted); font-size: 13.5px; margin-top: 6px; line-height: 1.5; }
+  .qz-pcard .pprice { margin-top: 4px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .qz-pcard .pprice .pbig { font-family: var(--serif); font-size: 27px; color: var(--brass); line-height: 1; }
+  .qz-pcard .pprice .punit { font-size: 14px; color: var(--brass); font-weight: 700; margin-left: -5px; }
+  .qz-pcard .pprice .pfull { font-size: 12.5px; color: var(--muted); font-weight: 500; }
+  .qz-pcard .pbenefits { list-style: none; margin: 13px 0 0; display: flex; flex-direction: column; gap: 7px; }
+  .qz-pcard .pbenefits li { position: relative; padding-left: 22px; font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
+  .qz-pcard .pbenefits li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--coral); font-weight: 800; }
   .qz-pcard .pbtn { margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px; border-radius: 12px; font-weight: 700; font-size: 14px; text-decoration: none; cursor: pointer; }
   .qz-pcard .pbtn .arw { transition: transform .2s var(--ease); }
   .qz-pcard .pbtn:hover .arw { transform: translateX(3px); }
@@ -452,10 +458,7 @@ fbq('track','PageView',{});
     <p class="qz-objection rv r6" id="qz-objection"></p>
     <a class="btn-primary btn-block rv r6" id="qz-cta" href="#" target="_blank" rel="noopener"><span id="qz-cta-text">Quero assinar agora</span> <span class="arw">→</span></a>
     <p class="qz-guarantee rv r6">🛡️ 7 dias de garantia · 💛 acesso imediato · ambiente seguro Hotmart</p>
-    <div class="rv r6">
-      <button type="button" class="qz-all" id="qz-all">ver todos os planos</button>
-      <button type="button" class="qz-redo" id="qz-redo">refazer o quiz</button>
-    </div>
+    <button type="button" class="qz-all rv r6" id="qz-all">📋 Ver todos os planos e benefícios</button>
   </section>
 
 </div>
@@ -554,9 +557,9 @@ fbq('track','PageView',{});
 
   var LOADING_MSGS = ['Lendo suas respostas ✨','Cruzando o seu perfil 🧵','Calculando a compatibilidade 💛','Escolhendo o plano ideal…','Quase pronto…'];
   var PLANS = {
-    mensal:     { name:'Mensal',     price:'R$ 49,90/mês',                              value:49.90 },
-    trimestral: { name:'Trimestral', price:'R$ 109,90 · 3 meses (~R$ 36,63/mês)',       value:109.90 },
-    anual:      { name:'Anual',      price:'R$ 289,90/ano · menos de R$ 1 por dia',      value:289.90 }
+    mensal:     { name:'Mensal',     big:'R$ 1,66',  unit:'/dia', full:'R$ 49,90/mês',         value:49.90 },
+    trimestral: { name:'Trimestral', big:'R$ 36,63', unit:'/mês', full:'R$ 109,90 · 3 meses',  value:109.90 },
+    anual:      { name:'Anual',      big:'R$ 24,16', unit:'/mês', full:'R$ 289,90/ano',        value:289.90 }
   };
   var CHECKOUT = {
     mensal:     'https://pay.hotmart.com/E79768335W?off=pnmayhml&checkoutMode=10&bid=1782349456865&src=quiz',
@@ -828,7 +831,7 @@ fbq('track','PageView',{});
     setLine('qz-objection', res.objecao_quebra);
     $('qz-cta-text').textContent = res.cta_texto || 'Quero assinar agora';
     $('qz-plan-name').textContent = PLANS[plano].name;
-    $('qz-plan-price').textContent = PLANS[plano].price;
+    $('qz-plan-price').innerHTML = '<span class="pbig">'+PLANS[plano].big+'</span><span class="punit">'+PLANS[plano].unit+'</span><span class="pfull">'+PLANS[plano].full+'</span>';
     $('qz-plan-why').textContent = res.motivo_plano || '';
     currentLeadId = leadId;
     $('qz-cta').setAttribute('href', (CHECKOUT[plano] || CHECKOUT.trimestral) + '&sck=' + encodeURIComponent(leadId));
@@ -911,13 +914,13 @@ fbq('track','PageView',{});
     };
   }
 
-  $('qz-redo').addEventListener('click', function(){ answers={}; scoreSum=0; scoreCount=0; readiness=0; lead={ name:'', phone:'', first:'' }; carouselTimers.forEach(clearInterval); carouselTimers=[]; if(urgTimer){ clearInterval(urgTimer); urgTimer=null; } show('screen-start'); focusEl('btn-start'); });
+  // botão "refazer o quiz" removido
 
   // ── modal "ver todos os planos" (sempre destaca o plano do perfil) ──
-  var PLAN_DESC = {
-    mensal: 'Pra começar leve, no seu ritmo, mês a mês.',
-    trimestral: 'Pra pegar ritmo e ver a evolução em 3 meses.',
-    anual: 'Melhor custo-benefício, menos de R$ 1 por dia.'
+  var PLAN_BENEFITS = {
+    mensal: ['Você recebe os moldes vigentes no período da sua assinatura','4 moldes profissionais por mês (do PP ao GG)','Vídeo-aula de montagem + ficha técnica de cada peça','Grupo VIP das assinantes + suporte direto','7 dias de garantia incondicional'],
+    trimestral: ['Acesso à biblioteca completa de moldes','4 novos moldes por mês (do PP ao GG)','Vídeo-aula de montagem + ficha técnica de cada peça','Grupo VIP das assinantes + suporte direto','7 dias de garantia incondicional'],
+    anual: ['Acesso à biblioteca completa de moldes','4 novos moldes por mês (do PP ao GG)','Vídeo-aula de montagem + ficha técnica de cada peça','Grupo VIP das assinantes + suporte direto','Melhor custo-benefício — menos de R$ 1 por dia']
   };
   function planCheckout(pl){ /* InitiateCheckout agora é rastreado só pelo Hotmart (fonte única) */ }
   function openPlans(){
@@ -929,8 +932,8 @@ fbq('track','PageView',{});
       card.className = 'qz-pcard' + (rec ? ' rec' : '');
       card.innerHTML = (rec ? '<span class="pbadge">⭐ Recomendado pra você</span>' : '') +
         '<div class="pname">'+PLANS[pl].name+'</div>'+
-        '<div class="pprice">'+PLANS[pl].price+'</div>'+
-        '<div class="pdesc">'+PLAN_DESC[pl]+'</div>'+
+        '<div class="pprice"><span class="pbig">'+PLANS[pl].big+'</span><span class="punit">'+PLANS[pl].unit+'</span><span class="pfull">'+PLANS[pl].full+'</span></div>'+
+        '<ul class="pbenefits">'+PLAN_BENEFITS[pl].map(function(b){ return '<li>'+esc(b)+'</li>'; }).join('')+'</ul>'+
         '<a class="pbtn '+(rec?'pbtn-rec':'pbtn-alt')+'" href="'+CHECKOUT[pl]+(currentLeadId?'&sck='+encodeURIComponent(currentLeadId):'')+'" target="_blank" rel="noopener" data-plan="'+pl+'">Assinar o '+PLANS[pl].name.toLowerCase()+' <span class="arw">→</span></a>';
       list.appendChild(card);
     });
