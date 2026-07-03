@@ -9,6 +9,7 @@
     { "source": "/v4", "destination": "/v4.html" },
     { "source": "/v5", "destination": "/v5.html" },
     { "source": "/v6", "destination": "/v6.html" },
+    { "source": "/v7", "destination": "/v7.html" },
     { "source": "/quiz", "destination": "/quiz.html" },
     { "source": "/obrigado", "destination": "/obrigado.html" },
     { "source": "/obrigada", "destination": "/obrigado.html" },
