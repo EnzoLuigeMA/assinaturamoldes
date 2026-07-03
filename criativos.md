@@ -234,7 +234,7 @@ COPY:
 - Headline (Young Serif; "molde de papel" em --coral): "Do molde de papel ao caimento no corpo."
 - Apoio (Hanken): "4 moldes profissionais por mês, vídeo-aula de montagem e ficha técnica. O caminho
   inteiro, sem buraco."
-- Legenda (depoimento real, pequena): "\"Amei costurar! Já penso em fazer de várias cores.\" — Rose"
+- Legenda (depoimento real, pequena): "\"Amei costurar! Deu vontade de fazer um de cada cor.\" — Rose"
 - CTA coral: "Descobrir meu perfil →"   ·   microcopy: "leva 2 min · resultado na hora"
 
 LAYOUT:
@@ -356,6 +356,6 @@ Fundo do palco: --cream liso (sem gradiente de luminária).
   em casa (A4) ou plotter.
 - **Garantia:** 7 dias incondicional (devolve 100%).
 - **Depoimentos reais:** Amanda — "Fiz a minha primeira peça da assinatura, a saia lápis. É bem fácil
-  de fazer, eu amei."; Rose — "Fiz o macacão assimétrico, amei costurar! Já penso em fazer de várias
+  de fazer, eu amei."; Rose — "Fiz o macacão assimétrico, amei costurar! Deu vontade de fazer um de cada
   cores."
 - **Preço NÃO é foco** nos anúncios de quiz (fica na /v5).
