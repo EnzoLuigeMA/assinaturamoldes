@@ -45,7 +45,7 @@ fbq('track','PageView',{});
     --shadow-sm: 0 2px 12px rgba(0,0,0,.28);
     --shadow-md: 0 16px 40px rgba(0,0,0,.40);
     --shadow-lg: 0 24px 64px rgba(0,0,0,.50);
-    --z-toast: 70;
+    --z-toast: 70; --z-coin: 80;
 
     --serif: 'Young Serif', Georgia, 'Times New Roman', serif;
     --sans: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -131,6 +131,45 @@ fbq('track','PageView',{});
   .qz-meter { flex: 1; height: 7px; background: rgba(227,173,87,.14); border-radius: 100px; overflow: hidden; }
   .qz-meter-fill { height: 100%; width: 100%; border-radius: 100px; background: linear-gradient(90deg, #b9842f, var(--brass)); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
   .qz-meter-val { font-size: 12.5px; font-weight: 800; color: var(--brass); white-space: nowrap; min-width: 36px; text-align: right; }
+
+  /* ── Cofrinho do Ateliê (gamificação de desconto) ── */
+  .cofre-row { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; position: relative; }
+  .cofre-ico { font-size: 20px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(227,173,87,.35)); }
+  .cofre-ico.pop { animation: cofrePop .5s var(--ease); }
+  @keyframes cofrePop { 0%{ transform: scale(1) rotate(0); } 35%{ transform: scale(1.45) rotate(-9deg); } 70%{ transform: scale(1.15) rotate(6deg); } 100%{ transform: scale(1); } }
+  .cofre-bar { flex: 1; height: 8px; background: rgba(227,173,87,.14); border-radius: 100px; overflow: hidden; position: relative; }
+  .cofre-fill { height: 100%; width: 100%; border-radius: 100px; background: linear-gradient(90deg, #b9842f, var(--brass) 70%, #ffe6a8); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); box-shadow: 0 0 12px rgba(227,173,87,.5); }
+  .cofre-fill.flash::after { content: ""; position: absolute; inset: 0; border-radius: 100px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); transform: translateX(-100%); animation: cofreSweep .7s var(--ease); }
+  @keyframes cofreSweep { to { transform: translateX(120%); } }
+  .cofre-val { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--brass); white-space: nowrap; min-width: 54px; text-align: right; font-variant-numeric: tabular-nums; }
+  .cofre-val .u { font-family: var(--sans); font-size: 13px; }
+  .cofre-val.pop { animation: cofrePop .45s var(--ease); }
+  /* "+X" que sobe do cofrinho */
+  .coin-float { position: absolute; left: 24px; top: -4px; font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brass); pointer-events: none; z-index: var(--z-coin); text-shadow: 0 2px 8px rgba(0,0,0,.5); animation: coinFloat 1s var(--ease) forwards; }
+  @keyframes coinFloat { 0%{ opacity: 0; transform: translateY(6px) scale(.7); } 20%{ opacity: 1; transform: translateY(-2px) scale(1.1); } 100%{ opacity: 0; transform: translateY(-42px) scale(1); } }
+  /* moedas voando (burst) */
+  .coin-burst { position: fixed; z-index: var(--z-coin); pointer-events: none; font-size: 20px; will-change: transform, opacity; }
+  @keyframes coinFly { 0%{ opacity: 0; transform: translate(0,0) scale(.5) rotate(0); } 15%{ opacity: 1; } 100%{ opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.05) rotate(var(--dr)); } }
+  /* botão de som */
+  .cofre-mute { position: fixed; bottom: 18px; left: 14px; z-index: var(--z-coin); width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: rgba(46,18,24,.78); backdrop-filter: blur(6px); color: var(--ink-soft); font-size: 16px; cursor: pointer; display: grid; place-items: center; transition: background .2s, transform .2s var(--ease); }
+  .cofre-mute:hover { background: var(--surface-2); transform: scale(1.06); }
+  /* selo de moedas na tela de lead */
+  .cofre-lead { display: inline-flex; align-items: center; gap: 8px; background: rgba(227,173,87,.1); border: 1px solid rgba(227,173,87,.32); border-radius: 100px; padding: 8px 16px; font-size: 14px; font-weight: 700; color: var(--brass); margin: 0 auto 20px; }
+  .cofre-lead b { font-family: var(--serif); font-weight: 400; font-size: 17px; }
+  .cofre-lead.jackpot { animation: cofrePop .5s var(--ease); }
+  /* preço com desconto no resultado */
+  .qz-plan-price .pwas { display: block; font-size: 15px; color: var(--muted); font-weight: 500; text-decoration: line-through; text-decoration-color: rgba(211,170,164,.6); margin-bottom: 2px; }
+  .qz-coin-tag { display: block; width: fit-content; max-width: 100%; text-align: center; background: rgba(227,173,87,.12); border: 1px solid rgba(227,173,87,.34); border-radius: 100px; padding: 8px 18px; font-size: 13.5px; font-weight: 700; color: var(--brass); margin: 0 auto 14px; }
+  .qz-coin-tag b { font-family: var(--serif); font-weight: 400; }
+  /* microcopy de moedas nos cards do modal */
+  .qz-pcard .pcoins { font-size: 12px; font-weight: 600; color: var(--muted); margin-top: 6px; }
+  .qz-pcard.rec .pcoins, .qz-pcard .pcoins.max { color: var(--brass); }
+  .qz-pcard .pwas { font-size: 12.5px; color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(211,170,164,.5); }
+  .qz-pcard .pseal { display: inline-block; font-size: 11px; font-weight: 700; color: var(--on-brass); background: var(--brass); border-radius: 100px; padding: 3px 10px; margin-top: 8px; }
+  @media (prefers-reduced-motion: reduce) {
+    .cofre-ico.pop, .cofre-val.pop, .cofre-lead.jackpot, .cofre-fill.flash::after { animation: none; }
+    .coin-float, .coin-burst { display: none !important; }
+  }
 
   .qz-question { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; color: var(--ink); font-size: clamp(23px, 5.6vw, 30px); line-height: 1.2; margin-bottom: 22px; text-wrap: balance; }
   .qz-question:focus { outline: none; }
@@ -335,7 +374,8 @@ fbq('track','PageView',{});
   <section class="qz-screen qz-lead" id="screen-lead">
     <div class="stitch"></div>
     <h2 class="display">Seu perfil tá pronto, <span class="accent">falta só um passo</span></h2>
-    <p class="lead">Deixa seu nome e WhatsApp pra revelar o seu resultado personalizado e receber o acesso quando abrir vaga.</p>
+    <div class="cofre-lead" id="cofre-lead"><span aria-hidden="true">🪙</span> Seu cofrinho: <b id="cofre-lead-val">40</b> moedas</div>
+    <p class="lead">Deixa seu nome e WhatsApp que eu solto <strong>+15 moedas de uma vez</strong> 🪙 — o maior pulo do cofrinho, que destrava o seu <strong>desconto máximo</strong>. É por aqui que eu te mando o resultado e o link com o preço já com as moedas.</p>
     <form id="lead-form" novalidate>
       <label class="field">
         <span class="field-lbl">Seu nome</span>
@@ -346,7 +386,7 @@ fbq('track','PageView',{});
         <input id="lead-phone" type="tel" name="phone" inputmode="numeric" autocomplete="tel" placeholder="(11) 90000-0000" required>
       </label>
       <p class="field-err" id="lead-err" role="alert" hidden></p>
-      <button class="btn-primary btn-block" type="submit">Ver meu resultado <span class="arw">→</span></button>
+      <button class="btn-primary btn-block" type="submit">Soltar minhas +15 moedas 🪙 <span class="arw">→</span></button>
       <p class="lead-fine">🔒 Usamos seus dados só pra personalizar o resultado e te avisar de novidades. Sem spam.</p>
     </form>
   </section>
@@ -354,13 +394,13 @@ fbq('track','PageView',{});
   <!-- 🅸 INTERESSE -->
   <section class="qz-screen" id="screen-quiz">
     <div class="qz-top">
-      <span class="qz-step" id="qz-step">Pergunta 1 de 11</span>
+      <span class="qz-step" id="qz-step">Pergunta 1 de 10</span>
     </div>
-    <div class="qz-progress" id="qz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="11" aria-valuenow="0" aria-label="Progresso do quiz"><div class="qz-progress-bar" id="qz-bar"></div></div>
-    <div class="qz-meter-row" aria-hidden="true">
-      <span class="qz-meter-lbl">⚡ Prontidão</span>
-      <div class="qz-meter"><div class="qz-meter-fill" id="qz-meter-fill"></div></div>
-      <span class="qz-meter-val" id="qz-meter-val">0%</span>
+    <div class="qz-progress" id="qz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Progresso do quiz"><div class="qz-progress-bar" id="qz-bar"></div></div>
+    <div class="cofre-row">
+      <span class="cofre-ico" id="cofre-ico" aria-hidden="true">🪙</span>
+      <div class="cofre-bar"><div class="cofre-fill" id="cofre-fill"></div></div>
+      <span class="cofre-val" id="cofre-val" aria-label="Moedas do cofrinho">0 <span class="u" aria-hidden="true">🪙</span></span>
     </div>
     <h2 class="qz-question" id="qz-question" tabindex="-1"></h2>
     <div class="qz-options" id="qz-options"></div>
@@ -448,13 +488,14 @@ fbq('track','PageView',{});
     <!-- plano + ação -->
     <div class="qz-plan rv r6">
       <span class="qz-ribbon">⭐ Recomendado pra você</span>
+      <div class="qz-coin-tag" id="qz-coin-tag"></div>
       <div class="qz-plan-name" id="qz-plan-name"></div>
       <div class="qz-plan-price" id="qz-plan-price"></div>
       <p class="qz-plan-why" id="qz-plan-why"></p>
       <p class="qz-plan-bonus" id="qz-bonus"></p>
     </div>
 
-    <div class="qz-urgency rv r6" id="qz-urgency">⏳ Condição desta sessão expira em <strong id="qz-timer">15:00</strong></div>
+    <div class="qz-urgency rv r6" id="qz-urgency"></div>
     <p class="qz-objection rv r6" id="qz-objection"></p>
     <a class="btn-primary btn-block rv r6" id="qz-cta" href="#" target="_blank" rel="noopener"><span id="qz-cta-text">Quero assinar agora</span> <span class="arw">→</span></a>
     <p class="qz-guarantee rv r6">🛡️ 7 dias de garantia · 💛 acesso imediato · ambiente seguro Hotmart</p>
@@ -547,6 +588,26 @@ fbq('track','PageView',{});
     trimestral: 'https://pay.hotmart.com/E79768335W?off=ctoqnxt6&checkoutMode=10&bid=1774540746590&src=quiz',
     anual:      'https://pay.hotmart.com/E79768335W?off=3357mnxb&checkoutMode=10&src=quiz'
   };
+
+  // ── Cofrinho do Ateliê: gamificação de desconto ──
+  // Regra: +4 moedas por resposta (10 = 40) + 15 ao deixar nome+WhatsApp = 55 = R$ 55 (teto = desconto do anual).
+  var COIN_PER_Q = 4, COIN_DATA_BONUS = 15, COIN_MAX = 55;
+  var coins = 0, coinBonusGiven = false, soundOn = true;
+  try { soundOn = localStorage.getItem('quiz_som') !== '0'; } catch(e){}
+  // desconto por plano: off = R$ de desconto (= teto de moedas que o plano aceita)
+  var DESC = {
+    mensal:     { off:10, price:'R$ 39,90',  per:'R$ 39,90/mês',      value:39.90 },
+    trimestral: { off:20, price:'R$ 89,90',  per:'R$ 29,97/mês',      value:89.90 },
+    anual:      { off:55, price:'R$ 234,90', per:'R$ 19,58/mês',      value:234.90 }
+  };
+  // TODO(Thaíza): trocar pelos LINKS DE DESCONTO (preço-piso) do Hotmart quando ela enviar.
+  // Enquanto forem os links de preço cheio, NÃO publicar em produção (só preview) — senão mostra
+  // preço com desconto e cobra cheio (desonesto). Hoje = placeholder = mesmos links de preço cheio.
+  var CHECKOUT_DESC = {
+    mensal:     CHECKOUT.mensal,
+    trimestral: CHECKOUT.trimestral,
+    anual:      CHECKOUT.anual
+  };
   // peças reais das alunas com a categoria de cada uma (pra ordenar pelo foco dela)
   var MAKES = [
     {src:'rose-macacaovermelho.jpg', cat:['calcas_macacoes','shorts'], alt:'Macacão assimétrico costurado por uma aluna'},
@@ -574,6 +635,89 @@ fbq('track','PageView',{});
   function focusEl(id){ try { var el = $(id); if(el) el.focus({ preventScroll:true }); } catch(e){} }
   function setLine(id, text){ var el = $(id); if(!el) return; if(text){ el.textContent = text; el.style.display = ''; } else { el.style.display = 'none'; } }
   function esc(s){ return String(s||'').replace(/[<>&"]/g, function(c){ return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]; }); }
+  function reduceMotion(){ return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+
+  // ── Som de caixa registradora (Web Audio, sintetizado — sem arquivo externo) ──
+  var _ac = null;
+  function ac(){ if(!_ac){ try{ _ac = new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ _ac = null; } } return _ac; }
+  function chaChing(big){
+    if(!soundOn) return;
+    var a = ac(); if(!a) return;
+    try{ if(a.state==='suspended') a.resume(); }catch(e){}
+    var t = a.currentTime, master = a.createGain();
+    master.gain.value = big ? 0.9 : 0.62; master.connect(a.destination);
+    // 1) "ka" — clique da gaveta (ruído curtinho decaindo)
+    try {
+      var n = Math.floor(a.sampleRate*0.03), buf = a.createBuffer(1, n, a.sampleRate), d = buf.getChannelData(0);
+      for(var i=0;i<n;i++){ d[i] = (Math.random()*2-1) * (1 - i/n); }
+      var src = a.createBufferSource(); src.buffer = buf;
+      var bp = a.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=2500; bp.Q.value=0.8;
+      var gN = a.createGain(); gN.gain.value=0.5;
+      src.connect(bp); bp.connect(gN); gN.connect(master); src.start(t);
+    } catch(e){}
+    // 2) "ching" — sinos brilhantes
+    function bell(freq, start, dur, peak, type){
+      var o = a.createOscillator(), g = a.createGain();
+      o.type = type||'triangle'; o.frequency.value = freq;
+      g.gain.setValueAtTime(0.0001, t+start);
+      g.gain.exponentialRampToValueAtTime(peak, t+start+0.006);
+      g.gain.exponentialRampToValueAtTime(0.0001, t+start+dur);
+      o.connect(g); g.connect(master); o.start(t+start); o.stop(t+start+dur+0.02);
+    }
+    bell(1568, 0.02, 0.55, 0.5, 'triangle');   // G6
+    bell(2093, 0.055, 0.62, 0.42, 'triangle');  // C7 (brilho)
+    if(big){ bell(2637, 0.14, 0.7, 0.4, 'triangle'); bell(3136, 0.24, 0.72, 0.32, 'sine'); } // E7 + G7 (jackpot)
+  }
+
+  // ── Efeitos visuais do cofrinho ──
+  function coinFloat(txt){
+    var row = document.querySelector('.cofre-row'); if(!row || reduceMotion()) return;
+    var s = document.createElement('span'); s.className='coin-float'; s.textContent = txt;
+    row.appendChild(s); setTimeout(function(){ s.remove(); }, 1050);
+  }
+  function coinBurst(fromEl, count){
+    if(reduceMotion()) return;
+    var el = fromEl || document.getElementById('cofre-ico'); if(!el) return;
+    var b = el.getBoundingClientRect(); if(!b.width && !b.height) return;
+    var sx = b.left+b.width/2, sy = b.top+b.height/2;
+    for(var i=0;i<(count||5);i++){
+      (function(i){
+        var c = document.createElement('span'); c.className='coin-burst'; c.textContent='🪙';
+        c.style.left = sx+'px'; c.style.top = sy+'px';
+        var ang = (-Math.PI/2) + (Math.random()*Math.PI - Math.PI/2);   // leque pra cima
+        var dist = 46 + Math.random()*70;
+        c.style.setProperty('--dx', (Math.cos(ang)*dist).toFixed(0)+'px');
+        c.style.setProperty('--dy', (Math.sin(ang)*dist - 20).toFixed(0)+'px');
+        c.style.setProperty('--dr', (Math.random()*360-180)+'deg');
+        c.style.animation = 'coinFly ' + (0.6 + Math.random()*0.4).toFixed(2) + 's var(--ease) ' + (i*0.035).toFixed(2) + 's forwards';
+        document.body.appendChild(c); setTimeout(function(){ c.remove(); }, 1200);
+      })(i);
+    }
+  }
+  function renderCoins(){
+    var fill = document.getElementById('cofre-fill'); if(fill) fill.style.transform = 'scaleX(' + Math.min(1, coins/COIN_MAX) + ')';
+    var val = document.getElementById('cofre-val'); if(val) val.innerHTML = coins + ' <span class="u" aria-hidden="true">🪙</span>';
+  }
+  // anima a contagem de `from` até `to` no elemento do cofrinho
+  function tweenCoins(from, to, big, fromEl){
+    coins = to; renderCoins();
+    var ico = document.getElementById('cofre-ico'), val = document.getElementById('cofre-val'), fill = document.getElementById('cofre-fill');
+    if(ico){ ico.classList.remove('pop'); void ico.offsetWidth; ico.classList.add('pop'); }
+    if(val){ val.classList.remove('pop'); void val.offsetWidth; val.classList.add('pop'); }
+    if(fill){ fill.classList.remove('flash'); void fill.offsetWidth; fill.classList.add('flash'); }
+    coinFloat('+' + (to-from) + ' 🪙');
+    coinBurst(fromEl, big ? 10 : 5);
+    chaChing(big);
+    if(reduceMotion() || !val) return;
+    var n = from, span = to-from, t0 = null, dur = big ? 900 : 360;
+    function tick(ts){ if(t0===null) t0=ts; var k = Math.min(1,(ts-t0)/dur); var cur = Math.round(from + span*(k<1?(1-Math.pow(1-k,3)):1)); val.firstChild.nodeValue = cur + ' '; if(k<1) requestAnimationFrame(tick); }
+    requestAnimationFrame(tick);
+  }
+  function toggleSound(){
+    soundOn = !soundOn; try{ localStorage.setItem('quiz_som', soundOn?'1':'0'); }catch(e){}
+    var b = document.getElementById('cofre-mute'); if(b){ b.textContent = soundOn?'🔊':'🔇'; b.setAttribute('aria-label', soundOn?'Desligar som':'Ligar som'); }
+    if(soundOn) chaChing(false);
+  }
   function fbqTrack(name, params, custom){
     if(typeof fbq!=='function') return;
     if(custom) fbq('trackCustom', name, params||{});
@@ -620,7 +764,19 @@ fbq('track','PageView',{});
 
     lead.name = name; lead.phone = digits; lead.first = firstName(name);
     fbqTrack('QuizLeadInfo', {}, true);
-    computeResult();
+    if(!coinBonusGiven){
+      coinBonusGiven = true;
+      var before = coins; coins = Math.min(COIN_MAX, coins + COIN_DATA_BONUS); var after = coins;
+      renderCoins();
+      var badge = $('cofre-lead'), lv = $('cofre-lead-val');
+      if(badge){ badge.classList.remove('jackpot'); void badge.offsetWidth; badge.classList.add('jackpot'); }
+      coinBurst(badge, 12); chaChing(true);
+      if(lv){
+        if(reduceMotion()){ lv.textContent = after; }
+        else { (function(){ var t0=null; function tk(ts){ if(t0===null)t0=ts; var k=Math.min(1,(ts-t0)/900); lv.textContent = Math.round(before+(after-before)*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(tk); } requestAnimationFrame(tk); })(); }
+      }
+      setTimeout(computeResult, reduceMotion()?60:1000);
+    } else { computeResult(); }
   });
 
   // ── engine: ramificação + tipos ──
@@ -694,6 +850,8 @@ fbq('track','PageView',{});
     scoreSum += (score||7); scoreCount++;
     readiness = Math.max(readiness, Math.round(scoreSum/(scoreCount*10)*100));
     updateMeter();
+    var fromEl = document.querySelector('#qz-options .sel');
+    tweenCoins(coins, Math.min(COIN_MAX, coins + COIN_PER_Q), false, fromEl);
     fbqTrack('QuizProgress', { step: answeredCount(), key: key }, true);
     if(fb) toast(fb);
     setTimeout(function(){ delete answers.__lock; step(); }, 460);
@@ -772,20 +930,15 @@ fbq('track','PageView',{});
   }
 
   // urgência honesta: condição "desta sessão" (evergreen ~15 min, persiste na sessão)
+  // Sem cronômetro falso: mensagem honesta de moedas (ancoragem + aversão à perda -> empurra o anual)
   function startUrgency(){
-    var KEY='quiz_offer_deadline';
-    var now = Date.now();
-    var dl = parseInt(sessionStorage.getItem(KEY)||'0',10);
-    if(!dl || dl < now){ dl = now + 15*60*1000; try{ sessionStorage.setItem(KEY, String(dl)); }catch(e){} }
-    var el = $('qz-timer');
-    function tick(){
-      var left = Math.max(0, dl - Date.now());
-      var m = Math.floor(left/60000), s = Math.floor((left%60000)/1000);
-      if(el) el.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
-      if(left<=0 && urgTimer){ clearInterval(urgTimer); urgTimer=null; }
+    var el = $('qz-urgency'); if(!el) return;
+    var sobra = Math.max(0, coins - (DESC[currentPlano] ? DESC[currentPlano].off : 0));
+    if(currentPlano === 'anual'){
+      el.innerHTML = '🪙 O plano anual é o único que usa as suas <strong>'+coins+' moedas</strong> inteiras — R$ '+coins+' de desconto de verdade.';
+    } else {
+      el.innerHTML = '🪙 Você tem <strong>'+coins+' moedas</strong>, mas aqui só entram '+ (DESC[currentPlano]?DESC[currentPlano].off:0) +'. As outras '+sobra+' rendem no <strong>anual</strong> (R$ '+coins+' de desconto).';
     }
-    if(urgTimer) clearInterval(urgTimer);
-    tick(); urgTimer = setInterval(tick, 1000);
   }
 
   function renderResult(res, leadId){
@@ -811,11 +964,17 @@ fbq('track','PageView',{});
     setLine('qz-bonus', '');  // sem bônus fantasma — prometer só o que existe nos planos
     setLine('qz-objection', res.objecao_quebra);
     $('qz-cta-text').textContent = res.cta_texto || 'Quero assinar agora';
+    var dsc = DESC[plano] || DESC.trimestral;
+    var usadas = Math.min(coins, dsc.off);
+    $('qz-coin-tag').innerHTML = 'Você juntou <b>'+coins+' 🪙</b> = R$ '+coins+' de desconto';
     $('qz-plan-name').textContent = PLANS[plano].name;
-    $('qz-plan-price').innerHTML = '<span class="pbig">'+PLANS[plano].big+'</span><span class="punit">'+PLANS[plano].unit+'</span><span class="pfull">'+PLANS[plano].full+'</span>';
+    $('qz-plan-price').innerHTML =
+      '<span class="pwas">de '+PLANS[plano].full+'</span>' +
+      '<span class="pbig">'+dsc.price+'</span>' +
+      '<span class="pfull">'+dsc.per+' · você troca '+usadas+' 🪙 aqui</span>';
     $('qz-plan-why').textContent = res.motivo_plano || '';
     currentLeadId = leadId;
-    $('qz-cta').setAttribute('href', (CHECKOUT[plano] || CHECKOUT.trimestral) + '&sck=' + encodeURIComponent(leadId));
+    $('qz-cta').setAttribute('href', (CHECKOUT_DESC[plano] || CHECKOUT_DESC.trimestral) + '&sck=' + encodeURIComponent(leadId));
 
     show('screen-result');
     focusEl('qz-arch-head');
@@ -911,11 +1070,16 @@ fbq('track','PageView',{});
       var rec = (pl === currentPlano);
       var card = document.createElement('div');
       card.className = 'qz-pcard' + (rec ? ' rec' : '');
+      var d = DESC[pl] || DESC.trimestral;
+      var isAnual = (pl === 'anual');
+      var usadas = Math.min(coins, d.off);
       card.innerHTML = (rec ? '<span class="pbadge">⭐ Recomendado pra você</span>' : '') +
         '<div class="pname">'+PLANS[pl].name+'</div>'+
-        '<div class="pprice"><span class="pbig">'+PLANS[pl].big+'</span><span class="punit">'+PLANS[pl].unit+'</span><span class="pfull">'+PLANS[pl].full+'</span></div>'+
+        '<div class="pprice"><span class="pwas">'+PLANS[pl].full+'</span> <span class="pbig">'+d.price+'</span><span class="punit"> · '+d.per+'</span></div>'+
+        '<div class="pcoins'+(isAnual?' max':'')+'">'+(isAnual ? '🪙 usa as suas '+coins+' moedas — todas!' : '🪙 troca '+usadas+' das suas '+coins+' moedas')+'</div>'+
+        (isAnual ? '<span class="pseal">🪙 Único que aceita as suas '+coins+' moedas</span>' : '')+
         '<ul class="pbenefits">'+PLAN_BENEFITS[pl].map(function(b){ return '<li>'+esc(b)+'</li>'; }).join('')+'</ul>'+
-        '<a class="pbtn '+(rec?'pbtn-rec':'pbtn-alt')+'" href="'+CHECKOUT[pl]+(currentLeadId?'&sck='+encodeURIComponent(currentLeadId):'')+'" target="_blank" rel="noopener" data-plan="'+pl+'">Assinar o '+PLANS[pl].name.toLowerCase()+' <span class="arw">→</span></a>';
+        '<a class="pbtn '+(rec?'pbtn-rec':'pbtn-alt')+'" href="'+CHECKOUT_DESC[pl]+(currentLeadId?'&sck='+encodeURIComponent(currentLeadId):'')+'" target="_blank" rel="noopener" data-plan="'+pl+'">Assinar o '+PLANS[pl].name.toLowerCase()+' <span class="arw">→</span></a>';
       list.appendChild(card);
     });
     Array.prototype.forEach.call(list.querySelectorAll('.pbtn'), function(b){
@@ -928,6 +1092,17 @@ fbq('track','PageView',{});
   $('qz-all').addEventListener('click', openPlans);
   Array.prototype.forEach.call(document.querySelectorAll('#plans-modal [data-close]'), function(el){ el.addEventListener('click', closePlans); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !$('plans-modal').hidden) closePlans(); });
+
+  // botão de som (fixo) + init visual do cofrinho
+  (function(){
+    var b = document.createElement('button');
+    b.id = 'cofre-mute'; b.className = 'cofre-mute'; b.type = 'button';
+    b.textContent = soundOn ? '🔊' : '🔇';
+    b.setAttribute('aria-label', soundOn ? 'Desligar som' : 'Ligar som');
+    b.addEventListener('click', toggleSound);
+    document.body.appendChild(b);
+    renderCoins();
+  })();
 })();
 </script>
 </body>
