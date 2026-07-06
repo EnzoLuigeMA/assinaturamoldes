@@ -481,7 +481,7 @@ fbq('track','PageView',{});
   'use strict';
 
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>';
-  var TOTAL = 11; // base (9) + 1 ramificação de nível + 1 ramificação de objetivo
+  var TOTAL = 10; // quiz linear (sem ramificações)
 
   // Pool de perguntas com ramificação (when), tipos e pontuação (score 0-10 p/ o medidor de prontidão).
   var POOL = [
@@ -493,61 +493,42 @@ fbq('track','PageView',{});
       {v:'shorts', t:'Shorts', img:'shorts.png', score:8, fb:'Short é a cara do verão ☀️'},
       {v:'blazers', t:'Blazers', img:'blazer-feminino.png', score:9, fb:'Alfaiataria é elegância 🤍'} ]},
     { key:'nivel', type:'cards', q:'Como você se descreve na costura hoje?', opts:[
-      {v:'iniciante', t:'Tô começando agora', ic:'🌱', score:6, fb:'Todo ateliê começou assim 🌱'},
-      {v:'intermediaria', t:'Já costuro, mas quero evoluir', ic:'✂️', score:8, fb:'Bora pro próximo nível ✂️'},
-      {v:'avancada', t:'Domino a máquina, quero moldes à altura', ic:'🧵', score:9, fb:'Você merece moldes profissionais 🧵'} ]},
-    { key:'frustracao', type:'cards', q:'Qual é a sua MAIOR frustração hoje?', opts:[
-      {v:'modelagem', t:'Travo na modelagem do molde', ic:'📐', score:8, fb:'A gente resolve isso 📐'},
-      {v:'caimento', t:'A peça fica "feita em casa", sem caimento', ic:'🪡', score:9, fb:'Caimento é com a gente 🪡'},
-      {v:'tempo', t:'Perco horas refazendo molde', ic:'⏳', score:8, fb:'Molde pronto economiza horas ⏳'},
-      {v:'acabamento', t:'Falta acabamento de ateliê', ic:'✨', score:9, fb:'Acabamento de ateliê vem aí ✨'} ]},
-    { key:'inseguranca', type:'cards', when:function(a){return a.nivel==='iniciante';}, q:'O que mais te dá insegurança?', opts:[
-      {v:'corte', t:'Medo de cortar errado o tecido', ic:'✂️', score:7, fb:'Molde testado tira esse medo ✂️'},
-      {v:'numeracao', t:'Acertar a numeração / tamanho', ic:'📏', score:7, fb:'Do PP ao GG, já vem certo 📏'},
-      {v:'maquina', t:'Domar a máquina', ic:'🧵', score:6, fb:'A vídeo-aula te guia 🧵'},
-      {v:'desistir', t:'Começar e não terminar', ic:'😅', score:6, fb:'Passo a passo até o fim 💛'} ]},
-    { key:'proximo_nivel', type:'cards', when:function(a){return a.nivel==='intermediaria'||a.nivel==='avancada';}, q:'O que falta pro seu próximo nível?', opts:[
-      {v:'modelagem', t:'Modelagem mais complexa', ic:'📐', score:8, fb:'Moldes pra te desafiar 📐'},
-      {v:'acabamento', t:'Acabamento profissional', ic:'✨', score:9, fb:'Ficha técnica de ateliê ✨'},
-      {v:'produtividade', t:'Produzir mais rápido', ic:'⚡', score:9, fb:'Molde pronto = mais produção ⚡'},
-      {v:'escala', t:'Escalar pra vender', ic:'📈', score:10, fb:'Bora escalar 📈'} ]},
-    { key:'objetivo', type:'cards', q:'Pra onde você quer levar a sua costura?', opts:[
-      {v:'hobby', t:'É o meu hobby, meu respiro', ic:'💛', score:7, fb:'Costurar cura 💛'},
-      {v:'renda_extra', t:'Quero uma renda extra', ic:'💰', score:9, fb:'Costura que paga as contas 💰'},
-      {v:'marca_propria', t:'Quero construir uma marca / ateliê', ic:'🏷️', score:10, fb:'Sua marca começa aqui 🏷️'} ]},
-    { key:'meta_renda', type:'slider', when:function(a){return a.objetivo==='renda_extra';}, q:'Quanto você quer faturar por mês costurando?', slider:{ min:0, max:4, step:1, def:1, labels:['R$500','R$1k','R$2k','R$3,5k','R$5k+'],
-      resolve:function(v){ return [
-        {v:'ate500', score:7, fb:'Começo que já paga o material 💰', label:'até R$ 500/mês'},
-        {v:'ate1000', score:8, fb:'Mil por mês muda o jogo 💪', label:'~ R$ 1 mil/mês'},
-        {v:'ate2000', score:9, fb:'Renda de verdade 🚀', label:'~ R$ 2 mil/mês'},
-        {v:'ate3500', score:10, fb:'Você pensa grande 🔥', label:'~ R$ 3,5 mil/mês'},
-        {v:'acima3500', score:10, fb:'Mentalidade de ateliê 👑', label:'R$ 5 mil+/mês'} ][v]; } }},
-    { key:'marca_estagio', type:'cards', when:function(a){return a.objetivo==='marca_propria';}, q:'Sobre a sua marca, você está…', opts:[
-      {v:'sonho', t:'Ainda é um sonho', ic:'🌙', score:8, fb:'Todo sonho começa com 1 peça 🌙'},
-      {v:'comecando', t:'Começando agora', ic:'🌱', score:9, fb:'Hora de acelerar 🌱'},
-      {v:'vendendo', t:'Já vendo, quero crescer', ic:'📈', score:10, fb:'Bora escalar sua marca 📈'} ]},
-    { key:'hobby_motivo', type:'cards', when:function(a){return a.objetivo==='hobby';}, q:'Costurar pra você é mais sobre…', opts:[
-      {v:'relaxar', t:'Relaxar e desligar a cabeça', ic:'🌿', score:7, fb:'Seu respiro 🌿'},
-      {v:'criar', t:'Criar coisas únicas', ic:'🎨', score:8, fb:'Criatividade sem limite 🎨'},
-      {v:'vestir_bem', t:'Vestir o que não acho na loja', ic:'👗', score:8, fb:'Roupa do seu jeito 👗'},
-      {v:'presentear', t:'Presentear quem amo', ic:'🎁', score:7, fb:'Presente costurado é amor 🎁'} ]},
+      {v:'nunca', t:'Nunca costurei, quero aprender', ic:'🌱', score:6, fb:'Todo ateliê começou assim 🌱'},
+      {v:'consertos', t:'Já costuro, mas só consertos e/ou artesanato', ic:'🧷', score:7, fb:'Bora pra costura de roupa ✨'},
+      {v:'aperfeicoar', t:'Já costuro, mas preciso me aperfeiçoar', ic:'✂️', score:8, fb:'Bora pro próximo nível ✂️'},
+      {v:'trabalho', t:'Já trabalho com costura e quero mais agilidade e variedade', ic:'🧵', score:9, fb:'Você merece moldes profissionais 🧵'} ]},
+    { key:'frustracao', type:'cards', q:'Qual a sua maior dificuldade hoje?', opts:[
+      {v:'modelagem', t:'Não sei desenvolver a modelagem', ic:'📐', score:8, fb:'A gente resolve isso 📐'},
+      {v:'caimento', t:'A peça fica estranha no corpo, mesmo bem costurada', ic:'🪡', score:9, fb:'Caimento é com a gente 🪡'},
+      {v:'tempo', t:'Perco horas fazendo o molde', ic:'⏳', score:8, fb:'Molde pronto economiza horas ⏳'},
+      {v:'corpo', t:'A roupa não fica bonita no corpo', ic:'🪞', score:9, fb:'A gente resolve o caimento 🪞'} ]},
+    { key:'inseguranca', type:'cards', q:'O que mais te dá insegurança?', opts:[
+      {v:'tecido', t:'Medo de desperdiçar tecido', ic:'✂️', score:7, fb:'Molde testado tira esse medo ✂️'},
+      {v:'perder_tempo', t:'Medo de perder tempo tentando', ic:'⏳', score:7, fb:'Molde pronto poupa seu tempo ⏳'},
+      {v:'cursos', t:'Já gastei com cursos que não deram resultado', ic:'💸', score:7, fb:'Aqui é prático, com garantia 💛'},
+      {v:'maquina', t:'Domar a máquina', ic:'🧵', score:6, fb:'A vídeo-aula te guia 🧵'} ]},
+    { key:'objetivo', type:'cards', q:'Qual o seu objetivo com a costura?', opts:[
+      {v:'hobby', t:'Quero costurar por hobby', ic:'💛', score:7, fb:'Costurar cura 💛'},
+      {v:'renda_extra', t:'Fazer renda extra', ic:'💰', score:9, fb:'Costura que paga as contas 💰'},
+      {v:'marca_propria', t:'Tenho uma marca e quero variar os modelos', ic:'🏷️', score:10, fb:'Bora variar sua marca 🏷️'},
+      {v:'fonte_renda', t:'É a minha fonte de renda', ic:'🚀', score:10, fb:'Costura é o seu negócio 🚀'} ]},
     { key:'tempo', type:'slider', q:'Quanto tempo por semana você consegue dedicar?', slider:{ min:0, max:3, step:1, def:1, labels:['1h','3h','6h','10h+'],
       resolve:function(v){ return [
         {v:'pouco', score:6, fb:'Dá pra costurar em minutinhos ⏱️', label:'~ 1h por semana'},
         {v:'pouco', score:7, fb:'Pouquinho já rende ⏱️', label:'~ 3h por semana'},
         {v:'medio', score:8, fb:'Tempo bom! 🌤️', label:'~ 6h por semana'},
         {v:'bastante', score:10, fb:'Costura é prioridade 🔥', label:'10h+ por semana'} ][v]; } }},
-    { key:'confianca', type:'slider', q:'De 1 a 10, qual a sua confiança pra encarar um molde novo?', slider:{ min:1, max:10, step:1, def:6, labels:['1','10'],
+    { key:'confianca', type:'slider', q:'De 1 a 10, qual a sua confiança pra costurar uma nova peça?', slider:{ min:1, max:10, step:1, def:6, labels:['1','10'],
       resolve:function(v){ var sc = v<=3?6:(v<=7?8:10); var fb = v<=3?'A gente te dá segurança 💛':(v<=7?'A confiança vem com o passo a passo 💪':'Que confiança! 🔥'); return { v:String(v), score:sc, fb:fb, label:v+' <small>/ 10</small>' }; } }},
-    { key:'objecao', type:'cards', q:'O que mais te segura pra assinar hoje?', opts:[
-      {v:'preco', t:'O preço / orçamento', ic:'💸', score:7, fb:'Vou te mostrar que cabe no bolso 💸'},
-      {v:'medo_nao_usar', t:'Medo de não usar', ic:'🤔', score:7, fb:'A biblioteca é sua pra sempre 🤔'},
+    { key:'objecao', type:'cards', q:'O que está te impedindo de assinar hoje?', opts:[
+      {v:'preco', t:'Preço / orçamento', ic:'💸', score:7, fb:'Vou te mostrar que cabe no bolso 💸'},
+      {v:'tempo', t:'Tempo', ic:'⏳', score:7, fb:'Molde pronto poupa seu tempo ⏳'},
       {v:'ja_tenho', t:'Já tenho muitos moldes', ic:'🗂️', score:8, fb:'Aqui é molde testado, com vídeo 🗂️'},
-      {v:'tempo', t:'Acho que não vou ter tempo', ic:'⏳', score:7, fb:'Molde pronto poupa seu tempo ⏳'} ]},
+      {v:'cursos', t:'Já me decepcionei com cursos que não deram resultado', ic:'😔', score:7, fb:'Aqui tem 7 dias de garantia 💛'} ]},
     { key:'compromisso', type:'cards', q:'E se você recebesse moldes profissionais todo mês?', opts:[
-      {v:'testar', t:'Queria testar com calma primeiro', ic:'🤔', score:7, fb:'Dá pra começar leve 🤔'},
-      {v:'conhecer', t:'Queria conhecer e pegar ritmo', ic:'🚶‍♀️', score:8, fb:'Vamos pegar ritmo juntas 🚶‍♀️'},
-      {v:'mergulhar', t:'Quero mergulhar de vez!', ic:'🌊', score:10, fb:'Adorei a energia! 🌊'} ]},
+      {v:'testar', t:'Quero testar e ver como funciona primeiro', ic:'🤔', score:7, fb:'Dá pra começar leve 🤔'},
+      {v:'aos_poucos', t:'Quero pegar confiança costurando aos poucos', ic:'🚶‍♀️', score:8, fb:'Vamos pegar ritmo juntas 🚶‍♀️'},
+      {v:'mergulhar', t:'Quero começar já!', ic:'🌊', score:10, fb:'Adorei a energia! 🌊'} ]},
     { key:'visao', type:'cards', q:'Daqui a 6 meses, você quer estar…', opts:[
       {v:'seguranca', t:'Costurando com segurança pra mim', ic:'💛', score:8, fb:'Você vai chegar lá 💛'},
       {v:'vendendo', t:'Vendendo as minhas peças', ic:'💰', score:9, fb:'Costura que vira renda 💰'},
@@ -750,7 +731,7 @@ fbq('track','PageView',{});
 
   // prova social direcionada ao perfil
   function setProof(a){
-    var seg = (a.objetivo==='marca_propria'||a.objetivo==='renda_extra') ? 'vende' : (a.nivel==='iniciante' ? 'inicio' : 'evolui');
+    var seg = (a.objetivo==='marca_propria'||a.objetivo==='renda_extra'||a.objetivo==='fonte_renda') ? 'vende' : ((a.nivel==='nunca'||a.nivel==='consertos') ? 'inicio' : 'evolui');
     var P = {
       vende:  { t:'"Fiz o macacão assimétrico, amei costurar. Dava gosto de ver que tava dando tudo certo."', c:'Rose, aluna da assinatura' },
       inicio: { t:'"Fiz a minha primeira peça da assinatura, a saia lápis. É bem fácil de fazer, eu amei!"', c:'aluna da assinatura' },
@@ -762,10 +743,10 @@ fbq('track','PageView',{});
 
   // diagnóstico espelhado (raio-x das respostas)
   var RECAP_L = {
-    nivel:{iniciante:'Começando agora',intermediaria:'Já costuro, evoluindo',avancada:'Avançada'},
+    nivel:{nunca:'Começando do zero',consertos:'Consertos e artesanato',aperfeicoar:'Costuro, quero evoluir',trabalho:'Trabalho com costura'},
     foco:{vestidos:'Vestidos',blusas:'Blusas e tops',saias:'Saias',calcas_macacoes:'Calças e macacões',shorts:'Shorts',blazers:'Blazers'},
-    frustracao:{modelagem:'Modelagem do molde',caimento:'Caimento das peças',tempo:'Tempo refazendo molde',acabamento:'Acabamento de ateliê'},
-    objetivo:{hobby:'Hobby, meu respiro',renda_extra:'Renda extra',marca_propria:'Marca própria'},
+    frustracao:{modelagem:'Desenvolver a modelagem',caimento:'Caimento no corpo',tempo:'Tempo fazendo molde',corpo:'A roupa no corpo'},
+    objetivo:{hobby:'Hobby, meu respiro',renda_extra:'Renda extra',marca_propria:'Variar minha marca',fonte_renda:'Minha fonte de renda'},
     visao:{seguranca:'Costurar com segurança',vendendo:'Vender minhas peças',marca:'Minha marca no ar',ensinando:'Confiante pra ensinar'}
   };
   function renderRecap(a){
@@ -889,13 +870,13 @@ fbq('track','PageView',{});
 
   function clientFallback(){
     var a = answers, plano = 'trimestral';
-    if(a.objetivo==='marca_propria' || a.compromisso==='mergulhar') plano='anual';
+    if(a.objetivo==='marca_propria' || a.objetivo==='fonte_renda' || a.compromisso==='mergulhar') plano='anual';
     else if(a.compromisso==='testar') plano='mensal';
     var arq = 'A Costureira Visionária';
-    if(a.objetivo==='marca_propria') arq='A Empreendedora da Costura';
+    if(a.objetivo==='marca_propria'||a.objetivo==='fonte_renda') arq='A Empreendedora da Costura';
     else if(a.objetivo==='renda_extra') arq='A Artesã Estratégica';
-    else if(a.nivel==='iniciante') arq='A Iniciante Apaixonada';
-    else if(a.nivel==='avancada') arq='A Modelista de Mão Cheia';
+    else if(a.nivel==='nunca'||a.nivel==='consertos') arq='A Iniciante Apaixonada';
+    else if(a.nivel==='trabalho') arq='A Modelista de Mão Cheia';
     var nm = lead.first ? (lead.first + ', o') : 'O';
     return {
       arquetipo: arq,
@@ -905,12 +886,12 @@ fbq('track','PageView',{});
       motivo_plano: 'Esse plano combina com o momento que você está vivendo na costura.',
       compatibilidade: 93,
       pontos_fortes: ['Você valoriza acabamento e caimento de verdade','Você prefere agir a ficar só planejando','Você quer evoluir com método'],
-      beneficio_direcionado: ({modelagem:'Como o que te trava é a modelagem, os moldes já chegam prontos e testados, do PP ao GG.',caimento:'Como o caimento te incomoda, os moldes têm as correções do corpo feminino pra peça cair como de ateliê.',tempo:'Como o seu tempo é curto, o molde chega pronto com vídeo-aula: é só cortar e costurar.',acabamento:'Como você quer acabamento de ateliê, cada molde vem com ficha técnica e vídeo de montagem.'})[a.frustracao] || 'Você recebe moldes profissionais, vídeo-aula e ficha técnica todo mês.',
+      beneficio_direcionado: ({modelagem:'Como o que te trava é a modelagem, os moldes já chegam prontos e testados, do PP ao GG.',caimento:'Como o caimento te incomoda, os moldes têm as correções do corpo feminino pra peça cair como de ateliê.',tempo:'Como o seu tempo é curto, o molde chega pronto com vídeo-aula: é só cortar e costurar.',corpo:'Como a roupa não cai bem no corpo, os moldes têm as correções do corpo feminino pra vestir do PP ao GG.'})[a.frustracao] || 'Você recebe moldes profissionais, vídeo-aula e ficha técnica todo mês.',
       primeira_peca: ({vestidos:'vestido midi',blusas:'blusa lenço',saias:'saia lápis',calcas_macacoes:'calça de moletom',shorts:'short de alfaiataria',blazers:'blazer de alfaiataria'})[a.foco] || 'saia lápis',
-      objecao_quebra: ({preco:'Sai menos que um molde avulso por semana, e você recebe 4 moldes profissionais por mês com vídeo-aula.',medo_nao_usar:'A biblioteca é acumulativa e os moldes não expiram: você usa no seu tempo, sem perder nada.',ja_tenho:'Aqui não é molde solto: é molde testado, do PP ao GG, com vídeo de montagem e ficha técnica.',tempo:'Os moldes chegam prontos e a vídeo-aula é passo a passo: dá pra costurar em poucos minutinhos por vez.'})[a.objecao] || ({testar:'Dá pra começar no plano mensal e sentir no seu ritmo, sem compromisso longo.',conhecer:'Você não precisa saber tudo agora: cada molde vem com vídeo-aula passo a passo.',mergulhar:'Você já está pronta, é só destravar o acesso e começar hoje.'})[a.compromisso] || 'Cada molde vem com vídeo-aula passo a passo, então você nunca fica na mão.',
-      cta_texto: ({marca_propria:'Quero construir minha marca',renda_extra:'Quero gerar renda costurando',hobby:'Quero costurar pra mim'})[a.objetivo] || 'Quero assinar agora',
+      objecao_quebra: ({preco:'Sai menos que um molde avulso por semana, e você recebe 4 moldes profissionais por mês com vídeo-aula.',tempo:'Os moldes chegam prontos e a vídeo-aula é passo a passo: dá pra costurar em poucos minutinhos por vez.',ja_tenho:'Aqui não é molde solto: é molde testado, do PP ao GG, com vídeo de montagem e ficha técnica.',cursos:'Aqui não é curso solto: é molde testado, com vídeo-aula da montagem e 7 dias de garantia — se não amar, devolvo 100%.'})[a.objecao] || ({testar:'Dá pra começar no plano mensal e sentir no seu ritmo, sem compromisso longo.',aos_poucos:'Você não precisa saber tudo agora: cada molde vem com vídeo-aula passo a passo.',mergulhar:'Você já está pronta, é só destravar o acesso e começar hoje.'})[a.compromisso] || 'Cada molde vem com vídeo-aula passo a passo, então você nunca fica na mão.',
+      cta_texto: ({marca_propria:'Quero variar minha marca',fonte_renda:'Quero produzir mais e melhor',renda_extra:'Quero gerar renda costurando',hobby:'Quero costurar pra mim'})[a.objetivo] || 'Quero assinar agora',
       bonus: ({marca_propria:'Guia de precificação pra sua marca',renda_extra:'Guia de quanto cobrar nas suas peças',hobby:'Guia da sua primeira peça sem erro'})[a.objetivo] || 'Guia da sua primeira peça sem erro',
-      transformacao: 'Hoje ' + (({modelagem:'você trava na modelagem do molde',caimento:'as suas peças não têm o caimento que você quer',tempo:'você perde horas refazendo molde',acabamento:'falta aquele acabamento de ateliê'})[a.frustracao] || 'falta o molde certo chegando todo mês') + ' → em alguns meses ' + (({seguranca:'você costura com segurança o que quiser',vendendo:'você está vendendo as suas peças',marca:'a sua marca está no ar',ensinando:'você está confiante até pra ensinar'})[a.visao] || 'você costura com confiança e caimento de ateliê') + '.'
+      transformacao: 'Hoje ' + (({modelagem:'você trava na modelagem do molde',caimento:'as suas peças não têm o caimento que você quer',tempo:'você perde horas refazendo molde',corpo:'a roupa não fica bonita no corpo'})[a.frustracao] || 'falta o molde certo chegando todo mês') + ' → em alguns meses ' + (({seguranca:'você costura com segurança o que quiser',vendendo:'você está vendendo as suas peças',marca:'a sua marca está no ar',ensinando:'você está confiante até pra ensinar'})[a.visao] || 'você costura com confiança e caimento de ateliê') + '.'
     };
   }
 
