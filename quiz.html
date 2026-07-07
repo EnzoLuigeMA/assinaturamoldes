@@ -17,11 +17,12 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-var _extId=localStorage.getItem('_meta_ext_id');
-if(!_extId){_extId='ext_'+'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);});localStorage.setItem('_meta_ext_id',_extId);}
+var _extId='';try{_extId=localStorage.getItem('_meta_ext_id')||'';}catch(e){}
+if(!_extId){_extId='ext_'+'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);});try{localStorage.setItem('_meta_ext_id',_extId);}catch(e){}}
+var _pvEid='xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16);});
 fbq('set','autoConfig',false,'246033433475773');
 fbq('init','246033433475773',{country:'br',external_id:_extId});
-fbq('track','PageView',{});
+fbq('track','PageView',{},{eventID:_pvEid});
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=246033433475773&ev=PageView&noscript=1"/></noscript>
 
@@ -775,7 +776,24 @@ fbq('track','PageView',{});
   function ck(n){ var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)'); return m?m.pop():''; }
   function firstName(n){ n = String(n||'').trim().split(/\s+/)[0] || ''; return n ? n.charAt(0).toUpperCase()+n.slice(1) : ''; }
 
-  fbqTrack('ViewContent', { content_name:'Quiz Perfil de Costureira', content_category:'Quiz' });
+  // Espelho CAPI (mesmo domínio /api/capi = à prova de adblocker) — recupera PageView/ViewContent
+  // de quem tem o pixel do navegador bloqueado (iOS/adblock/in-app), o que derruba a taxa de visualização.
+  function capiMirror(name, id, data){
+    try {
+      var ud = { external_id: _extId };
+      var fbp = ck('_fbp'); if(fbp) ud.fbp = fbp;
+      var fbc = ck('_fbc'); if(!fbc){ var q = new URLSearchParams(location.search).get('fbclid'); if(q) fbc = 'fb.1.'+Date.now()+'.'+q; } if(fbc) ud.fbc = fbc;
+      var payload = JSON.stringify({ data: [{ event_name:name, event_id:id, event_source_url:location.href, user_data:ud, custom_data:data||{} }] });
+      if(navigator.sendBeacon){ navigator.sendBeacon('/api/capi', new Blob([payload], {type:'application/json'})); }
+      else { fetch('/api/capi', {method:'POST', headers:{'Content-Type':'application/json'}, body:payload, keepalive:true}).catch(function(){}); }
+    } catch(e){}
+  }
+  // PageView: espelha com o MESMO event_id do <head> (dedup com o pixel do navegador)
+  if(typeof _pvEid !== 'undefined') capiMirror('PageView', _pvEid, {});
+  // ViewContent: dispara no navegador + espelho CAPI com event_id compartilhado
+  var _vcId = eid(), _vcParams = { content_name:'Quiz Perfil de Costureira', content_category:'Quiz' };
+  if(typeof fbq==='function') fbq('track', 'ViewContent', _vcParams, { eventID:_vcId });
+  capiMirror('ViewContent', _vcId, _vcParams);
 
   // hook -> começa o quiz direto (nome/WhatsApp vêm antes do resultado)
   $('btn-start').addEventListener('click', function(){
