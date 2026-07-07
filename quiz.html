@@ -641,13 +641,11 @@ fbq('track','PageView',{});
     trimestral: { off:20, price:'R$ 89,90',  per:'R$ 29,97/mês',  normal:'R$ 109,90', normalUnit:'· 3 meses', value:89.90 },
     anual:      { off:55, price:'R$ 234,90', per:'R$ 19,58/mês',  normal:'R$ 289,90', normalUnit:'/ano',      value:234.90 }
   };
-  // TODO(Thaíza): trocar pelos LINKS DE DESCONTO (preço-piso) do Hotmart quando ela enviar.
-  // Enquanto forem os links de preço cheio, NÃO publicar em produção (só preview) — senão mostra
-  // preço com desconto e cobra cheio (desonesto). Hoje = placeholder = mesmos links de preço cheio.
+  // Links de DESCONTO (preço-piso) do Hotmart — usados só depois que a lead TROCA as moedas.
   var CHECKOUT_DESC = {
-    mensal:     CHECKOUT.mensal,
-    trimestral: CHECKOUT.trimestral,
-    anual:      CHECKOUT.anual
+    mensal:     'https://pay.hotmart.com/E79768335W?off=nantub8r&checkoutMode=10&bid=1746464740583&src=quiz',
+    trimestral: 'https://pay.hotmart.com/E79768335W?off=oykvtfbq&checkoutMode=10&src=quiz',
+    anual:      'https://pay.hotmart.com/E79768335W?off=cih3gkyw&checkoutMode=10&bid=1783392384949&src=quiz'
   };
   // peças reais das alunas com a categoria de cada uma (pra ordenar pelo foco dela)
   var MAKES = [
