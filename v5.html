@@ -943,7 +943,8 @@ fbq('track','PageView',{},{eventID:_pvEid});
     var pricingEl=document.getElementById('planos');
     if(pricingEl){var atcDone=false;var pObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&!atcDone){atcDone=true;dual('AddToCart',{content_name:'Assinatura de Moldes',content_type:'product',content_ids:['assinatura-moldes'],contents:[{id:'assinatura-moldes',quantity:1,item_price:49.90}],currency:'BRL',value:49.90});pObs.unobserve(e.target);}});},{threshold:0.25});pObs.observe(pricingEl);}
 
-    // 4) InitiateCheckout — agora rastreado SÓ pelo Hotmart (fonte única). Os botões [data-plan] navegam pro checkout normalmente.
+  // 4) InitiateCheckout no clique de checkout (navegador + CAPI, mesmo event_id = dedup)
+    (function(){ var icDone=false; document.querySelectorAll('[data-plan]').forEach(function(b){ b.addEventListener('click',function(){ if(icDone)return; icDone=true; var v=parseFloat(b.getAttribute('data-value'))||49.90; dual('InitiateCheckout',{content_name:'Assinatura de Moldes',content_category:'Moldes de Costura',content_ids:['assinatura-moldes'],contents:[{id:'assinatura-moldes',quantity:1,item_price:v}],currency:'BRL',value:v}); }); }); })();
   })();
 
   // Vídeos lazy: só carregam/tocam quando entram na tela (economiza dados no mobile)

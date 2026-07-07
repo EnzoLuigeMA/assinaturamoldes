@@ -4,7 +4,7 @@
 // e repassa pro Graph API. Dedup com o Pixel continua pelo event_id.
 
 const PIXEL_ID = '246033433475773';
-const ALLOWED_EVENTS = ['PageView', 'ViewContent', 'AddToCart'];
+const ALLOWED_EVENTS = ['PageView', 'ViewContent', 'AddToCart', 'InitiateCheckout'];
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {

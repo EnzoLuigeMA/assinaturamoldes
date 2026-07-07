@@ -1277,7 +1277,8 @@ document.querySelectorAll('[data-reveal]').forEach(el=>observer.observe(el));
     pObs.observe(pricingEl);
   }
 
-  // 4) Checkout — InitiateCheckout agora é rastreado SÓ pelo Hotmart (fonte única, sem duplicar)
+  // 4) InitiateCheckout no clique de checkout (navegador + CAPI, mesmo event_id = dedup)
+  (function(){ var icDone=false; document.querySelectorAll('[data-plan]').forEach(function(b){ b.addEventListener('click',function(){ if(icDone)return; icDone=true; var v=parseFloat(b.getAttribute('data-value'))||49.90; dual('InitiateCheckout',{content_name:'Assinatura de Moldes',content_category:'Moldes de Costura',content_ids:['assinatura-moldes'],contents:[{id:'assinatura-moldes',quantity:1,item_price:v}],currency:'BRL',value:v}); }); }); })();
   document.querySelectorAll('.plan-cta').forEach(function(btn){
     btn.addEventListener('click',function(e){
       e.preventDefault();

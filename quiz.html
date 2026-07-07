@@ -795,6 +795,16 @@ fbq('track','PageView',{},{eventID:_pvEid});
   if(typeof fbq==='function') fbq('track', 'ViewContent', _vcParams, { eventID:_vcId });
   capiMirror('ViewContent', _vcId, _vcParams);
 
+  // InitiateCheckout no clique de checkout: navegador + espelho CAPI com o MESMO event_id (dedup).
+  // Obs: se o Hotmart também disparar IC no checkout, pode haver contagem cruzada (event_id diferente).
+  var _icDone = false;
+  function icFire(value){
+    if(_icDone) return; _icDone = true;
+    var id = eid(), params = { content_name:'Assinatura de Moldes', content_category:'Quiz', content_ids:['assinatura-moldes'], currency:'BRL', value: value || 0 };
+    if(typeof fbq==='function') fbq('track','InitiateCheckout', params, { eventID:id });
+    capiMirror('InitiateCheckout', id, params);
+  }
+
   // hook -> começa o quiz direto (nome/WhatsApp vêm antes do resultado)
   $('btn-start').addEventListener('click', function(){
     fbqTrack('QuizStart', {}, true);
@@ -1164,7 +1174,7 @@ fbq('track','PageView',{},{eventID:_pvEid});
     trimestral: ['Acesso à biblioteca completa de moldes','4 novos moldes por mês (do PP ao GG)','Vídeo-aula de montagem + ficha técnica de cada peça','Grupo VIP das assinantes + suporte direto','7 dias de garantia incondicional'],
     anual: ['Acesso à biblioteca completa de moldes','4 novos moldes por mês (do PP ao GG)','Vídeo-aula de montagem + ficha técnica de cada peça','Grupo VIP das assinantes + suporte direto','Melhor custo-benefício — menos de R$ 1 por dia']
   };
-  function planCheckout(pl){ /* InitiateCheckout agora é rastreado só pelo Hotmart (fonte única) */ }
+  function planCheckout(pl){ icFire((DESC[pl] || {}).value); }
   function openPlans(){
     var list = $('plans-list'); list.innerHTML = '';
     // banner de troca no topo do modal (some depois que troca)
@@ -1211,6 +1221,7 @@ fbq('track','PageView',{},{eventID:_pvEid});
   }
   function closePlans(){ $('plans-modal').hidden = true; document.body.style.overflow = ''; }
   (function(){ var t=$('qz-trade'); if(t) t.addEventListener('click', applyTrade); })();
+  $('qz-cta').addEventListener('click', function(){ icFire((DESC[currentPlano] || {}).value); });
   $('qz-all').addEventListener('click', openPlans);
   Array.prototype.forEach.call(document.querySelectorAll('#plans-modal [data-close]'), function(el){ el.addEventListener('click', closePlans); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !$('plans-modal').hidden) closePlans(); });
