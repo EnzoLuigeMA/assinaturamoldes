@@ -148,7 +148,16 @@ fbq('track','PageView',{});
   .coin-float { position: absolute; left: 24px; top: -4px; font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--brass); pointer-events: none; z-index: var(--z-coin); text-shadow: 0 2px 8px rgba(0,0,0,.5); animation: coinFloat 1s var(--ease) forwards; }
   @keyframes coinFloat { 0%{ opacity: 0; transform: translateY(6px) scale(.7); } 20%{ opacity: 1; transform: translateY(-2px) scale(1.1); } 100%{ opacity: 0; transform: translateY(-42px) scale(1); } }
   /* moedas voando (burst) */
-  .coin-burst { position: fixed; z-index: var(--z-coin); pointer-events: none; font-size: 20px; will-change: transform, opacity; }
+  /* moeda desenhada em CSS (não depende de emoji — renderiza em qualquer device) */
+  .coin { display: inline-block; width: 1.05em; height: 1.05em; border-radius: 50%; vertical-align: -0.15em; position: relative;
+    background: radial-gradient(circle at 35% 30%, #ffe8b0, #f0c064 45%, #cf9338 78%, #b9842f);
+    box-shadow: inset 0 1px 2px rgba(255,240,200,.7), inset 0 -2px 3px rgba(120,80,30,.4), 0 1px 2px rgba(0,0,0,.3); }
+  .coin::after { content: ""; position: absolute; inset: 16%; border-radius: 50%; border: 1.2px solid rgba(140,100,40,.42); }
+  .coin-sm { width: .92em; height: .92em; vertical-align: -0.1em; }
+  .coin-lg { width: 1.4em; height: 1.4em; }
+  .coin-burst { position: fixed; z-index: var(--z-coin); pointer-events: none; width: 17px; height: 17px; border-radius: 50%; will-change: transform, opacity;
+    background: radial-gradient(circle at 35% 30%, #ffe8b0, #f0c064 45%, #cf9338 78%, #b9842f);
+    box-shadow: inset 0 1px 2px rgba(255,240,200,.7), 0 1px 2px rgba(0,0,0,.3); }
   @keyframes coinFly { 0%{ opacity: 0; transform: translate(0,0) scale(.5) rotate(0); } 15%{ opacity: 1; } 100%{ opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.05) rotate(var(--dr)); } }
   /* botão de som */
   .cofre-mute { position: fixed; bottom: 18px; left: 14px; z-index: var(--z-coin); width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: rgba(46,18,24,.78); backdrop-filter: blur(6px); color: var(--ink-soft); font-size: 16px; cursor: pointer; display: grid; place-items: center; transition: background .2s, transform .2s var(--ease); }
@@ -391,7 +400,7 @@ fbq('track','PageView',{});
     <h1 class="display">Descubra o seu <span class="accent">perfil de costureira</span></h1>
     <p class="lead">Responda umas perguntas rápidas e a gente revela o seu perfil — e o caminho pra fazer as peças que você sonha sem travar na modelagem, mesmo começando agora.</p>
     <div class="qz-explainer">
-      <div class="qz-explainer-hd"><span class="cx-coin" aria-hidden="true">🪙</span> E ainda ganha desconto respondendo</div>
+      <div class="qz-explainer-hd"><span class="cx-coin" aria-hidden="true"><i class="coin" aria-hidden="true"></i></span> E ainda ganha desconto respondendo</div>
       <p>A cada resposta você ganha <b>moedas douradas</b> — e cada moeda vale <b>R$ 1 de desconto de verdade</b> na assinatura. Junte até <b>R$ 55</b> pra trocar por desconto no final. 💛</p>
       <div class="qz-explainer-steps">
         <span>✍️ Cada resposta &rarr; <b>+ R$ 4</b> no cofrinho</span>
@@ -399,12 +408,12 @@ fbq('track','PageView',{});
         <span>💰 No final você troca por até <b>R$ 55</b> de desconto</span>
       </div>
     </div>
-    <button class="btn-primary" id="btn-start">Começar e juntar moedas 🪙 <span class="arw">→</span></button>
+    <button class="btn-primary" id="btn-start">Começar e juntar moedas <i class="coin" aria-hidden="true"></i> <span class="arw">→</span></button>
     <div class="qz-meta">
       <span>⚡ 2 minutinhos</span><span class="sep"></span><span>diagnóstico personalizado</span><span class="sep"></span><span>resultado na hora</span>
     </div>
     <div class="qz-badges">
-      <span class="qz-badge">🧵 Moldes profissionais</span>
+      <span class="qz-badge">✂️ Moldes profissionais</span>
       <span class="qz-badge">🌱 Pra iniciante também</span>
       <span class="qz-badge">💛 +200 alunas</span>
     </div>
@@ -414,8 +423,8 @@ fbq('track','PageView',{});
   <section class="qz-screen qz-lead" id="screen-lead">
     <div class="stitch"></div>
     <h2 class="display">Seu perfil tá pronto, <span class="accent">falta só um passo</span></h2>
-    <div class="cofre-lead" id="cofre-lead"><span aria-hidden="true">🪙</span> Seu cofrinho: <b id="cofre-lead-val">40</b> moedas</div>
-    <p class="lead">Deixa seu nome e WhatsApp que eu solto <strong>+15 moedas de uma vez</strong> 🪙 — o maior pulo do cofrinho, que destrava o seu <strong>desconto máximo</strong>. É por aqui que eu te mando o resultado e o link com o preço já com as moedas.</p>
+    <div class="cofre-lead" id="cofre-lead"><span aria-hidden="true"><i class="coin" aria-hidden="true"></i></span> Seu cofrinho: <b id="cofre-lead-val">40</b> moedas</div>
+    <p class="lead">Deixa seu nome e WhatsApp que eu solto <strong>+15 moedas de uma vez</strong> <i class="coin" aria-hidden="true"></i> — o maior pulo do cofrinho, que destrava o seu <strong>desconto máximo</strong>. É por aqui que eu te mando o resultado e o link com o preço já com as moedas.</p>
     <form id="lead-form" novalidate>
       <label class="field">
         <span class="field-lbl">Seu nome</span>
@@ -426,7 +435,7 @@ fbq('track','PageView',{});
         <input id="lead-phone" type="tel" name="phone" inputmode="numeric" autocomplete="tel" placeholder="(11) 90000-0000" required>
       </label>
       <p class="field-err" id="lead-err" role="alert" hidden></p>
-      <button class="btn-primary btn-block" type="submit">Soltar minhas +15 moedas 🪙 <span class="arw">→</span></button>
+      <button class="btn-primary btn-block" type="submit">Soltar minhas +15 moedas <i class="coin" aria-hidden="true"></i> <span class="arw">→</span></button>
       <p class="lead-fine">🔒 Usamos seus dados só pra personalizar o resultado e te avisar de novidades. Sem spam.</p>
     </form>
   </section>
@@ -438,9 +447,9 @@ fbq('track','PageView',{});
     </div>
     <div class="qz-progress" id="qz-progress" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0" aria-label="Progresso do quiz"><div class="qz-progress-bar" id="qz-bar"></div></div>
     <div class="cofre-row">
-      <span class="cofre-ico" id="cofre-ico" aria-hidden="true">🪙</span>
+      <span class="cofre-ico" id="cofre-ico" aria-hidden="true"><i class="coin" aria-hidden="true"></i></span>
       <div class="cofre-bar"><div class="cofre-fill" id="cofre-fill"></div></div>
-      <span class="cofre-val" id="cofre-val" aria-label="Desconto acumulado no cofrinho"><b class="cv-rs" id="cofre-rs">R$ 0</b><span class="cv-co" id="cofre-co">0 🪙</span></span>
+      <span class="cofre-val" id="cofre-val" aria-label="Desconto acumulado no cofrinho"><b class="cv-rs" id="cofre-rs">R$ 0</b><span class="cv-co" id="cofre-co">0 <i class="coin" aria-hidden="true"></i></span></span>
     </div>
     <h2 class="qz-question" id="qz-question" tabindex="-1"></h2>
     <div class="qz-options" id="qz-options"></div>
@@ -450,7 +459,7 @@ fbq('track','PageView',{});
   <section class="qz-screen qz-loading" id="screen-loading">
     <div class="qz-loader" aria-hidden="true">
       <svg viewBox="0 0 74 74"><circle class="lt" cx="37" cy="37" r="33"/><circle class="lf" cx="37" cy="37" r="33"/></svg>
-      <div class="needle">🪡</div>
+      <div class="needle">✂️</div>
     </div>
     <h2 class="display">Analisando seu perfil…</h2>
     <p class="qz-loading-msg" id="qz-loading-msg" role="status" aria-live="polite">Lendo suas respostas ✨</p>
@@ -535,7 +544,7 @@ fbq('track','PageView',{});
       <p class="qz-plan-bonus" id="qz-bonus"></p>
     </div>
 
-    <button type="button" class="qz-trade rv r6" id="qz-trade">🪙 Trocar minhas moedas por desconto <span class="arw">→</span></button>
+    <button type="button" class="qz-trade rv r6" id="qz-trade"><i class="coin" aria-hidden="true"></i> Trocar minhas moedas por desconto <span class="arw">→</span></button>
     <div class="qz-urgency rv r6" id="qz-urgency"></div>
     <p class="qz-objection rv r6" id="qz-objection"></p>
     <a class="btn-primary btn-block rv r6" id="qz-cta" href="#" target="_blank" rel="noopener" style="display:none"><span id="qz-cta-text">Quero assinar agora</span> <span class="arw">→</span></a>
@@ -576,19 +585,19 @@ fbq('track','PageView',{});
       {v:'blazers', t:'Blazers', img:'blazer-feminino.png', score:9, fb:'Alfaiataria é elegância 🤍'} ]},
     { key:'nivel', type:'cards', q:'Como você se descreve na costura hoje?', opts:[
       {v:'nunca', t:'Nunca costurei, quero aprender', ic:'🌱', score:6, fb:'Todo ateliê começou assim 🌱'},
-      {v:'consertos', t:'Já costuro, mas só consertos e/ou artesanato', ic:'🧷', score:7, fb:'Bora pra costura de roupa ✨'},
+      {v:'consertos', t:'Já costuro, mas só consertos e/ou artesanato', ic:'📌', score:7, fb:'Bora pra costura de roupa ✨'},
       {v:'aperfeicoar', t:'Já costuro, mas preciso me aperfeiçoar', ic:'✂️', score:8, fb:'Bora pro próximo nível ✂️'},
-      {v:'trabalho', t:'Já trabalho com costura e quero mais agilidade e variedade', ic:'🧵', score:9, fb:'Você merece moldes profissionais 🧵'} ]},
+      {v:'trabalho', t:'Já trabalho com costura e quero mais agilidade e variedade', ic:'👔', score:9, fb:'Você merece moldes profissionais 👔'} ]},
     { key:'frustracao', type:'cards', q:'Qual a sua maior dificuldade hoje?', opts:[
       {v:'modelagem', t:'Não sei desenvolver a modelagem', ic:'📐', score:8, fb:'A gente resolve isso 📐'},
-      {v:'caimento', t:'A peça fica estranha no corpo, mesmo bem costurada', ic:'🪡', score:9, fb:'Caimento é com a gente 🪡'},
+      {v:'caimento', t:'A peça fica estranha no corpo, mesmo bem costurada', ic:'👗', score:9, fb:'Caimento é com a gente 👗'},
       {v:'tempo', t:'Perco horas fazendo o molde', ic:'⏳', score:8, fb:'Molde pronto economiza horas ⏳'},
-      {v:'corpo', t:'A roupa não fica bonita no corpo', ic:'🪞', score:9, fb:'A gente resolve o caimento 🪞'} ]},
+      {v:'corpo', t:'A roupa não fica bonita no corpo', ic:'💃', score:9, fb:'A gente resolve o caimento 💃'} ]},
     { key:'inseguranca', type:'cards', q:'O que mais te dá insegurança?', opts:[
       {v:'tecido', t:'Medo de desperdiçar tecido', ic:'✂️', score:7, fb:'Molde testado tira esse medo ✂️'},
       {v:'perder_tempo', t:'Medo de perder tempo tentando', ic:'⏳', score:7, fb:'Molde pronto poupa seu tempo ⏳'},
       {v:'cursos', t:'Já gastei com cursos que não deram resultado', ic:'💸', score:7, fb:'Aqui é prático, com garantia 💛'},
-      {v:'maquina', t:'Domar a máquina', ic:'🧵', score:6, fb:'A vídeo-aula te guia 🧵'} ]},
+      {v:'maquina', t:'Domar a máquina', ic:'🔧', score:6, fb:'A vídeo-aula te guia 🔧'} ]},
     { key:'objetivo', type:'cards', q:'Qual o seu objetivo com a costura?', opts:[
       {v:'hobby', t:'Quero costurar por hobby', ic:'💛', score:7, fb:'Costurar cura 💛'},
       {v:'renda_extra', t:'Fazer renda extra', ic:'💰', score:9, fb:'Costura que paga as contas 💰'},
@@ -618,7 +627,7 @@ fbq('track','PageView',{});
       {v:'ensinando', t:'Confiante pra até ensinar', ic:'🎓', score:10, fb:'De aluna a referência 🎓'} ]}
   ];
 
-  var LOADING_MSGS = ['Lendo suas respostas ✨','Cruzando o seu perfil 🧵','Calculando a compatibilidade 💛','Escolhendo o plano ideal…','Quase pronto…'];
+  var LOADING_MSGS = ['Lendo suas respostas ✨','Cruzando o seu perfil ✂️','Calculando a compatibilidade 💛','Escolhendo o plano ideal…','Quase pronto…'];
   var PLANS = {
     mensal:     { name:'Mensal',     big:'R$ 1,66',  unit:'/dia', full:'R$ 49,90/mês',         value:49.90 },
     trimestral: { name:'Trimestral', big:'R$ 36,63', unit:'/mês', full:'R$ 109,90 · 3 meses',  value:109.90 },
@@ -716,7 +725,7 @@ fbq('track','PageView',{});
     var sx = b.left+b.width/2, sy = b.top+b.height/2;
     for(var i=0;i<(count||5);i++){
       (function(i){
-        var c = document.createElement('span'); c.className='coin-burst'; c.textContent='🪙';
+        var c = document.createElement('span'); c.className='coin-burst';
         c.style.left = sx+'px'; c.style.top = sy+'px';
         var ang = (-Math.PI/2) + (Math.random()*Math.PI - Math.PI/2);   // leque pra cima
         var dist = 46 + Math.random()*70;
@@ -731,7 +740,7 @@ fbq('track','PageView',{});
   function renderCoins(){
     var fill = document.getElementById('cofre-fill'); if(fill) fill.style.transform = 'scaleX(' + Math.min(1, coins/COIN_MAX) + ')';
     var rs = document.getElementById('cofre-rs'); if(rs) rs.textContent = 'R$ ' + coins;
-    var co = document.getElementById('cofre-co'); if(co) co.textContent = coins + ' 🪙';
+    var co = document.getElementById('cofre-co'); if(co) co.innerHTML = coins + ' <i class="coin coin-sm" aria-hidden="true"></i>';
   }
   // anima o cofrinho de `from` até `to` (mostra R$ e moedas)
   function tweenCoins(from, to, big, fromEl){
@@ -749,7 +758,7 @@ fbq('track','PageView',{});
     chaChing(big);
     if(reduceMotion() || !rs){ renderCoins(); return; }
     var span = to-from, t0 = null, dur = big ? 900 : 380;
-    function tick(ts){ if(t0===null) t0=ts; var k = Math.min(1,(ts-t0)/dur); var cur = Math.round(from + span*(1-Math.pow(1-k,3))); if(rs) rs.textContent='R$ '+cur; if(co) co.textContent=cur+' 🪙'; if(k<1) requestAnimationFrame(tick); }
+    function tick(ts){ if(t0===null) t0=ts; var k = Math.min(1,(ts-t0)/dur); var cur = Math.round(from + span*(1-Math.pow(1-k,3))); if(rs) rs.textContent='R$ '+cur; if(co) co.innerHTML=cur+' <i class="coin coin-sm" aria-hidden="true"></i>'; if(k<1) requestAnimationFrame(tick); }
     requestAnimationFrame(tick);
   }
   function toggleSound(){
@@ -954,7 +963,7 @@ fbq('track','PageView',{});
       ['Objetivo', RECAP_L.objetivo[a.objetivo]],
       ['Em 6 meses', RECAP_L.visao[a.visao]]
     ].filter(function(r){ return r[1]; });
-    var html = '<h4>🪡 Seu raio-x da costura</h4>';
+    var html = '<h4>✂️ Seu raio-x da costura</h4>';
     rows.forEach(function(r, i){ html += '<div class="row'+(i===0?' first':'')+'"><span class="rk">'+r[0]+'</span><span class="rval">'+esc(r[1])+'</span></div>'; });
     $('qz-recap').innerHTML = html;
   }
@@ -974,9 +983,9 @@ fbq('track','PageView',{});
     var el = $('qz-urgency'); if(!el) return;
     var sobra = Math.max(0, coins - (DESC[currentPlano] ? DESC[currentPlano].off : 0));
     if(currentPlano === 'anual'){
-      el.innerHTML = '🪙 O plano anual é o único que usa as suas <strong>'+coins+' moedas</strong> inteiras — R$ '+coins+' de desconto de verdade.';
+      el.innerHTML = '<i class="coin" aria-hidden="true"></i> O plano anual é o único que usa as suas <strong>'+coins+' moedas</strong> inteiras — R$ '+coins+' de desconto de verdade.';
     } else {
-      el.innerHTML = '🪙 Você tem <strong>'+coins+' moedas</strong>, mas aqui só entram '+ (DESC[currentPlano]?DESC[currentPlano].off:0) +'. As outras '+sobra+' rendem no <strong>anual</strong> (R$ '+coins+' de desconto).';
+      el.innerHTML = '<i class="coin" aria-hidden="true"></i> Você tem <strong>'+coins+' moedas</strong>, mas aqui só entram '+ (DESC[currentPlano]?DESC[currentPlano].off:0) +'. As outras '+sobra+' rendem no <strong>anual</strong> (R$ '+coins+' de desconto).';
     }
   }
   // preço: NORMAL (antes de trocar) vs. com desconto (depois de trocar)
@@ -989,7 +998,7 @@ fbq('track','PageView',{});
     } else {
       el.innerHTML = '<span class="pwas">de '+dsc.normal+' '+dsc.normalUnit+'</span>'+
         '<span class="pbig">'+dsc.price+'</span>'+
-        '<span class="pfull">'+dsc.per+' · você trocou '+Math.min(coins,dsc.off)+' 🪙 🎉</span>';
+        '<span class="pfull">'+dsc.per+' · você trocou '+Math.min(coins,dsc.off)+' <i class="coin" aria-hidden="true"></i> 🎉</span>';
       el.classList.add('dropped');
     }
   }
@@ -1008,8 +1017,8 @@ fbq('track','PageView',{});
     var tb = $('qz-trade');
     coinBurst(tb, 18); chaChing(true); floatDiscount(dsc.off);
     renderPlanPrice(plano, true);
-    var tag = $('qz-coin-tag'); if(tag) tag.innerHTML = '✓ <b>'+coins+' 🪙</b> trocadas por <b>R$ '+dsc.off+'</b> de desconto';
-    if(tb){ tb.classList.remove('shine'); tb.classList.add('done'); tb.disabled = true; tb.innerHTML = '✓ R$ '+dsc.off+' de desconto aplicado 🪙'; }
+    var tag = $('qz-coin-tag'); if(tag) tag.innerHTML = '✓ <b>'+coins+' <i class="coin" aria-hidden="true"></i></b> trocadas por <b>R$ '+dsc.off+'</b> de desconto';
+    if(tb){ tb.classList.remove('shine'); tb.classList.add('done'); tb.disabled = true; tb.innerHTML = '✓ R$ '+dsc.off+' de desconto aplicado <i class="coin" aria-hidden="true"></i>'; }
     var cta = $('qz-cta'); if(cta){ cta.style.display=''; cta.setAttribute('href', (CHECKOUT_DESC[plano]||CHECKOUT_DESC.trimestral) + '&sck=' + encodeURIComponent(currentLeadId)); }
     var ctat = $('qz-cta-text'); if(ctat) ctat.textContent = 'Assinar o '+PLANS[plano].name.toLowerCase()+' com desconto';
     startUrgency();
@@ -1041,13 +1050,13 @@ fbq('track','PageView',{});
     $('qz-cta-text').textContent = res.cta_texto || 'Quero assinar agora';
     traded = false;
     currentLeadId = leadId;
-    $('qz-coin-tag').innerHTML = 'Você juntou <b>'+coins+' 🪙</b> = R$ '+coins+' de desconto pra trocar';
+    $('qz-coin-tag').innerHTML = 'Você juntou <b>'+coins+' <i class="coin" aria-hidden="true"></i></b> = R$ '+coins+' de desconto pra trocar';
     $('qz-plan-name').textContent = PLANS[plano].name;
     renderPlanPrice(plano, false);   // preço NORMAL até ela trocar as moedas
     $('qz-plan-why').textContent = res.motivo_plano || '';
     var tb = $('qz-trade');
     if(tb){ tb.style.display=''; tb.disabled=false; tb.classList.remove('done','shine');
-      tb.innerHTML = '🪙 Trocar minhas '+coins+' moedas por desconto <span class="arw">→</span>';
+      tb.innerHTML = '<i class="coin" aria-hidden="true"></i> Trocar minhas '+coins+' moedas por desconto <span class="arw">→</span>';
       setTimeout(function(){ tb.classList.add('shine'); }, 700); }
     var cta = $('qz-cta'); if(cta){ cta.style.display='none'; }
 
@@ -1145,7 +1154,7 @@ fbq('track','PageView',{});
     var sub = document.querySelector('.qz-modal-sub');
     if(!traded && sub && sub.parentNode){
       var mb = document.createElement('button'); mb.id='qz-trade-modal'; mb.className='qz-trade-modal'; mb.type='button';
-      mb.innerHTML = '🪙 Trocar minhas '+coins+' moedas por desconto';
+      mb.innerHTML = '<i class="coin" aria-hidden="true"></i> Trocar minhas '+coins+' moedas por desconto';
       mb.addEventListener('click', function(){ applyTrade(); openPlans(); });
       sub.parentNode.insertBefore(mb, sub.nextSibling);
     }
@@ -1160,18 +1169,18 @@ fbq('track','PageView',{});
       var priceHtml, coinsHtml, link;
       if(traded){
         priceHtml = '<span class="pwas">'+d.normal+' '+d.normalUnit+'</span> <span class="pbig">'+d.price+'</span><span class="punit"> · '+d.per+'</span>';
-        coinsHtml = '<div class="pcoins'+(isAnual?' max':'')+'">'+(isAnual ? '🪙 usou as suas '+coins+' moedas — todas!' : '🪙 trocou '+usadas+' das suas '+coins+' moedas')+'</div>';
+        coinsHtml = '<div class="pcoins'+(isAnual?' max':'')+'">'+(isAnual ? '<i class="coin" aria-hidden="true"></i> usou as suas '+coins+' moedas — todas!' : '<i class="coin" aria-hidden="true"></i> trocou '+usadas+' das suas '+coins+' moedas')+'</div>';
         link = CHECKOUT_DESC[pl] || CHECKOUT_DESC.trimestral;
       } else {
         priceHtml = '<span class="pbig">'+d.normal+'</span><span class="punit"> '+d.normalUnit+'</span>';
-        coinsHtml = '<div class="pcoins'+(isAnual?' max':'')+'">'+(isAnual ? '🪙 aqui suas '+coins+' moedas viram R$ '+coins+' — todas!' : '🪙 aqui você troca '+usadas+' das suas '+coins+' moedas')+'</div>';
+        coinsHtml = '<div class="pcoins'+(isAnual?' max':'')+'">'+(isAnual ? '<i class="coin" aria-hidden="true"></i> aqui suas '+coins+' moedas viram R$ '+coins+' — todas!' : '<i class="coin" aria-hidden="true"></i> aqui você troca '+usadas+' das suas '+coins+' moedas')+'</div>';
         link = CHECKOUT[pl] || CHECKOUT.trimestral;
       }
       card.innerHTML = (rec ? '<span class="pbadge">⭐ Recomendado pra você</span>' : '') +
         '<div class="pname">'+PLANS[pl].name+'</div>'+
         '<div class="pprice">'+priceHtml+'</div>'+
         coinsHtml +
-        (isAnual ? '<span class="pseal">🪙 Único que aceita as suas '+coins+' moedas</span>' : '')+
+        (isAnual ? '<span class="pseal"><i class="coin" aria-hidden="true"></i> Único que aceita as suas '+coins+' moedas</span>' : '')+
         '<ul class="pbenefits">'+PLAN_BENEFITS[pl].map(function(b){ return '<li>'+esc(b)+'</li>'; }).join('')+'</ul>'+
         '<a class="pbtn '+(rec?'pbtn-rec':'pbtn-alt')+'" href="'+link+(currentLeadId?'&sck='+encodeURIComponent(currentLeadId):'')+'" target="_blank" rel="noopener" data-plan="'+pl+'">Assinar o '+PLANS[pl].name.toLowerCase()+' <span class="arw">→</span></a>';
       list.appendChild(card);
