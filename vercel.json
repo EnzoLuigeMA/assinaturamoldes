@@ -2,14 +2,16 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/v2", "destination": "/", "permanent": true },
+    { "source": "/v3", "destination": "/", "permanent": true },
+    { "source": "/v4", "destination": "/", "permanent": true },
+    { "source": "/v5", "destination": "/", "permanent": true },
+    { "source": "/v6", "destination": "/", "permanent": true },
+    { "source": "/v7", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/v2", "destination": "/v2.html" },
-    { "source": "/v3", "destination": "/v3.html" },
-    { "source": "/v4", "destination": "/v4.html" },
-    { "source": "/v5", "destination": "/v5.html" },
-    { "source": "/v6", "destination": "/v6.html" },
-    { "source": "/v7", "destination": "/v7.html" },
     { "source": "/quiz", "destination": "/quiz.html" },
     { "source": "/obrigado", "destination": "/obrigado.html" },
     { "source": "/obrigada", "destination": "/obrigado.html" },

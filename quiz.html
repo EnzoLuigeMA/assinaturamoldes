@@ -1047,7 +1047,7 @@ fbq('track','PageView',{},{eventID:_pvEid});
     renderPlanPrice(plano, true);
     var tag = $('qz-coin-tag'); if(tag) tag.innerHTML = '✓ <b>'+coins+' <i class="coin" aria-hidden="true"></i></b> trocadas por <b>R$ '+dsc.off+'</b> de desconto';
     if(tb){ tb.classList.remove('shine'); tb.classList.add('done'); tb.disabled = true; tb.innerHTML = '✓ R$ '+dsc.off+' de desconto aplicado <i class="coin" aria-hidden="true"></i>'; }
-    var cta = $('qz-cta'); if(cta){ cta.style.display=''; cta.setAttribute('href', (CHECKOUT_DESC[plano]||CHECKOUT_DESC.trimestral) + '&sck=' + encodeURIComponent(currentLeadId)); }
+    var cta = $('qz-cta'); if(cta){ cta.style.display=''; cta.setAttribute('href', '/?plano=' + encodeURIComponent(plano) + '#planos'); }
     var ctat = $('qz-cta-text'); if(ctat) ctat.textContent = 'Assinar o '+PLANS[plano].name.toLowerCase()+' com desconto';
     startUrgency();
     fbqTrack('QuizTradeCoins', { plano: plano, desconto: dsc.off }, true);
