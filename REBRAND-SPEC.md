@@ -154,6 +154,71 @@ lista como **anti-referência** ("tasteful AI default"). Proibido repetir isso.
 - [ ] Nada além do escopo alterado; funil (quiz/obrigado/comunidade) intacto salvo o link de
       entrega do quiz para `/#planos`.
 
+## 7b. RODADA 2 — refinamento pós-review do cliente (obrigatório)
+Feedback do cliente: gostou do design, mas (a) a página ficou **curta / pouca informação**;
+(b) o **fecho do scroll do molde mostra um print de conversa de WhatsApp** (`comunidade-1.jpeg`)
+que fica deslocado; (c) quer uma **seção específica de depoimentos**; (d) quer **melhor uso das
+imagens** nas seções.
+
+### Classificação real dos assets (checado visualmente — respeitar!)
+- **Prints autênticos de WhatsApp** (têm balão de chat / reações): `comunidade-1..13.jpeg`,
+  `andressa-saia.jpg`, `amanda-saiacamadas.jpg`, `hero-1.webp`, `hero-2.webp`, `rose-*.jpg`,
+  `saia-lapis-*.jpg`, `mariane-blusa.jpg`, `silvana-blusa.jpg`, `cris-colete.jpg`,
+  `galeria-*.jpeg`, `feedback-1.jpeg`, `feedback-2.jpg`. → São PROVA autêntica. Usar SÓ na
+  seção de depoimentos, emoldurados como print de grupo. **Nunca** como "foto limpa de peça"
+  nem como fecho do scroll.
+- **Fotos/arte limpas** (sem UI de chat): `thaiza.jpg` (Thaíza medindo colete no manequim —
+  autoridade/ateliê), packshots de produto (`Vestidos.png`, `Blusas.png`, `Saia.png`,
+  `shorts.png`, `blazer-feminino.png`, `calca-moletom.png`, `vestido-midi-nesgas.png`,
+  `Vestidos(1..8).png`, `Blusas(1..7).jpg`, `Saias(1..7).jpg`), imagens de molde
+  (`molde-1..7`). Avatares: `av-amanda/mariane/rose/silvana.webp` (atribuição de depoimento).
+
+### Mudanças obrigatórias
+1. **Fecho limpo do scrollytelling.** Remover o `final-photo` com print de WhatsApp. O keyframe
+   4 deve **resolver a ilustração do molde numa peça finalizada** (tecido preenchido + costura
+   completa; opcional silhueta/manequim ilustrado), mantendo o mundo de ilustração do ateliê.
+   **Sem crossfade pra print de chat.** Se quiser um remate fotográfico, só packshot limpo — mas
+   o padrão é ilustração. Melhorar a sensação do efeito (a peça "ganhando vida": preenchimento
+   de tecido quente + costura correndo pelas linhas), suave e ligada ao scroll; reduced-motion
+   estático. Corrigir também o fallback estático (não usar `comunidade-*` como "peça vestida").
+2. **Seção dedicada de Depoimentos** ("Direto do grupo das alunas"). Emoldurar os prints
+   autênticos COMO prints (força de prova real, não esconder o chat). Combinar com **cards de
+   citação** (avatar `av-*` + nome + frase real) reaproveitando as frases do index antigo
+   ("Fiz o macacão assimétrico, amei costurar", "Blusa lenço e short de elástico — melhores
+   moldes!", "Fiz a saia lápis no crepe Zara e o caimento ficou perfeito", "Minha primeira peça
+   da assinatura! Modelagem perfeita!", etc.). Essa é a "aba específica pros feedbacks".
+3. **Expandir conteúdo (a página está rasa).**
+   - **Bloco de autoridade** (NOVO) com `thaiza.jpg`: "Cada molde é desenvolvido e testado pela
+     Thaíza" — quem cria, por que o caimento é profissional. Trust + informação.
+   - **Stack de valor**: restaurar a descrição de cada item (1 frase + âncora de valor), como no
+     index antigo — hoje está em uma linha só.
+   - **Como funciona / o que chega todo mês**: detalhar (4 moldes PDF+PLT, aula de montagem,
+     ficha técnica, nível de dificuldade, biblioteca acumulativa).
+   - **Beats do scroll**: 2–3 frases cada (não uma linha), pra o scroll ter substância.
+   - **Catálogo**: enriquecer com mais categorias/peças usando os packshots reais.
+4. **Melhor uso das imagens por seção:** autoridade→`thaiza.jpg`; catálogo→packshots;
+   depoimentos→prints+avatares; scroll→molde ilustrado. Nunca usar print de chat como "peça
+   limpa". Todas com `alt`, abaixo da dobra em `loading="lazy"`, sem estourar o LCP.
+
+### Ajustes pós-validação Grok (rodada 2) — profundidade, não volume
+A página parece rasa porque **a prova está errada** (chat fingindo peça vestida) e o "o que
+chega" é uma **lista**, não porque faltam seções. Então:
+- **NÃO expandir o catálogo** (mais packshot = "loja rasa"). Manter ~8 e não mexer em
+  Qualificador nem FAQ (já existem).
+- **Beats do scroll: no máx. 2 frases cada** (não 4) — o pin de 28vh não aguenta beat longo.
+- **Profundidade via 1 caso, não galeria:** destacar UMA história ("primeira peça da Amanda" —
+  print + frase real) com peso, em vez de só empilhar prints.
+- **"O que chega no 1º mês" concreto:** mostrar objeto (PDF / PLT / aula / ficha técnica) e, se
+  fluir, um **clipe curto** (`a4-video.mp4`) — não parágrafo extra.
+- **Thaíza (`thaiza.jpg`) como autoridade real**, não enfeite (quem desenvolve e testa cada molde).
+- **Garantia continua sob/nos planos (2 linhas)** — não virar seção.
+- **Ordem do fluxo:** pin solta → **depoimentos** → **planos** (prova imediatamente antes da oferta).
+
+### Preservar da rodada 1 (não regredir)
+Sticky ≤28vh (svh/dvh, solta na prova), buy-bar fixa, `?plano=` via JS, tracking Pixel+CAPI,
+links Hotmart reais, redirects `/v2..v7`, fontes auto-hospedadas, reduced-motion, WCAG AA,
+mesma oferta/preços. Trabalhar na branch atual `rebrand/molde-a-peca`.
+
 ## 8. Fora de escopo
 - Não mexer em preços/planos/oferta além da apresentação.
 - Não reescrever o quiz (só o link de saída).
